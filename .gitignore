@@ -3,19 +3,29 @@
 
 # Input files #
 ######################
+Output/
 *.nc
 *.kml
 *.xlsx
 
 # Output files #
 ######################
+Input/
 *.pickle
 *.png
 
 # Documentation #
 #####################
-*.pptx
+docs/
 *.docx
+*.pptx
+
+# Package related files #
+######################
+build/
+dist/
+JAT/.egg-info/
+
 
 #GENERAL
 
