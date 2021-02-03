@@ -23,26 +23,24 @@ Parameter | Variable name | Explanation | Variable output | Dependent on
 Dune height - Primary | dune_height_and_location | Cross-shore location and elevation of the primary dune peak with elevation and prominence above user-defined value | DuneTop_prim_x, DuneTop_prim_y | -
 Dune height - Secondary | dune_height_and_location | Cross-shore location and elevation of the secondary dune peak with elevation and prominence above user-defined value | DuneTop_prim_x, DuneTop_prim_y, DuneTop_sec_x, DuneTop_sec_y | -
 Mean Sea Level | mean_sea_level | Elevation and cross-shore location of Mean Sea level defined as user-defined value w.r.t. reference datum (default = 0) | MSL_x | -
- | mean_sea_level_variable | Elevation and cross-shore location of Mean Sea level defined as the cross-shore location between the variable MHW and MLW location (MLW+MHW)/2 | MSL_x_var | MLW_x_var & MHW_x_var
+   | mean_sea_level_variable | Elevation and cross-shore location of Mean Sea level defined as the cross-shore location between the variable MHW and MLW location (MLW+MHW)/2 | MSL_x_var | MLW_x_var & MHW_x_var
 Mean Low Water | mean_low_water_fixed | Cross-shore location of Mean Low Water defined as user-defined value w.r.t. reference datum (default =  -1 m) | MLW_x_fix | -
- | mean_low_water_variable | Elevation and cross-shore location of Mean Low Water based on value w.r.t. reference datum provided per transect in the Jarkus dataset* based on tidal modeling | MLW_y_var, MLW_x_var | -
+   | mean_low_water_variable | Elevation and cross-shore location of Mean Low Water based on value w.r.t. reference datum provided per transect in the Jarkus dataset* based on tidal modeling | MLW_y_var, MLW_x_var | -
 Mean High Water | mean_high_water_fixed | Cross-shore location of Mean High Water defined as user-defined value m w.r.t. reference datum (default =  +1 m) | MHW_x_fix | -
- | mean_high_water_variable | Elevation and cross-shore location of Mean High Water based on value w.r.t. reference datum provided per transect in the Jarkus dataset* based on tidal modeling | MHW_y_var, MHW_x_var | -
+   | mean_high_water_variable | Elevation and cross-shore location of Mean High Water based on value w.r.t. reference datum provided per transect in the Jarkus dataset* based on tidal modeling | MHW_y_var, MHW_x_var | -
 Intertidal area width | Intertidal_width_fix | Cross-shore width between the fixed Mean High Water and Mean Low Water MHW-MLW | MLW_x_var & MHW_x_var
- | Intertidal_width_var | Cross-shore width between the variable Mean High Water and Mean Low Water MHW-MLW | MLW_x_var & MHW_x_var
-Landward boundary | landward_point_variance | Landward point where variance of elvation through time is below a user-defined threshold. | Landward_x_variance | DuneTop_prim_x 
- | landward_point_derivative | Landward point defind as dune peak above a fixed threshold used for 2nd derivative method (Diamantidou, 2019). | Landward_x_der | MHW_y_var 
- | landward_point_bma | Cross-shore location of value w.r.t. reference datum that approximates the boundary between the marine and aeolian zone (De Vries et al., 2010) (default =  +2 m) | Landward_x_bma | - 
+   | Intertidal_width_var | Cross-shore width between the variable Mean High Water and Mean Low Water MHW-MLW | MLW_x_var & MHW_x_var
+Landward boundary | landward_point_variance | Landward boundary where variance of elevation through time is below a user-defined threshold (default = 0.1) | Landward_x_variance | DuneTop_prim_x 
+   | landward_point_derivative | Landward boundary defined as dune peak above a fixed threshold (default = +2.4 m) and with a maximum elevation (defulat = +6.0m) used for 2nd derivative method (Diamantidou, 2019) | Landward_x_der | MHW_y_var 
+   | landward_point_bma | Cross-shore location of value w.r.t. reference datum that approximates the boundary between the marine and aeolian zone (De Vries et al., 2010) (default =  +2 m) | Landward_x_bma | - 
+Seaward boundary | seaward_point_foreshore | Cross-shore location of value w.r.t. reference datum that approximates the seaward boundary of the foreshore (default = -4.0m) | Seaward_x_FS | -
+   | seaward_point_activeprofile | Cross-shore location of value w.r.t. reference datum that approximates the seaward boundary of the active profile (default = -8.0m)| Seaward_x_AP | -
+   | seaward_point_doc** | Approximation of the depth of closure below a user-defined minimum  (default = -5.0m) where the standard deviation of the elevation through time is below a user-defined value (default = 0.25) for at least a user-defined length (default = 200m) (Hinton, 2000) | Seaward_x_mindepth, Seaward_x_DoC | -
+   
 
+* These values vary alongshore (per transect), but are constant through time (per year). 
+** It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
 
-
-
-* Note: these values vary alongshore (per transect), but are constant through time (per year). 
-
-        
-        seaward_point_foreshore     : ['Seaward_x_FS']
-        seaward_point_activeprofile : ['Seaward_x_AP']
-        seaward_point_doc           : ['Seaward_x_mindepth', 'Seaward_x_DoC']
         
         dune_foot_fixed             : ['Dunefoot_x_fix']
         dune_foot_derivative        : ['Dunefoot_y_der', 'Dunefoot_x_der']
