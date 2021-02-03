@@ -27,7 +27,7 @@ docs/
 ######################
 build/
 dist/
-JAT/.egg-info/
+JAT.egg-info/
 
 
 #GENERAL
