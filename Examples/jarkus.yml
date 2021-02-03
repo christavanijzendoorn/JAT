@@ -114,7 +114,7 @@ dimensions: # Select which dimensions should be calculated for the transects
         
         landward_point_variance     : ['Landward_x_variance']
         landward_point_derivative   : ['Landward_x_der']
-        landward_point_bma          : ['Landward_x_variance']
+        landward_point_bma          : ['Landward_x_bma']
         
         seaward_point_foreshore     : ['Seaward_x_FS']
         seaward_point_activeprofile : ['Seaward_x_AP']

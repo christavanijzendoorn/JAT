@@ -18,7 +18,67 @@ The output of the extraction methods for all years and transects produced with t
 
 # Available characteristic parameters
 
+Parameter | Variable name | Explanation | Variable output | Dependent on
+------------ | ------------- | ------------ | ------------- | ------------- 
+Dune height - Primary | dune_height_and_location | Cross-shore location and elevation of the primary dune peak with elevation and prominence above user-defined value | DuneTop_prim_x, DuneTop_prim_y | -
+Dune height - Secondary | dune_height_and_location | Cross-shore location and elevation of the secondary dune peak with elevation and prominence above user-defined value | DuneTop_prim_x, DuneTop_prim_y, DuneTop_sec_x, DuneTop_sec_y | -
+Mean Sea Level | mean_sea_level | Elevation and cross-shore location of Mean Sea level defined as user-defined value w.r.t. reference datum (default = 0) | MSL_x | -
+ | mean_sea_level_variable | Elevation and cross-shore location of Mean Sea level defined as the cross-shore location between the variable MHW and MLW location (MLW+MHW)/2 | MSL_x_var | MLW_x_var & MHW_x_var
+Mean Low Water | mean_low_water_fixed | Cross-shore location of Mean Low Water defined as user-defined value w.r.t. reference datum (default =  -1 m) | MLW_x_fix | -
+ | mean_low_water_variable | Elevation and cross-shore location of Mean Low Water based on value w.r.t. reference datum provided per transect in the Jarkus dataset* based on tidal modeling | MLW_y_var, MLW_x_var | -
+Mean High Water | mean_high_water_fixed | Cross-shore location of Mean High Water defined as user-defined value m w.r.t. reference datum (default =  +1 m) | MHW_x_fix | -
+ | mean_high_water_variable | Elevation and cross-shore location of Mean High Water based on value w.r.t. reference datum provided per transect in the Jarkus dataset* based on tidal modeling | MHW_y_var, MHW_x_var | -
+Intertidal area width | Intertidal_width_fix | Cross-shore width between the fixed Mean High Water and Mean Low Water MHW-MLW | MLW_x_var & MHW_x_var
+ | Intertidal_width_var | Cross-shore width between the variable Mean High Water and Mean Low Water MHW-MLW | MLW_x_var & MHW_x_var
+Landward boundary | landward_point_variance | Landward point where variance of elvation through time is below a user-defined threshold. | Landward_x_variance | DuneTop_prim_x 
+ | landward_point_derivative | Landward point defind as dune peak above a fixed threshold used for 2nd derivative method (Diamantidou, 2019). | Landward_x_der | MHW_y_var 
+ | landward_point_bma | Cross-shore location of value w.r.t. reference datum that approximates the boundary between the marine and aeolian zone (De Vries et al., 2010) (default =  +2 m) | Landward_x_bma | - 
 
+
+
+
+* Note: these values vary alongshore (per transect), but are constant through time (per year). 
+
+        
+        seaward_point_foreshore     : ['Seaward_x_FS']
+        seaward_point_activeprofile : ['Seaward_x_AP']
+        seaward_point_doc           : ['Seaward_x_mindepth', 'Seaward_x_DoC']
+        
+        dune_foot_fixed             : ['Dunefoot_x_fix']
+        dune_foot_derivative        : ['Dunefoot_y_der', 'Dunefoot_x_der']
+        dune_foot_pybeach           : ['Dunefoot_y_pybeach_mix', 'Dunefoot_x_pybeach_mix']
+        
+        beach_width_fix             : ['Beach_width_fix']
+        beach_width_var             : ['Beach_width_var']
+        beach_width_der             : ['Beach_width_der']
+        beach_width_der_var         : ['Beach_width_der_var']
+        
+        beach_gradient_fix          : ['Beach_gradient_fix']
+        beach_gradient_var          : ['Beach_gradient_var']
+        beach_gradient_der          : ['Beach_gradient_der']
+
+        dune_front_width_prim_fix   : ['Dunefront_width_prim_fix']
+        dune_front_width_prim_der   : ['Dunefront_width_prim_der']
+        dune_front_width_sec_fix    : ['Dunefront_width_sec_fix']
+        dune_front_width_sec_der    : ['Dunefront_width_sec_der']
+        
+        dune_front_gradient_prim_fix: ['Dunefront_gradient_prim_fix']
+        dune_front_gradient_prim_der: ['Dunefront_gradient_prim_der']
+        dune_front_gradient_sec_fix : ['Dunefront_gradient_sec_fix']
+        dune_front_gradient_sec_der : ['Dunefront_gradient_sec_der']
+        
+        dune_volume_fix             : ['DuneVol_fix']
+        dune_volume_der             : ['DuneVol_der']
+        
+        intertidal_gradient         : ['Intertidal_gradient_fix']
+        intertidal_volume_fix       : ['Intertidal_volume_fix']
+        intertidal_volume_var       : ['Intertidal_volume_var']
+        
+        foreshore_gradient          : ['Foreshore_gradient']
+        foreshore_volume            : ['Foreshore_volume']
+        
+        active_profile_gradient     : ['Active_profile_gradient']
+        active_profile_volume       : ['Active_profile_volume']
 
 # Source data
 
