@@ -3,7 +3,7 @@
 
 # Input files #
 ######################
-Output/
+Input/
 
 *.nc
 *.kml
@@ -11,10 +11,9 @@ Output/
 
 # Output files #
 ######################
-Input/
+Output/
 
 *.pickle
-*.png
 
 # Documentation #
 #####################
