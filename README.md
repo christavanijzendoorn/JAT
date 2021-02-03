@@ -34,8 +34,8 @@ Landward boundary | landward_point_variance | Landward boundary where variance o
    | landward_point_derivative | Landward boundary defined as dune peak above a fixed threshold (default = +2.4 m) and with a maximum elevation (defulat = +6.0m) used for 2nd derivative method (Diamantidou, 2019) | Landward_x_der | MHW_y_var 
    | landward_point_bma | Cross-shore location of value w.r.t. reference datum that approximates the boundary between the marine and aeolian zone (De Vries et al., 2010) (default =  +2 m) | Landward_x_bma | - 
 Seaward boundary | seaward_point_foreshore | Cross-shore location of value w.r.t. reference datum that approximates the seaward boundary of the foreshore (default = -4.0m) | Seaward_x_FS | -
-   | seaward_point_activeprofile | Cross-shore location of value w.r.t. reference datum that approximates the seaward boundary of the active profile (default = -8.0m)| Seaward_x_AP | -
-   | seaward_point_doc** | Approximation of the depth of closure below a user-defined minimum  (default = -5.0m) where the standard deviation of the elevation through time is below a user-defined value (default = 0.25) for at least a user-defined length (default = 200m) (Hinton, 2000) | Seaward_x_mindepth, Seaward_x_DoC | -
+&nbsp; | seaward_point_activeprofile | Cross-shore location of value w.r.t. reference datum that approximates the seaward boundary of the active profile (default = -8.0m)| Seaward_x_AP | -
+&nbsp;   | seaward_point_doc** | Approximation of the depth of closure below a user-defined minimum  (default = -5.0m) where the standard deviation of the elevation through time is below a user-defined value (default = 0.25) for at least a user-defined length (default = 200m) (Hinton, 2000) | Seaward_x_mindepth, Seaward_x_DoC | -
    
 
 * These values vary alongshore (per transect), but are constant through time (per year). 
