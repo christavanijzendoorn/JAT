@@ -150,8 +150,9 @@ Active profile gradient | BMA | Gradient of the active profile calculated as the
 Active profile volume | BMA | Volume of the active profile calculated as the volume under the profile BMA and the seaward boundary of the active profile
 
 
-/*/ These values vary alongshore (per transect), but are constant through time (per year)
-/**/ It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
+* These values vary alongshore (per transect), but are constant through time (per year)
+
+** It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
 
 
 
