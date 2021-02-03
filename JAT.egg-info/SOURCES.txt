@@ -1,9 +1,0 @@
-README.md
-setup.py
-JAT/Filtering_functions.py
-JAT/Jarkus_Analysis_Toolbox.py
-JAT/__init__.py
-JAT.egg-info/PKG-INFO
-JAT.egg-info/SOURCES.txt
-JAT.egg-info/dependency_links.txt
-JAT.egg-info/top_level.txt
