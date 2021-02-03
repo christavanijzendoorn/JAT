@@ -144,14 +144,14 @@ Dune volume | Fixed | Dune volume calculated as the volume under the coastal pro
 Intertidal area gradient | Fixed | Gradient of the profile between the fixed Mean High Water and Mean Low Water
 Intertidal area volume | Fixed | Volume of the intertidal area calculated as the volume under the profile between the location of the fixed Mean High Water and Mean Low Water
 &nbsp; | Variable | Volume of the intertidal area calculated as the volume under the profile between the location of the variable Mean High Water and Mean Low Water
-Foreshore gradient | Gradient of the foreshore calculated as the slope between the BMA and the seaward boundary of the foreshore
-Foreshore volume | Volume of the foreshore calculated as the volume under the profile between the BMA and the seaward boundary of the foreshore
-Active profile gradient | Gradient of the active profile calculated as the slope between the BMA and the seaward boundary of the active profile
-Active profile volume | Volume of the active profile calculated as the volume under the profile BMA and the seaward boundary of the active profile
+Foreshore gradient | BMA | Gradient of the foreshore calculated as the slope between the BMA and the seaward boundary of the foreshore
+Foreshore volume | BMA | Volume of the foreshore calculated as the volume under the profile between the BMA and the seaward boundary of the foreshore
+Active profile gradient | BMA | Gradient of the active profile calculated as the slope between the BMA and the seaward boundary of the active profile
+Active profile volume | BMA | Volume of the active profile calculated as the volume under the profile BMA and the seaward boundary of the active profile
 
 
-* These values vary alongshore (per transect), but are constant through time (per year). 
-** It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
+/*/ These values vary alongshore (per transect), but are constant through time (per year)
+/**/ It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
 
 
 
