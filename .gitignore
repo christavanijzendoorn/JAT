@@ -4,6 +4,7 @@
 # Input files #
 ######################
 Output/
+
 *.nc
 *.kml
 *.xlsx
@@ -11,12 +12,14 @@ Output/
 # Output files #
 ######################
 Input/
+
 *.pickle
 *.png
 
 # Documentation #
 #####################
 docs/
+
 *.docx
 *.pptx
 
