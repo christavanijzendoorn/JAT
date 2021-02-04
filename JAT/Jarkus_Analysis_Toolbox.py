@@ -51,7 +51,7 @@ class Transects:
         years_requested = list(range(start_yr, end_yr))
         years_filter =  np.isin(years, years_requested)
         self.years_filtered = np.array(years)[np.nonzero(years_filter)[0]]
-        self.years_filtered_idxs = np.where(years_filter)
+        self.years_filtered_idxs = np.where(years_filter)[0]
    
     def get_transects_filtered(self, transects_requested, execute_all_transects):
         ids = self.variables['id'].values                              # retrieve transect ids from jarkus dataset
@@ -73,8 +73,8 @@ class Transects:
             trsct = str(self.transects_filtered[i])
             elevation_dataframe = pd.DataFrame(index=self.years_filtered, columns=crossshore)
             #!!! When searching for a selection of years after 1965 there is a problem here with indexing!! 
-            for yr_idx in self.years_filtered_idxs[0]:    
-                elevation_dataframe.loc[self.years_filtered[yr_idx]] = self.variables['altitude'].values[yr_idx, trsct_idx, :]  # elevation of profile point
+            for j, yr_idx in enumerate(self.years_filtered_idxs):   
+                elevation_dataframe.loc[self.years_filtered[j]] = self.variables['altitude'].values[yr_idx, trsct_idx, :]  # elevation of profile point
                 
             if apply_filter1 == 'yes':
                 for idx, row in elevation_dataframe.iterrows():
@@ -106,7 +106,7 @@ class Transects:
                
             # Load and plot data per year
             for i, yr in enumerate(self.years_filtered):
-                yr_idx = self.years_filtered_idxs[0][i]
+                yr_idx = self.years_filtered_idxs[i]
                 
                 colorVal = scalarMap.to_rgba(yr)
                 elevation = self.variables['altitude'].values[yr_idx, trsct_idx, :]
@@ -182,8 +182,9 @@ class Transects:
                 ids_alongshore = np.concatenate((ids_alongshore, ids_filt))
             
             # Create conversion dictionary  
-            conversion_alongshore2ids = dict(zip(ids_alongshore, trscts))
-            conversion_ids2alongshore = dict(zip(trscts, ids_alongshore))
+            trscts_str = [str(tr) for tr in trscts]
+            conversion_alongshore2ids = dict(zip(ids_alongshore, trscts_str))
+            conversion_ids2alongshore = dict(zip(trscts_str, ids_alongshore))
             
         return conversion_alongshore2ids, conversion_ids2alongshore
 
@@ -264,7 +265,15 @@ class Extraction:
         self.data = data
         self.config = config
         self.crossshore = data.variables['cross_shore'].values
-
+        
+    def get_requested_variables(self):
+        self.variables_req = []
+        for key in self.config['dimensions']['setting']:
+            if self.config['dimensions']['setting'][key] == True:
+                self.variables_req.extend(self.config['dimensions']['variables'][key])
+                
+        return self.variables_req
+                
     def get_all_dimensions(self):
         for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
             trsct = str(self.data.transects_filtered[i])
@@ -277,102 +286,103 @@ class Extraction:
                 self.dimensions = pd.DataFrame({'transect': trsct, 'years':self.data.years_filtered})
                 self.dimensions.set_index('years', inplace=True)
             
-            if self.config['dimensions']['dune_height_and_location'] == True:
+            if self.config['dimensions']['setting']['dune_height_and_location'] == True:
                 self.get_dune_height_and_location(trsct_idx)
-                
-            if self.config['dimensions']['mean_sea_level'] == True:
+
+            if self.config['dimensions']['setting']['mean_sea_level'] == True:
                 self.get_mean_sea_level(trsct_idx)
-            if self.config['dimensions']['mean_low_water_fixed'] == True:
+            if self.config['dimensions']['setting']['mean_low_water_fixed'] == True:
                 self.get_mean_low_water_fixed(trsct_idx)
-            if self.config['dimensions']['mean_low_water_variable'] == True:
+            if self.config['dimensions']['setting']['mean_low_water_variable'] == True:
                 self.get_mean_low_water_variable(trsct_idx)
-            if self.config['dimensions']['mean_high_water_fixed'] == True:
+            if self.config['dimensions']['setting']['mean_high_water_fixed'] == True:
                 self.get_mean_high_water_fixed(trsct_idx)
-            if self.config['dimensions']['mean_high_water_variable'] == True:
+            if self.config['dimensions']['setting']['mean_high_water_variable'] == True:
                 self.get_mean_high_water_variable(trsct_idx)
-            if self.config['dimensions']['mean_sea_level_variable'] == True:
+            if self.config['dimensions']['setting']['mean_sea_level_variable'] == True:
                 self.get_mean_sea_level_variable()
                 
-            if self.config['dimensions']['intertidal_width_fixed'] == True:
+                
+            if self.config['dimensions']['setting']['intertidal_width_fixed'] == True:
                 self.get_intertidal_width_fixed()       
-            if self.config['dimensions']['intertidal_width_variable'] == True:
+            if self.config['dimensions']['setting']['intertidal_width_variable'] == True:
                 self.get_intertidal_width_variable()      
 
-            if self.config['dimensions']['landward_point_variance'] == True:
+            if self.config['dimensions']['setting']['landward_point_variance'] == True:
                 self.get_landward_point_variance(trsct_idx)       
-            if self.config['dimensions']['landward_point_derivative'] == True:
+            if self.config['dimensions']['setting']['landward_point_derivative'] == True:
                 self.get_landward_point_derivative(trsct_idx)     
-            if self.config['dimensions']['landward_point_bma'] == True:
+            if self.config['dimensions']['setting']['landward_point_bma'] == True:
                 self.get_landward_point_bma(trsct_idx)    
 
-            if self.config['dimensions']['seaward_point_foreshore'] == True:
+            if self.config['dimensions']['setting']['seaward_point_foreshore'] == True:
                 self.get_seaward_point_foreshore(trsct_idx)       
-            if self.config['dimensions']['seaward_point_activeprofile'] == True:
+            if self.config['dimensions']['setting']['seaward_point_activeprofile'] == True:
                 self.get_seaward_point_activeprofile(trsct_idx)     
-            if self.config['dimensions']['seaward_point_doc'] == True:
+            if self.config['dimensions']['setting']['seaward_point_doc'] == True:
                 self.get_seaward_point_doc(trsct_idx)                
                 
-            if self.config['dimensions']['dune_foot_fixed'] == True:
+            if self.config['dimensions']['setting']['dune_foot_fixed'] == True:
                 self.get_dune_foot_fixed(trsct_idx)       
-            if self.config['dimensions']['dune_foot_derivative'] == True:
+            if self.config['dimensions']['setting']['dune_foot_derivative'] == True:
                 self.get_dune_foot_derivative(trsct_idx)     
-            if self.config['dimensions']['dune_foot_pybeach'] == True:
+            if self.config['dimensions']['setting']['dune_foot_pybeach'] == True:
                 self.get_dune_foot_pybeach(trsct_idx)      
                 
-            if self.config['dimensions']['beach_width_fix'] == True:
+            if self.config['dimensions']['setting']['beach_width_fix'] == True:
                 self.get_beach_width_fix()       
-            if self.config['dimensions']['beach_width_var'] == True:
+            if self.config['dimensions']['setting']['beach_width_var'] == True:
                 self.get_beach_width_var()     
-            if self.config['dimensions']['beach_width_der'] == True:
+            if self.config['dimensions']['setting']['beach_width_der'] == True:
                 self.get_beach_width_der()   
-            if self.config['dimensions']['beach_width_der_var'] == True:
+            if self.config['dimensions']['setting']['beach_width_der_var'] == True:
                 self.get_beach_width_der_var()  
 
-            if self.config['dimensions']['beach_gradient_fix'] == True:
+            if self.config['dimensions']['setting']['beach_gradient_fix'] == True:
                 self.get_beach_gradient_fix(trsct_idx)       
-            if self.config['dimensions']['beach_gradient_var'] == True:
+            if self.config['dimensions']['setting']['beach_gradient_var'] == True:
                 self.get_beach_gradient_var(trsct_idx)     
-            if self.config['dimensions']['beach_gradient_der'] == True:
+            if self.config['dimensions']['setting']['beach_gradient_der'] == True:
                 self.get_beach_gradient_der(trsct_idx)   
                 
-            if self.config['dimensions']['dune_front_width_prim_fix'] == True:
+            if self.config['dimensions']['setting']['dune_front_width_prim_fix'] == True:
                 self.get_dune_front_width_prim_fix()       
-            if self.config['dimensions']['dune_front_width_prim_der'] == True:
+            if self.config['dimensions']['setting']['dune_front_width_prim_der'] == True:
                 self.get_dune_front_width_prim_der()     
-            if self.config['dimensions']['dune_front_width_sec_fix'] == True:
+            if self.config['dimensions']['setting']['dune_front_width_sec_fix'] == True:
                 self.get_dune_front_width_sec_fix()  
-            if self.config['dimensions']['dune_front_width_sec_der'] == True:
+            if self.config['dimensions']['setting']['dune_front_width_sec_der'] == True:
                 self.get_dune_front_width_sec_der()  
                 
-            if self.config['dimensions']['dune_front_gradient_prim_fix'] == True:
+            if self.config['dimensions']['setting']['setting']['dune_front_gradient_prim_fix'] == True:
                 self.get_dune_front_gradient_prim_fix(trsct_idx)       
-            if self.config['dimensions']['dune_front_gradient_prim_der'] == True:
+            if self.config['dimensions']['setting']['dune_front_gradient_prim_der'] == True:
                 self.get_dune_front_gradient_prim_der(trsct_idx)     
-            if self.config['dimensions']['dune_front_gradient_sec_fix'] == True:
+            if self.config['dimensions']['setting']['dune_front_gradient_sec_fix'] == True:
                 self.get_dune_front_gradient_sec_fix(trsct_idx)  
-            if self.config['dimensions']['dune_front_gradient_sec_der'] == True:
+            if self.config['dimensions']['setting']['dune_front_gradient_sec_der'] == True:
                 self.get_dune_front_gradient_sec_der(trsct_idx)  
 
-            if self.config['dimensions']['dune_volume_fix'] == True:
+            if self.config['dimensions']['setting']['dune_volume_fix'] == True:
                 self.get_dune_volume_fix(trsct_idx)  
-            if self.config['dimensions']['dune_volume_der'] == True:
+            if self.config['dimensions']['setting']['dune_volume_der'] == True:
                 self.get_dune_volume_der(trsct_idx)              
             
-            if self.config['dimensions']['intertidal_gradient'] == True:
+            if self.config['dimensions']['setting']['intertidal_gradient'] == True:
                 self.get_intertidal_gradient_fix(trsct_idx)     
-            if self.config['dimensions']['intertidal_volume_fix'] == True:
+            if self.config['dimensions']['setting']['intertidal_volume_fix'] == True:
                 self.get_intertidal_volume_fix(trsct_idx)  
-            if self.config['dimensions']['intertidal_volume_var'] == True:
+            if self.config['dimensions']['setting']['intertidal_volume_var'] == True:
                 self.get_intertidal_volume_var(trsct_idx)  
   
-            if self.config['dimensions']['foreshore_gradient'] == True:
+            if self.config['dimensions']['setting']['foreshore_gradient'] == True:
                 self.get_foreshore_gradient(trsct_idx)  
-            if self.config['dimensions']['foreshore_volume'] == True:
+            if self.config['dimensions']['setting']['foreshore_volume'] == True:
                 self.get_foreshore_volume(trsct_idx)  
                 
-            if self.config['dimensions']['active_profile_gradient'] == True:
+            if self.config['dimensions']['setting']['active_profile_gradient'] == True:
                 self.get_active_profile_gradient(trsct_idx)  
-            if self.config['dimensions']['active_profile_volume'] == True:
+            if self.config['dimensions']['setting']['active_profile_volume'] == True:
                 self.get_active_profile_volume(trsct_idx)  
                 
             # Save dimensions data frame for each transect
@@ -382,8 +392,7 @@ class Extraction:
         variable_dataframe = pd.DataFrame({'years': self.data.years_filtered})
         variable_dataframe.set_index('years', inplace=True)   
         
-        variables = self.dimensions.columns.tolist()
-        variables.remove('transect')
+        variables = self.variables_req
                 
         for variable in variables:
             for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
@@ -407,10 +416,7 @@ class Extraction:
     def normalize_dimensions(self):
         
         norm_year = self.config['user defined']['normalization year']
-        
-        variables = self.dimensions.columns.tolist()
-        print(variables)
-        variables.remove('transect')
+        variables = self.variables_req
         
         # Get all variables that have to be normalized based on the requirement that _x should be in the column name, 
         # and that change values do not have to be normalized.
@@ -437,7 +443,7 @@ class Extraction:
         # The prominence of a peak measures how much a peak stands out from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             
@@ -469,7 +475,7 @@ class Extraction:
         MSL_y = self.config['user defined']['mean sea level'] # in m above reference datum
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             
@@ -500,7 +506,7 @@ class Extraction:
         MLW_y_fixed   = self.config['user defined']['mean low water'] # in m above reference datum
             
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MLW_y_fixed)
@@ -519,7 +525,7 @@ class Extraction:
         self.dimensions.loc[:, 'MLW_y_var'] = MLW_y_variable     # save assumed mean low water level as extracted from the jarkus dataset
             
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MLW_y_variable)
@@ -537,7 +543,7 @@ class Extraction:
         MHW_y_fixed   = self.config['user defined']['mean high water'] # in m above reference datum
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MHW_y_fixed)
@@ -556,7 +562,7 @@ class Extraction:
         self.dimensions.loc[:, 'MHW_y_var'] = MHW_y_variable     # save assumed mean low water level as extracted from the jarkus dataset
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MHW_y_variable)
@@ -615,7 +621,7 @@ class Extraction:
         peaks_threshold = height_of_peaks + self.dimensions['MHW_y_var'].values[0]
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             peaks = find_peaks(elevation, prominence = height_of_peaks)[0] # Documentation see get_dune_top
@@ -628,7 +634,7 @@ class Extraction:
                 if len(intersections_derivative) != 0:
                     self.dimensions.loc[yr, 'Landward_x_der'] = intersections_derivative[-1]
             elif len(peaks_filt) != 0:
-                self.dimensions.loc[yr, 'Landward_x_der'] = peaks_filt.index[-1]
+                self.dimensions.loc[yr, 'Landward_x_der'] = peaks_filt[-1]
             else:
                 self.dimensions.loc[yr, 'Landward_x_der'] = np.nan
 
@@ -642,7 +648,7 @@ class Extraction:
         bma_y = self.config['user defined']['landward bma']
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
             intersections_bma = find_intersections(elevation, self.crossshore, bma_y)
@@ -668,7 +674,7 @@ class Extraction:
         seaward_ActProf_y = self.config['user defined']['seaward active profile']
     
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :] 
             intersections_AP = find_intersections(elevation, self.crossshore, seaward_ActProf_y)
@@ -682,7 +688,7 @@ class Extraction:
         min_depth = self.config['user defined']['seaward DoC']['min depth']
     
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :] 
             intersections_mindepth = find_intersections(elevation, self.crossshore, min_depth)
@@ -752,7 +758,7 @@ class Extraction:
         from pybeach.beach import Profile
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                 
@@ -764,8 +770,8 @@ class Extraction:
             # Remove everything outside of boundaries
             elevation = elevation.drop(elevation.index[elevation.index > seaward_x]) # drop everything seaward of seaward boundary
             elevation = elevation.drop(elevation.index[elevation.index < landward_x]).interpolate() # drop everything landward of landward boundary and interpolate remaining data
-            
-            if np.isnan(sum(elevation)) == False and len(elevation) > 5:
+
+            if np.isnan(sum(elevation.values)) == False and len(elevation) > 5:
                 x_ml = np.array(elevation.index) # pybeach asks ndarray, so convert with np.array(). Note it should be land-left, sea-right otherwise use np.flip()
                 y_ml = np.array(elevation.values) 
                 
@@ -792,7 +798,7 @@ class Extraction:
 
     def get_beach_gradient_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
             
@@ -805,7 +811,7 @@ class Extraction:
     
     def get_beach_gradient_var(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
             
@@ -818,7 +824,7 @@ class Extraction:
     
     def get_beach_gradient_der(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
             
@@ -843,7 +849,7 @@ class Extraction:
     
     def get_dune_front_gradient_prim_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-             yr_idx = self.data.years_filtered_idxs[0][i]
+             yr_idx = self.data.years_filtered_idxs[i]
              
              elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
              
@@ -856,7 +862,7 @@ class Extraction:
  
     def get_dune_front_gradient_prim_der(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-             yr_idx = self.data.years_filtered_idxs[0][i]
+             yr_idx = self.data.years_filtered_idxs[i]
              
              elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
              
@@ -869,7 +875,7 @@ class Extraction:
  
     def get_dune_front_gradient_sec_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-             yr_idx = self.data.years_filtered_idxs[0][i]
+             yr_idx = self.data.years_filtered_idxs[i]
              
              elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
              
@@ -882,7 +888,7 @@ class Extraction:
  
     def get_dune_front_gradient_sec_der(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-             yr_idx = self.data.years_filtered_idxs[0][i]
+             yr_idx = self.data.years_filtered_idxs[i]
              
              elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
              
@@ -895,7 +901,7 @@ class Extraction:
    
     def get_dune_volume_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                  
@@ -908,7 +914,7 @@ class Extraction:
         
     def get_dune_volume_der(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                  
@@ -921,7 +927,7 @@ class Extraction:
   
     def get_intertidal_gradient_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
                 
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
             
@@ -934,7 +940,7 @@ class Extraction:
     
     def get_intertidal_volume_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                  
@@ -947,7 +953,7 @@ class Extraction:
 
     def get_intertidal_volume_var(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                  
@@ -960,7 +966,7 @@ class Extraction:
 
     def get_foreshore_gradient(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
                 
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
             
@@ -972,7 +978,7 @@ class Extraction:
 
     def get_foreshore_volume(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                  
@@ -985,7 +991,7 @@ class Extraction:
 
     def get_active_profile_gradient(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
                 
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
             
@@ -997,7 +1003,7 @@ class Extraction:
     
     def get_active_profile_volume(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
                  
