@@ -2,7 +2,9 @@
 
 The Jarkus Analysis Toolbox (JAT) is a Python-based open-source software, that can be used to analyze the Jarkus dataset. The Jarkus dataset is one of the most elaborate coastal datasets in the world and consists of coastal profiles of the entire Dutch coast, spaced about 250-500 m apart, which have been measured yearly since 1965. The main purpose of the JAT is to provide stakeholders (e.g. scientists, engineers and coastal managers) with the techniques that are necessary to study the spatial and temporal variations in characteristic parameters like dune height, dune volume, dune foot, beach width and closure depth. Different available definitions for extracting these characteristic parameters were collected and implemented in the JAT. 
 
-![Example of characteristic parameters that can be extracted using the JAT](https://github.com/christavanijzendoorn/JAT/blob/master/images/parameters.png | width=100)
+![Example of characteristic parameters that can be extracted using the JAT](https://github.com/christavanijzendoorn/JAT/blob/master/images/parameters.png)
+
+<img src="https://github.com/christavanijzendoorn/JAT/blob/master/images/parameters.png" width="48">
 
 The modular set-up of the JAT makes sure that new extraction techniques can be added in the future. For instance, we are currently working on the inclusion of:
 - a closure depth method
