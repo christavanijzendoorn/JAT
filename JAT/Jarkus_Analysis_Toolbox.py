@@ -32,7 +32,8 @@ import numpy as np
 import pandas as pd
 import pickle
 import os
-import xarray as xr
+# import xarray as xr
+from netCDF4 import Dataset, num2date
 
 #################################
 ####     DATA-EXTRACTION     ####
@@ -41,42 +42,47 @@ import xarray as xr
 class Transects:
 
     def __init__(self, config): 
-        # create a dataset object, based on locally saved JARKUS dataset
-        self.dataset = xr.open_dataset(config['root'] + config['data locations']['DirJK'])
+        # create a dataset object, based on JARKUS dataset saved locally or on server
+        if 'http' in config['data locations']['Jarkus']: # check whether it's a url
+            self.dataset = Dataset(config['data locations']['Jarkus'])    
+        else: # load from local file
+            self.dataset = Dataset(config['root'] + config['data locations']['Jarkus'])
         self.variables = self.dataset.variables
         
     def get_years_filtered(self, start_yr, end_yr):
-        time = self.variables['time'].values                     # retrieve years from jarkus dataset
-        years = pd.to_datetime(time).year                        # convert to purely integers indicating the measurement year
+        time = self.variables['time'][:]                     # retrieve years from jarkus dataset
+        years = num2date(time, self.variables['time'].units)
+        years = [yr.year for yr in years]                    # convert to purely integers indicating the measurement year
         years_requested = list(range(start_yr, end_yr))
         years_filter =  np.isin(years, years_requested)
-        self.years_filtered = np.array(years)[np.nonzero(years_filter)[0]]
+        self.years_filtered = np.array(years)[np.nonzero(years_filter)]
         self.years_filtered_idxs = np.where(years_filter)[0]
    
     def get_transects_filtered(self, transects_requested, execute_all_transects):
-        ids = self.variables['id'].values                              # retrieve transect ids from jarkus dataset
+        ids = self.variables['id'][:]                              # retrieve transect ids from jarkus dataset
         if execute_all_transects == True:
             transects_requested = ids
         transects_filter = np.isin(ids, transects_requested)
         self.transects_filtered = np.array(ids)[np.nonzero(transects_filter)[0]]
         self.transects_filtered_idxs = np.where(transects_filter)[0]
     
-    def get_availability(self, start_yr, end_yr, transects_requested, execute_all_transects):
-        self.get_years_filtered(start_yr, end_yr)    
-        self.get_transects_filtered(transects_requested, execute_all_transects)    
+    def get_availability(self, config):
+        self.get_years_filtered(config['years']['start_yr'], config['years']['end_yr'])    
+        self.get_transects_filtered(config['transects']['transects_req'], config['transects']['execute_all_transects'])    
         
-    def save_elevation_dataframes(self, config, apply_filter1=''):
+    def save_elevation_dataframes(self, config):
                 
-        crossshore = self.variables['cross_shore'].values
+        crossshore = self.variables['cross_shore'][:]
 
         for i, trsct_idx in enumerate(self.transects_filtered_idxs):
             trsct = str(self.transects_filtered[i])
             elevation_dataframe = pd.DataFrame(index=self.years_filtered, columns=crossshore)
             #!!! When searching for a selection of years after 1965 there is a problem here with indexing!! 
             for j, yr_idx in enumerate(self.years_filtered_idxs):   
-                elevation_dataframe.loc[self.years_filtered[j]] = self.variables['altitude'].values[yr_idx, trsct_idx, :]  # elevation of profile point
+                print(yr_idx)
+                elevation_dataframe.loc[self.years_filtered[j]] = self.variables['altitude'][yr_idx, trsct_idx, :]  # elevation of profile point
                 
-            if apply_filter1 == 'yes':
+            if config['user defined']['filter1']['apply'] == True:
                 for idx, row in elevation_dataframe.iterrows():
                     if min(row) > config['user defined']['filter1']['min'] or max(row) < config['user defined']['filter1']['max']:
                         elevation_dataframe.drop(idx, axis=0)
@@ -89,7 +95,7 @@ class Transects:
         import matplotlib.colors as colors
         import matplotlib.cm as cm
         
-        crossshore = self.variables['cross_shore'].values
+        crossshore = self.variables['cross_shore'][:]
         
         for i, trsct_idx in enumerate(self.transects_filtered_idxs):
             trsct = str(self.transects_filtered[i])
@@ -109,7 +115,7 @@ class Transects:
                 yr_idx = self.years_filtered_idxs[i]
                 
                 colorVal = scalarMap.to_rgba(yr)
-                elevation = self.variables['altitude'].values[yr_idx, trsct_idx, :]
+                elevation = self.variables['altitude'][yr_idx, trsct_idx, :]
                 mask = np.isfinite(elevation)
                 plt.plot(crossshore[mask], elevation[mask], color=colorVal, label = str(yr), linewidth = 2.5)
             
@@ -746,7 +752,7 @@ class Extraction:
             ###################################
             ## Variable dunefoot definition based on first and second derivative of profile
     
-            dunefoots = xr.open_dataset(self.config['root'] + self.config['data locations']['DirDF'])
+            dunefoots = xr.open_dataset(self.config['root'] + self.config['data locations']['DuneFoot'])
             dunefoots_y = dunefoots.variables['dune_foot_2nd_deriv'].values[self.data.years_filtered_idxs, trsct_idx][0] 
             dunefoots_x = dunefoots.variables['dune_foot_2nd_deriv_cross'].values[self.data.years_filtered_idxs, trsct_idx][0] 
             

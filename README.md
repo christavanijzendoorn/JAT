@@ -2,8 +2,8 @@
 
 The Jarkus Analysis Toolbox (JAT) is a Python-based open-source software, that can be used to analyze the Jarkus dataset. The Jarkus dataset is one of the most elaborate coastal datasets in the world and consists of coastal profiles of the entire Dutch coast, spaced about 250-500 m apart, which have been measured yearly since 1965. The main purpose of the JAT is to provide stakeholders (e.g. scientists, engineers and coastal managers) with the techniques that are necessary to study the spatial and temporal variations in characteristic parameters like dune height, dune volume, dune foot, beach width and closure depth. Different available definitions for extracting these characteristic parameters were collected and implemented in the JAT. 
 
-*Example of characteristic parameters that can be extracted using the JAT*
 <img src="https://github.com/christavanijzendoorn/JAT/blob/master/images/parameters.png" width="500">
+*Example of characteristic parameters that can be extracted using the JAT*
 
 The modular set-up of the JAT makes sure that new extraction techniques can be added in the future. For instance, we are currently working on the inclusion of:
 - a closure depth method
@@ -14,16 +14,16 @@ The output of the extraction methods for all years and transects produced with t
 
 # Method
 
-*Flowchart of Jarkus Analysis Toolbox functionalities*
 <img src="https://github.com/christavanijzendoorn/JAT/blob/master/images/flowchart.png" width="500">
+*Flowchart of Jarkus Analysis Toolbox functionalities*
 
 # Source data
 
 The Jarkus dataset:
-http://opendap.deltares.nl/thredds/catalog/opendap/rijkswaterstaat/jarkus/profiles/catalog.html?dataset=varopendap/rijkswaterstaat/jarkus/profiles/transect.nc  
+http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc
 
 The dune foots extracted using the second derivative method:
-http://opendap.deltares.nl/thredds/catalog/opendap/rijkswaterstaat/DuneFoot/catalog.html?dataset=varopendap/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc 
+http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc
 
 you can save these files locally to be independent of internet access. Make sure to include their directory in the settings file (jarkus.yml).
 
