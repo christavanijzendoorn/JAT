@@ -1,0 +1,174 @@
+name: jarkus
+
+# REQUEST YEARS AND TRANSECTS
+years:
+    start_yr: 1980
+    end_yr: 2020
+
+transects: 
+    execute_all_transects: False # Set whether all transect should be analysed or define a retrieval request
+    # Note! If execute_all_transects = True it overrides the input of transects_req indicated below 
+    transects_req: 8009325 # for single
+    #transects_req: [8009325, 8009350] # for multiple
+    #transects_req: np.arange(8009000, 8009751, 1) # for range
+
+# DIRECTORIES
+root: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\
+data locations: # When saved locally fill in directory of dataset (and leave out the root)
+   Jarkus: 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
+   # Input\transect.nc       
+   DuneFoot: 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc'
+           # Input\DF_2nd_deriv.nc
+   Nourishment: Input\Suppletiedatabase.xlsx
+           # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
+   LocFilter: \Examples\01_single_transect\location_filter.yml # not necessary for single transect
+   Titles: \Examples\01_single_transect\plot_titles.yml # not necessary for single transect
+save locations:
+   DirA: \Examples\01_single_transect\A_elevation_dataframes\ # This is combined with root to find directory
+   DirB: \Examples\01_single_transect\B_transect_plots\
+   DirC: \Examples\01_single_transect\C_dimensions_dataframes_per_transect\
+   DirD: \Examples\01_single_transect\D_dataframes_per_dimension\
+   DirE: \Examples\01_single_transect\E_filtered_dataframes\
+   
+# USER-DEFINED VALUES
+user defined:
+   filter1: # If no data is present between the min and max value (in m NAP) the transect is dropped
+       apply: True # or False
+       min: -1 
+       max: 5
+   filter2: 
+       # BUILD IN APPLY HERE
+       years: 0 # Minimum percentage of values over all transect locations that has to be available for a single year, otherwise it is filtered out.
+       locations: 0 # Minimum percentage of values over all years that has to be available for a single transect location, otherwise it is filtered out.
+   mean sea level: 0
+   mean high water: 1
+   mean low water: -1
+   landward variance threshold: 0.1
+   landward derivative:
+      min height: 2.4
+      height constraint: 6.0
+   landward bma: 2.0 # boundary marine aeolian
+   seaward foreshore: -4.0
+   seaward active profile: -8.0
+   seaward DoC:
+       min depth: -5.0
+       stddev threshold: 0.25
+       low stddev length: 200
+   dune foot fixed: 3
+   normalization year: 1990
+
+# SELECTION OF CHARACTERISTIC PARAMETERS
+dimensions: # Select which dimensions should be calculated for the transects
+    setting:
+        dune_height_and_location    : True
+        
+        mean_sea_level              : True
+        mean_low_water_fixed        : True
+        mean_low_water_variable     : True
+        mean_high_water_fixed       : True
+        mean_high_water_variable    : True
+        mean_sea_level_variable     : True
+
+        intertidal_width_fixed      : True
+        intertidal_width_variable   : True
+        
+        landward_point_variance     : True
+        landward_point_derivative   : True
+        landward_point_bma          : True
+        
+        seaward_point_foreshore     : True
+        seaward_point_activeprofile : True
+        seaward_point_doc           : True
+        
+        dune_foot_fixed             : True
+        dune_foot_derivative        : True
+        dune_foot_pybeach           : True
+        
+        beach_width_fix             : True
+        beach_width_var             : True
+        beach_width_der             : True
+        beach_width_der_var         : True
+        
+        beach_gradient_fix          : True
+        beach_gradient_var          : True
+        beach_gradient_der          : True
+
+        dune_front_width_prim_fix   : True
+        dune_front_width_prim_der   : True
+        dune_front_width_sec_fix    : True
+        dune_front_width_sec_der    : True
+        
+        dune_front_gradient_prim_fix: True
+        dune_front_gradient_prim_der: True
+        dune_front_gradient_sec_fix : True
+        dune_front_gradient_sec_der : True
+        
+        dune_volume_fix             : True
+        dune_volume_der             : True
+        
+        intertidal_gradient         : True
+        intertidal_volume_fix       : True
+        intertidal_volume_var       : True
+        
+        foreshore_gradient          : True
+        foreshore_volume            : True
+        
+        active_profile_gradient     : True
+        active_profile_volume       : True
+
+    variables:
+        dune_height_and_location    : ['DuneTop_prim_x', 'DuneTop_prim_y', 'DuneTop_sec_x', 'DuneTop_sec_y']
+        
+        mean_sea_level              : ['MSL_x']
+        mean_low_water_fixed        : ['MLW_x_fix']
+        mean_low_water_variable     : ['MLW_y_var', 'MLW_x_var']
+        mean_high_water_fixed       : ['MHW_x_fix']
+        mean_high_water_variable    : ['MHW_y_var', 'MHW_x_var']
+        mean_sea_level_variable     : ['MSL_x_var']
+
+        intertidal_width_fixed      : ['Intertidal_width_fix']
+        intertidal_width_variable   : ['Intertidal_width_var']
+        
+        landward_point_variance     : ['Landward_x_variance']
+        landward_point_derivative   : ['Landward_x_der']
+        landward_point_bma          : ['Landward_x_bma']
+        
+        seaward_point_foreshore     : ['Seaward_x_FS']
+        seaward_point_activeprofile : ['Seaward_x_AP']
+        seaward_point_doc           : ['Seaward_x_mindepth', 'Seaward_x_DoC']
+        
+        dune_foot_fixed             : ['Dunefoot_x_fix']
+        dune_foot_derivative        : ['Dunefoot_y_der', 'Dunefoot_x_der']
+        dune_foot_pybeach           : ['Dunefoot_y_pybeach_mix', 'Dunefoot_x_pybeach_mix']
+        
+        beach_width_fix             : ['Beach_width_fix']
+        beach_width_var             : ['Beach_width_var']
+        beach_width_der             : ['Beach_width_der']
+        beach_width_der_var         : ['Beach_width_der_var']
+        
+        beach_gradient_fix          : ['Beach_gradient_fix']
+        beach_gradient_var          : ['Beach_gradient_var']
+        beach_gradient_der          : ['Beach_gradient_der']
+
+        dune_front_width_prim_fix   : ['Dunefront_width_prim_fix']
+        dune_front_width_prim_der   : ['Dunefront_width_prim_der']
+        dune_front_width_sec_fix    : ['Dunefront_width_sec_fix']
+        dune_front_width_sec_der    : ['Dunefront_width_sec_der']
+        
+        dune_front_gradient_prim_fix: ['Dunefront_gradient_prim_fix']
+        dune_front_gradient_prim_der: ['Dunefront_gradient_prim_der']
+        dune_front_gradient_sec_fix : ['Dunefront_gradient_sec_fix']
+        dune_front_gradient_sec_der : ['Dunefront_gradient_sec_der']
+        
+        dune_volume_fix             : ['DuneVol_fix']
+        dune_volume_der             : ['DuneVol_der']
+        
+        intertidal_gradient         : ['Intertidal_gradient_fix']
+        intertidal_volume_fix       : ['Intertidal_volume_fix']
+        intertidal_volume_var       : ['Intertidal_volume_var']
+        
+        foreshore_gradient          : ['Foreshore_gradient']
+        foreshore_volume            : ['Foreshore_volume']
+        
+        active_profile_gradient     : ['Active_profile_gradient']
+        active_profile_volume       : ['Active_profile_volume']
