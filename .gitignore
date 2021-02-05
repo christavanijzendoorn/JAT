@@ -27,9 +27,9 @@ docs/
 build/
 dist/
 JAT.egg-info/
+__pycache__/
 
 *.pyc
-
 
 #GENERAL
 
