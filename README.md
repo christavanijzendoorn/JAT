@@ -17,15 +17,27 @@ The output of the extraction methods for all years and transects produced with t
 <img src="https://github.com/christavanijzendoorn/JAT/blob/master/images/flowchart.png" width="500">
 *Flowchart of Jarkus Analysis Toolbox functionalities*
 
+# Installation
+
+'''python setup.py install'''
+
+# Usage
+
+'''import JAT
+
+# Here include more info on how to use
+
+'''
+
+Refer to [examples](https://github.com/christavanijzendoorn/JAT/tree/master/Examples)
+
 # Source data
 
-The Jarkus dataset:
-http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc
+[The Jarkus dataset](http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc)
 
-The dune foots extracted using the second derivative method:
-http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc
+[The dune foots extracted using the second derivative method](http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc)
 
-you can save these files locally to be independent of internet access. Make sure to include their directory in the settings file (jarkus.yml).
+You can save these files locally to be independent of internet access. Make sure to include their directory in the settings file (jarkus.yml).
 
 # Settings
 
