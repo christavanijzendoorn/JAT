@@ -28,6 +28,8 @@ build/
 dist/
 JAT.egg-info/
 
+*.pyc
+
 
 #GENERAL
 
