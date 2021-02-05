@@ -34,7 +34,8 @@ Created on Wed Jun 10 17:24:40 2020
 import yaml
 import os
 import pickle
-from Jarkus_Analysis_Toolbox import Transects, Extraction
+import numpy as np
+from Jarkus_Analysis_Toolbox_classes import Transects, Extraction
 # get_ipython().run_line_magic('matplotlib', 'auto') ## %matplotlib auto TO GET WINDOW FIGURE
 
 ######################
@@ -47,16 +48,17 @@ plot_titles = yaml.safe_load(open(config['root'] + config['data locations']['Tit
 #%%###################
 # USER-DEFINED REQUEST
 ######################
-start_yr = 1965                                                                # USER-DEFINED request for years
+start_yr = 1980                                                               # USER-DEFINED request for years
 end_yr = 2020
 
-# trscts_requested = 8009325
-trscts_requested = [8009325, 8009350]
+trscts_requested = 8009325
+# trscts_requested = [8009325, 8009350]
 #trscts_requested = np.arange(8009000, 8009751, 1)                               # USER-DEFINED request for transects
+
 
 # Set whether all transect should be analysed or define a retrieval request
 # Note! If put as true it overrides the input of trscts_requested 
-execute_all_transects = True
+execute_all_transects = False
 
 #%%###################
 # LOAD DATA
@@ -97,7 +99,7 @@ extract = Extraction(data, config)
 extract.get_all_dimensions()
 # note that extract.dimensions holds the dataframe with dimensions for the last transect after applying the function above.
 
-dimensions = extract.dimensions
+dimensions = extract.get_requested_variables()
 
 # Convert all dimensions extracted per transect location to a dataframe per dimension
 extract.get_dataframe_per_dimension()
