@@ -1,26 +1,40 @@
 name: jarkus
 
-root: C:\Users\cijzendoornvan\Documents\DuneForce\JARKUS\Jarkus_Toolbox\
+# REQUEST YEARS AND TRANSECTS
+years:
+    start_yr: 1965
+    end_yr: 2020
+
+transects: 
+    execute_all_transects: False # Set whether all transect should be analysed or define a retrieval request
+    # Note! If execute_all_transects = True it overrides the input of transects_req indicated below 
+    transects_req: 8009325 # for single
+    #transects_req: [8009325, 8009350] # for multiple
+    #transects_req: np.arange(8009000, 8009751, 1) # for range
+
+# DIRECTORIES
+root: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\
 data locations:
-   DirJK: Downloads\transect.nc
-   DirDF: Downloads\DF_2nd_deriv.nc
-   DirNourish: Downloads\Suppletiedatabase.xlsx
-   DirHydro: Downloads\Hydraulic_Data
-   LocFilter: location_filter.yml
-   Titles: plot_titles.yml
+   DirJK: Input\transect.nc
+   DirDF: Input\DF_2nd_deriv.nc
+   DirNourish: Input\Suppletiedatabase.xlsx
+   LocFilter: \Examples\01_single_transect\location_filter.yml # not necessary for single transect
+   Titles: \Examples\01_single_transect\plot_titles.yml # not necessary for single transect
 save locations:
-   DirA: A_elevation_dataframes\
-   DirA3: A3_transect_plots_with_dune_foots\
-   DirB: B_transect_plots\
-   DirC: C_dimensions_dataframes_per_transect\
-   DirD: D_dataframes_per_dimension\
-   DirE: E_filtered_dataframes\
+   DirA: \Examples\01_single_transect\A_elevation_dataframes\ # This is combined with root to find directory
+   DirB: \Examples\01_single_transect\B_transect_plots\
+   DirC: \Examples\01_single_transect\C_dimensions_dataframes_per_transect\
+   DirD: \Examples\01_single_transect\D_dataframes_per_dimension\
+   DirE: \Examples\01_single_transect\E_filtered_dataframes\
    
+# USER-DEFINED VALUES
 user defined:
    filter1: # If no data is present between the min and max value (in m NAP) the transect is dropped
+       apply: True # or False
        min: -1 
        max: 5
    filter2: 
+       # BUILD IN APPLY HERE
        years: 0 # Minimum percentage of values over all transect locations that has to be available for a single year, otherwise it is filtered out.
        locations: 0 # Minimum percentage of values over all years that has to be available for a single transect location, otherwise it is filtered out.
    mean sea level: 0
@@ -40,7 +54,7 @@ user defined:
    dune foot fixed: 3
    normalization year: 1990
 
-
+# SELECTION OF CHARACTERISTIC PARAMETERS
 dimensions: # Select which dimensions should be calculated for the transects
     setting:
         dune_height_and_location    : True
