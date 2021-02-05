@@ -19,18 +19,18 @@ The output of the extraction methods for all years and transects produced with t
 
 # Installation
 
-'''
+```
 python setup.py install
-'''
+```
 
 # Usage
 
-'''python
+```python
 import JAT
 
-# Here include more info on how to use
+#Here include more info on how to use
 
-'''
+```
 
 Refer to [examples](https://github.com/christavanijzendoorn/JAT/tree/master/Examples)
 
