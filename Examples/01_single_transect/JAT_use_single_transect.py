@@ -85,7 +85,7 @@ print('The maximum dune height is ' + str(max(dune_tops.max())) + ' meters.')
 # Or, loading the dimensions of the certain transect to plot the change in the dune toe and landward boundary location:
 dimensions = pickle.load(open(config['root'] + config['save locations']['DirC'] + 'Transect_' + transect + '_dataframe.pickle', 'rb'))
 
-ax1 = dimensions.plot(y='Landward_x_variance', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Cross-shore location of important chracteristic parameters through time')
+ax1 = dimensions.plot(y='Landward_x_variance', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Cross-shore location of important characteristic parameters through time')
 dimensions.plot(y='DuneTop_prim_x', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
 dimensions.plot(y='Dunefoot_x_fix', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
 dimensions.plot(y='Seaward_x_DoC', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
