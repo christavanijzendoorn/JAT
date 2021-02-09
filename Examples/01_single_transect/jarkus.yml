@@ -13,22 +13,23 @@ transects:
     #transects_req: np.arange(8009000, 8009751, 1) # for range
 
 # DIRECTORIES
-root: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\
+inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
+outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\02_region_transects\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
-   Jarkus: 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
-   # Input\transect.nc       
-   DuneFoot: 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc'
-           # Input\DF_2nd_deriv.nc
-   Nourishment: Input\Suppletiedatabase.xlsx
+   Jarkus: transect.nc
+           # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
+   DuneFoot: DF_2nd_deriv.nc
+           # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc' 
+   Nourishment: Suppletiedatabase.xlsx
            # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
-   LocFilter: \Examples\01_single_transect\location_filter.yml # not necessary for single transect
-   Titles: \Examples\01_single_transect\plot_titles.yml # not necessary for single transect
+   LocFilter: location_filter.yml # not necessary for single transect
+   Titles: plot_titles.yml # not necessary for single transect
 save locations:
-   DirA: \Examples\01_single_transect\A_elevation_dataframes\ # This is combined with root to find directory
-   DirB: \Examples\01_single_transect\B_transect_plots\
-   DirC: \Examples\01_single_transect\C_dimensions_dataframes_per_transect\
-   DirD: \Examples\01_single_transect\D_dataframes_per_dimension\
-   DirE: \Examples\01_single_transect\E_filtered_dataframes\
+   DirA: A_elevation_dataframes\ # This is combined with root to find directory
+   DirB: B_transect_plots\
+   DirC: C_dimensions_dataframes_per_transect\
+   DirD: D_dataframes_per_dimension\
+   DirE: E_filtered_dataframes\
    
 # USER-DEFINED VALUES
 user defined:
