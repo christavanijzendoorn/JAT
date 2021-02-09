@@ -44,14 +44,14 @@ data.save_elevation_dataframes(config)
 
 # to reopen pickle file with elevation:
 transect = str(config['transects']['transects_req'])
-elevation = pickle.load(open(config['root'] + config['save locations']['DirA'] + transect + '_elevation' + '.pickle','rb'))    
+elevation = pickle.load(open(config['outputdir'] + config['save locations']['DirA'] + transect + '_elevation' + '.pickle','rb'))    
 
 #%%
 # Create elevation plots for the available transects - saved as png and pickle
 data.get_transect_plot(config)
 
 # to reopen pickle file with figure:
-figx = pickle.load(open(config['root'] + config['save locations']['DirB'] + 'Transect_' + transect + '.fig.pickle','rb'))    
+figx = pickle.load(open(config['outputdir'] + config['save locations']['DirB'] + 'Transect_' + transect + '.fig.pickle','rb'))    
 figx.show()
     
 #%%###################################
@@ -77,13 +77,13 @@ extract.normalize_dimensions()
 # For further analysis one can load pickle files from the directory where the dataframes have been saved.
 # Note, you need to know the variable names to load them, see documentation or jarkus.yml file.
 
-# For example, loading the dune top to determine the maximum dune height along the Dutch coast.
+# For example, loading the dune top to determine the maximum dune height throughout the years for this transect.
 variable = 'DuneTop_prim_y'
-dune_tops = pickle.load(open(config['root'] + config['save locations']['DirD'] + variable + '_dataframe.pickle','rb'))    
+dune_tops = pickle.load(open(config['outputdir'] + config['save locations']['DirD'] + variable + '_dataframe.pickle','rb'))    
 print('The maximum dune height is ' + str(max(dune_tops.max())) + ' meters.')
 
 # Or, loading the dimensions of the certain transect to plot the change in the dune toe and landward boundary location:
-dimensions = pickle.load(open(config['root'] + config['save locations']['DirC'] + 'Transect_' + transect + '_dataframe.pickle', 'rb'))
+dimensions = pickle.load(open(config['outputdir'] + config['save locations']['DirC'] + 'Transect_' + transect + '_dataframe.pickle', 'rb'))
 
 ax1 = dimensions.plot(y='Landward_x_variance', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Cross-shore location of important characteristic parameters through time')
 dimensions.plot(y='DuneTop_prim_x', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)

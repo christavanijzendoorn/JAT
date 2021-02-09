@@ -46,7 +46,7 @@ class Transects:
         if 'http' in config['data locations']['Jarkus']: # check whether it's a url
             self.dataset = Dataset(config['data locations']['Jarkus'])    
         else: # load from local file
-            self.dataset = Dataset(config['root'] + config['data locations']['Jarkus'])
+            self.dataset = Dataset(config['inputdir'] + config['data locations']['Jarkus'])
         self.variables = self.dataset.variables
         
     def get_years_filtered(self, start_yr, end_yr):
@@ -63,7 +63,6 @@ class Transects:
         if execute_all_transects == True:
             transects_requested = ids
         transects_filter = np.isin(ids, transects_requested)
-        print(transects_filter)
         self.transects_filtered = np.array(ids)[np.nonzero(transects_filter)[0]]
         self.transects_filtered_idxs = np.where(transects_filter)[0]
     
@@ -86,7 +85,9 @@ class Transects:
                     if min(row) > config['user defined']['filter1']['min'] or max(row) < config['user defined']['filter1']['max']:
                         elevation_dataframe.drop(idx, axis=0)
                 
-            elevation_dataframe.to_pickle(config['root'] + config['save locations']['DirA'] + trsct + '_elevation.pickle')
+            if os.path.isdir(config['outputdir'] + config['save locations']['DirA']) == False:
+                os.mkdir(config['outputdir'] + config['save locations']['DirA'])
+            elevation_dataframe.to_pickle(config['outputdir'] + config['save locations']['DirA'] + trsct + '_elevation.pickle')
            
     def get_transect_plot(self, config):
         
@@ -138,8 +139,10 @@ class Transects:
             #ax.invert_xaxis()
                 
             # Save figure as png in predefined directory
-            plt.savefig(config['root'] + config['save locations']['DirB'] + 'Transect_' + str(trsct) + '.png')
-            pickle.dump(fig, open(config['root'] + config['save locations']['DirB'] + 'Transect_' + str(trsct) + '.fig.pickle', 'wb'))
+            if os.path.isdir(config['outputdir'] + config['save locations']['DirB']) == False:
+                os.mkdir(config['outputdir'] + config['save locations']['DirB'])
+            plt.savefig(config['outputdir'] + config['save locations']['DirB'] + 'Transect_' + str(trsct) + '.png')
+            pickle.dump(fig, open(config['outputdir'] + config['save locations']['DirB'] + 'Transect_' + str(trsct) + '.fig.pickle', 'wb'))
             
             plt.close()
         
@@ -286,7 +289,7 @@ class Extraction:
             
             pickle_file = self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
     
-            if pickle_file in os.listdir(self.config['root'] + self.config['save locations']['DirC']):
+            if pickle_file in os.listdir(self.config['outputdir'] + self.config['save locations']['DirC']):
                 self.dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
             else:
                 self.dimensions = pd.DataFrame({'transect': trsct, 'years':self.data.years_filtered})
@@ -392,7 +395,9 @@ class Extraction:
                 self.get_active_profile_volume(trsct_idx)  
                 
             # Save dimensions data frame for each transect
-            self.dimensions.to_pickle(self.config['root'] + pickle_file)
+            if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirC']) == False:
+                os.mkdir(self.config['outputdir'] + self.config['save locations']['DirC'])
+            self.dimensions.to_pickle(self.config['outputdir'] + pickle_file)
             
     def get_dataframe_per_dimension(self):
         variable_dataframe = pd.DataFrame({'years': self.data.years_filtered})
@@ -403,7 +408,7 @@ class Extraction:
         for variable in variables:
             for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
                 trsct = str(self.data.transects_filtered[i])
-                pickle_file = self.config['root'] + self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
+                pickle_file = self.config['outputdir'] + self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
                 variable_dataframe[trsct] = np.nan
         
                 if os.path.exists(pickle_file):
@@ -415,7 +420,9 @@ class Extraction:
                         variable_dataframe.loc[yr, trsct] = dimensions.loc[yr, variable] #extract column that corresponds to the requested variable
                 print('Extracted transect ' + str(trsct) + ' for variable ' + variable)
                     
-            variable_dataframe.to_pickle(self.config['root'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle')
+            if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirD']) == False:
+                os.mkdir(self.config['outputdir'] + self.config['save locations']['DirD'])
+            variable_dataframe.to_pickle(self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle')
             print('The dataframe of ' + variable + ' was saved')
 
     
@@ -429,7 +436,7 @@ class Extraction:
         normalized_variables = [var for var in variables if '_x' in var and 'change' not in var]
         
         for i, variable in enumerate(normalized_variables):      
-            pickle_file = self.config['root'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle'
+            pickle_file = self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle'
             dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of dimensions   
             normalized = dimensions.copy()
             normalization_values = dimensions.loc[norm_year] 
@@ -438,7 +445,7 @@ class Extraction:
                 # Get norm value for the cross-shore location in the norm year and subtract that from the values of the variable for each transect
                 normalized[trsct] = normalized[trsct] - normalization_values.loc[trsct] 
             
-            normalized.to_pickle(self.config['root'] + self.config['save locations']['DirD'] + variable + '_normalized_dataframe' + '.pickle')
+            normalized.to_pickle(self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_normalized_dataframe' + '.pickle')
             print('The dataframe of ' + variable + ' was normalized and saved')
 
     def get_dune_height_and_location(self, trsct_idx):        
@@ -755,7 +762,7 @@ class Extraction:
             if 'http' in self.config['data locations']['Jarkus']: # check whether it's a url
                 dunefoots = Dataset(self.config['data locations']['DuneFoot'])    
             else: # load from local file
-                dunefoots = Dataset(self.config['root'] + self.config['data locations']['DuneFoot'])
+                dunefoots = Dataset(self.config['inputdir'] + self.config['data locations']['DuneFoot'])
                 
             dunefoots_y = dunefoots.variables['dune_foot_2nd_deriv'][self.data.years_filtered_idxs, trsct_idx]
             dunefoots_x = dunefoots.variables['dune_foot_2nd_deriv_cross'][self.data.years_filtered_idxs, trsct_idx]

@@ -15,9 +15,11 @@ setuptools.setup(
     packages=setuptools.find_packages(),
 	install_requires=[
 		'numpy',
-		'pandas',
+		'pandas==0.25.1',
 		'netCDF4',
-		'scipy'
+		'scipy==1.3.1',
+		'matplotlib',
+		'pybeach'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
