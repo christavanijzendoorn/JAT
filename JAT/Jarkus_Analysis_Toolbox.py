@@ -77,9 +77,7 @@ class Transects:
         for i, trsct_idx in enumerate(self.transects_filtered_idxs):
             trsct = str(self.transects_filtered[i])
             elevation_dataframe = pd.DataFrame(index=self.years_filtered, columns=crossshore)
-            #!!! When searching for a selection of years after 1965 there is a problem here with indexing!! 
             for j, yr_idx in enumerate(self.years_filtered_idxs):   
-                print(yr_idx)
                 elevation_dataframe.loc[self.years_filtered[j]] = self.variables['altitude'][yr_idx, trsct_idx, :]  # elevation of profile point
                 
             if config['user defined']['filter1']['apply'] == True:
@@ -116,8 +114,8 @@ class Transects:
                 
                 colorVal = scalarMap.to_rgba(yr)
                 elevation = self.variables['altitude'][yr_idx, trsct_idx, :]
-                mask = np.isfinite(elevation)
-                plt.plot(crossshore[mask], elevation[mask], color=colorVal, label = str(yr), linewidth = 2.5)
+                mask = elevation.mask
+                plt.plot(crossshore[~mask], elevation[~mask], color=colorVal, label = str(yr), linewidth = 2.5)
             
             # Added this to get the legend to work
             handles,labels = ax.get_legend_handles_labels()
@@ -145,7 +143,7 @@ class Transects:
             plt.close()
         
     def get_conversion_dicts(self): # Create conversion dictionary
-        trscts = self.variables['id'].values  
+        trscts = self.variables['id'][:]  
         area_bounds = [2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000, 11000000, 12000000, 13000000, 14000000, 15000000, 16000000, 17000000, 18000000]
         
         for i, val in enumerate(area_bounds):
@@ -197,8 +195,9 @@ class Transects:
 def find_intersections(elevation, crossshore, y_value):
     value_vec = np.array([y_value] * len(elevation))
     elevation = pd.Series(elevation).interpolate().tolist()
-    
-    diff = np.nan_to_num(np.diff(np.sign(elevation - value_vec)))
+        
+    with np.errstate(invalid='ignore'):
+        diff = np.nan_to_num(np.diff(np.sign(elevation - value_vec)))
     intersection_idxs = np.nonzero(diff)
     intersection_x = np.array([crossshore[idx] for idx in intersection_idxs[0]])
     
@@ -270,7 +269,7 @@ class Extraction:
         self.dimensions = pd.DataFrame()
         self.data = data
         self.config = config
-        self.crossshore = data.variables['cross_shore'].values
+        self.crossshore = data.variables['cross_shore'][:]
         
     def get_requested_variables(self):
         self.variables_req = []
@@ -360,7 +359,7 @@ class Extraction:
             if self.config['dimensions']['setting']['dune_front_width_sec_der'] == True:
                 self.get_dune_front_width_sec_der()  
                 
-            if self.config['dimensions']['setting']['setting']['dune_front_gradient_prim_fix'] == True:
+            if self.config['dimensions']['setting']['dune_front_gradient_prim_fix'] == True:
                 self.get_dune_front_gradient_prim_fix(trsct_idx)       
             if self.config['dimensions']['setting']['dune_front_gradient_prim_der'] == True:
                 self.get_dune_front_gradient_prim_der(trsct_idx)     
@@ -451,7 +450,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
             dune_top_prim = find_peaks(elevation, height = 5, prominence = 2.0) # , distance = 5
             dune_top_sec = find_peaks(elevation, height = 3, prominence = 0.5) # , distance = 5
@@ -483,7 +482,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
             intersections = find_intersections(elevation, self.crossshore, MSL_y)
             if len(intersections) != 0 and np.isnan(self.dimensions.loc[yr, 'DuneTop_prim_x']):
@@ -514,7 +513,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MLW_y_fixed)
             if len(intersections) != 0:
                 # filter intersections based on the assumption that mean low water should be a maximum of 250 m offshore
@@ -527,13 +526,13 @@ class Extraction:
                 self.dimensions.loc[yr, 'MLW_x_fix'] = np.nan
     
     def get_mean_low_water_variable(self, trsct_idx):
-        MLW_y_variable   = self.data.variables['mean_low_water'].values[trsct_idx]     # gets the mean low water level as included in the Jarkus dataset, so it varies per location
+        MLW_y_variable   = self.data.variables['mean_low_water'][trsct_idx]     # gets the mean low water level as included in the Jarkus dataset, so it varies per location
         self.dimensions.loc[:, 'MLW_y_var'] = MLW_y_variable     # save assumed mean low water level as extracted from the jarkus dataset
             
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MLW_y_variable)
             if len(intersections) != 0:
                 # filter intersections based on the assumption that mean low water should be a maximum of 250 m offshore
@@ -551,7 +550,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MHW_y_fixed)
             if len(intersections) != 0:
                 # filter intersections based on the assumption that mean high water should be a maximum of 250 m landward
@@ -564,13 +563,13 @@ class Extraction:
                 self.dimensions.loc[yr, 'MHW_x_fix'] = np.nan
     
     def get_mean_high_water_variable(self, trsct_idx):
-        MHW_y_variable   = self.data.variables['mean_high_water'].values[trsct_idx]     # gets the mean low water level as included in the Jarkus dataset, so it varies per location
+        MHW_y_variable   = self.data.variables['mean_high_water'][trsct_idx]     # gets the mean low water level as included in the Jarkus dataset, so it varies per location
         self.dimensions.loc[:, 'MHW_y_var'] = MHW_y_variable     # save assumed mean low water level as extracted from the jarkus dataset
         
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             intersections = find_intersections(elevation, self.crossshore, MHW_y_variable)
             if len(intersections) != 0:
                 # filter intersections based on the assumption that mean high water should be a maximum of 250 m landward
@@ -597,7 +596,7 @@ class Extraction:
         ####  Variance method - Sierd de Vries ####
         var_threshold = self.config['user defined']['landward variance threshold'] # very dependent on area and range of years!
         
-        elevation = pd.DataFrame(self.data.variables['altitude'].values[:, trsct_idx, :], columns = self.crossshore)
+        elevation = pd.DataFrame(self.data.variables['altitude'][:, trsct_idx, :], columns = self.crossshore)
         var_y = elevation.var()
         
         # Gives locations where variance is below threshold
@@ -624,12 +623,12 @@ class Extraction:
         
         height_of_peaks = self.config['user defined']['landward derivative']['min height'] #m
         height_constraint = self.config['user defined']['landward derivative']['height constraint'] #m
-        peaks_threshold = height_of_peaks + self.dimensions['MHW_y_var'].values[0]
+        peaks_threshold = height_of_peaks + self.dimensions['MHW_y_var'].iloc[0]
         
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             peaks = find_peaks(elevation, prominence = height_of_peaks)[0] # Documentation see get_dune_top
             
             peaks = elevation[peaks]
@@ -656,7 +655,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             intersections_bma = find_intersections(elevation, self.crossshore, bma_y)
             if len(intersections_bma) != 0:
                 self.dimensions.loc[yr, 'Landward_x_bma'] = intersections_bma[-1]
@@ -667,9 +666,9 @@ class Extraction:
         seaward_FS_y = self.config['user defined']['seaward foreshore']
         
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :] 
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
             intersections_FS = find_intersections(elevation, self.crossshore, seaward_FS_y)
             if len(intersections_FS) != 0:
                 self.dimensions.loc[yr, 'Seaward_x_FS'] = intersections_FS[-1]
@@ -682,7 +681,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :] 
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
             intersections_AP = find_intersections(elevation, self.crossshore, seaward_ActProf_y)
             if len(intersections_AP) != 0:
                 self.dimensions.loc[yr, 'Seaward_x_AP'] = intersections_AP[-1]
@@ -696,14 +695,14 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :] 
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
             intersections_mindepth = find_intersections(elevation, self.crossshore, min_depth)
             if len(intersections_mindepth) != 0:
                 self.dimensions.loc[yr, 'Seaward_x_mindepth'] = intersections_mindepth[-1]
             else:
                 self.dimensions.loc[yr, 'Seaward_x_mindepth'] = np.nan
         
-        elevation = pd.DataFrame(self.data.variables['altitude'].values[:, trsct_idx, :], columns = self.crossshore)
+        elevation = pd.DataFrame(self.data.variables['altitude'][:, trsct_idx, :], columns = self.crossshore)
                 
         # Gives locations seaward of minimal seaward boundary at -5.0m NAP
         offshore = elevation.columns[elevation.columns > self.dimensions['Seaward_x_mindepth'].max()]
@@ -719,7 +718,8 @@ class Extraction:
         for x_val in offshore:
             if x_val < max(stdv_y.index) - window_size + 5:
                 this_window = stdv_y[x_val:x_val+window_size]
-                window_average = np.nanmean(this_window)
+                with np.errstate(invalid='ignore'):
+                    window_average = np.nanmean(this_window)
                 if window_average < stdThr and stdv_y[x_val] < stdThr:
                     stable_points.append(x_val)
                 
@@ -738,9 +738,9 @@ class Extraction:
         DF_fixed_y = self.config['user defined']['dune foot fixed'] # in m above reference datum
     
         for i, yr in enumerate(self.data.years_filtered):
-            yr_idx = self.data.years_filtered_idxs[0][i]
+            yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = self.data.variables['altitude'].values[yr_idx, trsct_idx, :] 
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
             intersections_DF = find_intersections(elevation, self.crossshore, DF_fixed_y)
             if len(intersections_DF) != 0:
                 self.dimensions.loc[yr, 'Dunefoot_x_fix'] = intersections_DF[-1]
@@ -751,10 +751,13 @@ class Extraction:
             ####  Derivative method - E.D. ####
             ###################################
             ## Variable dunefoot definition based on first and second derivative of profile
-    
-            dunefoots = xr.open_dataset(self.config['root'] + self.config['data locations']['DuneFoot'])
-            dunefoots_y = dunefoots.variables['dune_foot_2nd_deriv'].values[self.data.years_filtered_idxs, trsct_idx][0] 
-            dunefoots_x = dunefoots.variables['dune_foot_2nd_deriv_cross'].values[self.data.years_filtered_idxs, trsct_idx][0] 
+            if 'http' in self.config['data locations']['Jarkus']: # check whether it's a url
+                dunefoots = Dataset(self.config['data locations']['DuneFoot'])    
+            else: # load from local file
+                dunefoots = Dataset(self.config['root'] + self.config['data locations']['DuneFoot'])
+                
+            dunefoots_y = dunefoots.variables['dune_foot_2nd_deriv'][self.data.years_filtered_idxs, trsct_idx]
+            dunefoots_x = dunefoots.variables['dune_foot_2nd_deriv_cross'][self.data.years_filtered_idxs, trsct_idx]
             
             self.dimensions.loc[:, 'Dunefoot_y_der'] = dunefoots_y
             self.dimensions.loc[:, 'Dunefoot_x_der'] = dunefoots_x
@@ -766,7 +769,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                 
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MHW_x_var']
@@ -806,7 +809,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
             
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MSL_x']
@@ -819,7 +822,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
             
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MSL_x_var']
@@ -832,7 +835,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
             
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MSL_x']
@@ -857,7 +860,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
-             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
              
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_prim_x']
@@ -870,7 +873,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
-             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
              
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_prim_x']
@@ -883,7 +886,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
-             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
              
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_sec_x']
@@ -896,7 +899,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
-             elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
              
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_sec_x']
@@ -909,7 +912,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
             seaward_x = np.ceil(self.dimensions.loc[yr, 'Dunefoot_x_fix'])
@@ -922,7 +925,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
             seaward_x = np.ceil(self.dimensions.loc[yr, 'Dunefoot_x_der'])
@@ -935,7 +938,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
                 
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
             
             # dimensions used as landward and seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MLW_x_fix']
@@ -948,7 +951,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
             seaward_x = np.ceil(self.dimensions.loc[yr, 'MLW_x_fix'])
@@ -961,7 +964,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
             seaward_x = np.ceil(self.dimensions.loc[yr, 'MLW_x_var'])
@@ -974,7 +977,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
                 
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
             
             # dimensions used as landward and seaward boundary
             seaward_x = self.dimensions.loc[yr, 'Seaward_x_FS']
@@ -986,7 +989,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
             seaward_x = np.ceil(self.dimensions.loc[yr, 'Seaward_x_FS'])
@@ -999,7 +1002,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
                 
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
             
             # dimensions used as landward and seaward boundary
             seaward_x = self.dimensions.loc[yr, 'Seaward_x_AP']
@@ -1011,7 +1014,7 @@ class Extraction:
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
-            elevation = pd.DataFrame(self.data.variables['altitude'].values[yr_idx, trsct_idx, :], index = self.crossshore) 
+            elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
             seaward_x = np.ceil(self.dimensions.loc[yr, 'Seaward_x_DoC'])
