@@ -63,6 +63,7 @@ class Transects:
         if execute_all_transects == True:
             transects_requested = ids
         transects_filter = np.isin(ids, transects_requested)
+        print(transects_filter)
         self.transects_filtered = np.array(ids)[np.nonzero(transects_filter)[0]]
         self.transects_filtered_idxs = np.where(transects_filter)[0]
     

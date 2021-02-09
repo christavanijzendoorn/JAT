@@ -17,6 +17,13 @@ The output of the extraction methods for all years and transects produced with t
 <img src="https://github.com/christavanijzendoorn/JAT/blob/master/images/flowchart.png" width="500">
 *Flowchart of Jarkus Analysis Toolbox functionalities*
 
+# Dependencies
+numpy = 1.17.2
+pandas = 0.25.2
+netcdf4 = 1.5.1.2
+pybeach = 0.1.2
+
+
 # Installation
 
 ```
@@ -65,7 +72,7 @@ Vaknummer + raainummer = VNNNNNN:
 Example Sand Engine: Vak 9, raai 11109 = 9011109
 
 Overview of transects: https://maps.rijkswaterstaat.nl/geoweb55/index.html?viewer=Kustlijnkaart 
-Overview of transects and ‘kustvakken’: http://publicaties.minienm.nl/documenten/kustlijnkaarten-2020-resultaten-beoordeling-ligging-kustlijn-op-1-januari-2020
+Overview of transects and ‘kustvakken’: https://puc.overheid.nl/rijkswaterstaat/doc/PUC_629858_31/
 
 # Available characteristic parameters
 
