@@ -15,7 +15,7 @@ from JAT.Jarkus_Analysis_Toolbox import Transects, Extraction
 ######################
 # LOAD SETTINGS
 ######################
-config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/01_single_transect/jarkus.yml"))
+config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/01_single_transect/jarkus_01.yml"))
 
 #%%###################
 # LOAD DATA
@@ -43,7 +43,7 @@ print(data.years_filtered)
 data.save_elevation_dataframes(config)
 
 # to reopen pickle file with elevation:
-transect = str(config['transects']['transects_req'])
+transect = str(config['transects']['single'])
 elevation = pickle.load(open(config['outputdir'] + config['save locations']['DirA'] + transect + '_elevation' + '.pickle','rb'))    
 
 #%%
@@ -89,6 +89,7 @@ ax1 = dimensions.plot(y='Landward_x_variance', lw = '0', marker = '+', markersiz
 dimensions.plot(y='DuneTop_prim_x', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
 dimensions.plot(y='Dunefoot_x_fix', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
 dimensions.plot(y='Seaward_x_DoC', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
+ax1.legend(loc='best')
 
 ax2 = dimensions.plot(y='Dunefoot_y_der', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Dune foot elevation through time')
 

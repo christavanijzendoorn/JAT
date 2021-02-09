@@ -58,17 +58,25 @@ class Transects:
         self.years_filtered = np.array(years)[np.nonzero(years_filter)]
         self.years_filtered_idxs = np.where(years_filter)[0]
    
-    def get_transects_filtered(self, transects_requested, execute_all_transects):
+    def get_transects_filtered(self, transects):
         ids = self.variables['id'][:]                              # retrieve transect ids from jarkus dataset
-        if execute_all_transects == True:
+        if transects['type'] == 'all':
             transects_requested = ids
+        elif transects['type'] == 'single':
+            transects_requested = transects['single']
+        elif transects['type'] == 'multiple':
+            transects_requested = transects['multiple']
+        elif transects['type'] == 'range':
+            transects_requested = np.arange(transects['range']['start'], transects['range']['end'], 1)
+        else:
+            print("Error: define type of transect request to all, single, multiple or range")
         transects_filter = np.isin(ids, transects_requested)
         self.transects_filtered = np.array(ids)[np.nonzero(transects_filter)[0]]
         self.transects_filtered_idxs = np.where(transects_filter)[0]
     
     def get_availability(self, config):
         self.get_years_filtered(config['years']['start_yr'], config['years']['end_yr'])    
-        self.get_transects_filtered(config['transects']['transects_req'], config['transects']['execute_all_transects'])    
+        self.get_transects_filtered(config['transects'])    
         
     def save_elevation_dataframes(self, config):
                 
@@ -284,6 +292,9 @@ class Extraction:
         return self.variables_req
                 
     def get_all_dimensions(self):
+        if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirC']) == False:
+            os.mkdir(self.config['outputdir'] + self.config['save locations']['DirC'])
+            
         for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
             trsct = str(self.data.transects_filtered[i])
             
@@ -395,8 +406,6 @@ class Extraction:
                 self.get_active_profile_volume(trsct_idx)  
                 
             # Save dimensions data frame for each transect
-            if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirC']) == False:
-                os.mkdir(self.config['outputdir'] + self.config['save locations']['DirC'])
             self.dimensions.to_pickle(self.config['outputdir'] + pickle_file)
             
     def get_dataframe_per_dimension(self):

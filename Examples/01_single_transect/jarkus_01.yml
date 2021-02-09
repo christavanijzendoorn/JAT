@@ -6,15 +6,21 @@ years:
     end_yr: 2020
 
 transects: 
-    execute_all_transects: False # Set whether all transect should be analysed or define a retrieval request
-    # Note! If execute_all_transects = True it overrides the input of transects_req indicated below 
-    transects_req: 8009325 # for single
-    #transects_req: [8009325, 8009350] # for multiple
-    #transects_req: np.arange(8009000, 8009751, 1) # for range
+    # Choose the type of analysis: single, multiple, range or all
+    type: single 
+    # below the retrieval request for the single, multiple and range type are defined
+    # Note! If type is set to 'all' it overrides the input below 
+    single: 8009325 # for single
+    multiple: # for multiple 
+        - 8009325
+        - 8009350 
+    range: # for range
+        start: 8008850
+        end: 8009726 
 
 # DIRECTORIES
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
-outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\02_region_transects\
+outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\01_single_transect\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
    Jarkus: transect.nc
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
