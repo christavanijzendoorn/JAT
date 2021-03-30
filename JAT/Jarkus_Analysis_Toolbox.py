@@ -32,6 +32,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import os
+# import jarkus
 # import xarray as xr
 from netCDF4 import Dataset, num2date
 
@@ -274,7 +275,6 @@ def get_volume(elevation, seaward_x, landward_x):
     
     return volume
 
-    
 class Extraction:
     
     def __init__(self, data, config):    
@@ -292,11 +292,15 @@ class Extraction:
         return self.variables_req
                 
     def get_all_dimensions(self):
+        import warnings # This error occurs due to nan values in less than boolean operations.
+        warnings.filterwarnings("ignore", message="invalid value encountered")
+        
         if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirC']) == False:
             os.mkdir(self.config['outputdir'] + self.config['save locations']['DirC'])
             
         for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
             trsct = str(self.data.transects_filtered[i])
+            print("Extracting parameters of transect " + trsct)
             
             pickle_file = self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
     
@@ -306,8 +310,10 @@ class Extraction:
                 self.dimensions = pd.DataFrame({'transect': trsct, 'years':self.data.years_filtered})
                 self.dimensions.set_index('years', inplace=True)
             
-            if self.config['dimensions']['setting']['dune_height_and_location'] == True:
-                self.get_dune_height_and_location(trsct_idx)
+            if self.config['dimensions']['setting']['primary_dune_top'] == True:
+                self.get_primary_dune_top(trsct_idx)
+            if self.config['dimensions']['setting']['secondary_dune_top'] == True:
+                self.get_secondary_dune_top(trsct_idx)
 
             if self.config['dimensions']['setting']['mean_sea_level'] == True:
                 self.get_mean_sea_level(trsct_idx)
@@ -342,12 +348,12 @@ class Extraction:
             if self.config['dimensions']['setting']['seaward_point_doc'] == True:
                 self.get_seaward_point_doc(trsct_idx)                
                 
-            if self.config['dimensions']['setting']['dune_foot_fixed'] == True:
-                self.get_dune_foot_fixed(trsct_idx)       
-            if self.config['dimensions']['setting']['dune_foot_derivative'] == True:
-                self.get_dune_foot_derivative(trsct_idx)     
-            if self.config['dimensions']['setting']['dune_foot_pybeach'] == True:
-                self.get_dune_foot_pybeach(trsct_idx)      
+            if self.config['dimensions']['setting']['dune_toe_fixed'] == True:
+                self.get_dune_toe_fixed(trsct_idx)       
+            if self.config['dimensions']['setting']['dune_toe_derivative'] == True:
+                self.get_dune_toe_derivative(trsct_idx)     
+            if self.config['dimensions']['setting']['dune_toe_pybeach'] == True:
+                self.get_dune_toe_pybeach(trsct_idx)      
                 
             if self.config['dimensions']['setting']['beach_width_fix'] == True:
                 self.get_beach_width_fix()       
@@ -435,29 +441,52 @@ class Extraction:
             print('The dataframe of ' + variable + ' was saved')
 
     
-    def normalize_dimensions(self):
-        
-        norm_year = self.config['user defined']['normalization year']
-        variables = self.variables_req
-        
+    def normalize_dimensions(self):    
         # Get all variables that have to be normalized based on the requirement that _x should be in the column name, 
         # and that change values do not have to be normalized.
-        normalized_variables = [var for var in variables if '_x' in var and 'change' not in var]
-        
+        variables = self.variables_req
+        normalized_variables = [var for var in variables if '_x' in var and 'change' not in var]            
         for i, variable in enumerate(normalized_variables):      
             pickle_file = self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle'
             dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of dimensions   
             normalized = dimensions.copy()
-            normalization_values = dimensions.loc[norm_year] 
-            
-            for trsct in normalized.columns:
-                # Get norm value for the cross-shore location in the norm year and subtract that from the values of the variable for each transect
-                normalized[trsct] = normalized[trsct] - normalization_values.loc[trsct] 
+            norm_type = self.config['user defined']['normalization']['type']
+            if norm_type == 'mean':
+                for i, col in dimensions.iteritems():
+                    # Get the mean cross-shore location per transect and subtract that from the values of the variable for each transect
+                    normalized.loc[:, i] = col - col.mean()
+            elif norm_type == 'norm_year':
+                norm_year = self.config['user defined']['normalization'][' year']    
+                for i, col in dimensions.iteritems():
+                    # Get norm value for the cross-shore location in the norm year and subtract that from the values of the variable for each transect
+                    normalized.loc[:, i] = col - col[norm_year]
             
             normalized.to_pickle(self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_normalized_dataframe' + '.pickle')
             print('The dataframe of ' + variable + ' was normalized and saved')
 
-    def get_dune_height_and_location(self, trsct_idx):        
+    def get_primary_dune_top(self, trsct_idx):        
+        from scipy.signal import find_peaks
+        # Documentation:
+        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences    
+        # The prominence of a peak measures how much a peak stands out from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
+        
+        for i, yr in enumerate(self.data.years_filtered):
+            yr_idx = self.data.years_filtered_idxs[i]
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
+            
+            dune_top_prim = find_peaks(elevation, height = self.config['user defined']['primary dune']['height'], prominence = self.config['user defined']['primary dune']['prominence'])
+
+            if len(dune_top_prim[0]) != 0: # If a peak is found in the profile
+                # Select the most seaward peak found of the primarypeaks
+                dune_top_prim_idx = dune_top_prim[0][-1]
+                self.dimensions.loc[yr, 'DuneTop_prim_x'] = self.crossshore[dune_top_prim_idx] 
+                self.dimensions.loc[yr, 'DuneTop_prim_y'] = elevation[dune_top_prim_idx]
+            else:
+                self.dimensions.loc[yr, 'DuneTop_prim_x'] = np.nan
+                self.dimensions.loc[yr, 'DuneTop_prim_y'] = np.nan
+                
+    def get_secondary_dune_top(self, trsct_idx):        
         from scipy.signal import find_peaks
         # Documentation:
         # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
@@ -469,27 +498,17 @@ class Extraction:
             
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
-            dune_top_prim = find_peaks(elevation, height = 5, prominence = 2.0) # , distance = 5
-            dune_top_sec = find_peaks(elevation, height = 3, prominence = 0.5) # , distance = 5
+            dune_top_sec = find_peaks(elevation, height = self.config['user defined']['secondary dune']['height'], prominence = self.config['user defined']['secondary dune']['prominence'])
 
-            if len(dune_top_prim[0]) != 0: # If a peak is found in the profile
-                # Select the most seaward peak found of the primary and secondary peaks
-                dune_top_prim_idx = dune_top_prim[0][-1]
+            if len(dune_top_sec[0]) != 0: # If a peak is found in the profile
+                # Select the most seaward peak found of the secondary peaks
                 dune_top_sec_idx = dune_top_sec[0][-1]
-                if  dune_top_sec_idx <= dune_top_prim_idx: 
-                    # If most seaward secondary peak is located at the same place or landward of the most seaward primary peak
-                    self.dimensions.loc[yr, 'DuneTop_prim_x'] = self.crossshore[dune_top_prim_idx]  # Save the primary peak location
-                    self.dimensions.loc[yr, 'DuneTop_prim_y'] = elevation[dune_top_prim_idx]
-                    #Assume that there is no seaward secondary peak, so no value filled in (i.e. it stays nan).
-                else:            
-                    # Otherwise save both the primary and secondary peak location
-                    self.dimensions.loc[yr, 'DuneTop_prim_x'] = self.crossshore[dune_top_prim_idx] 
-                    self.dimensions.loc[yr, 'DuneTop_prim_y'] = elevation[dune_top_prim_idx]
+                dune_top_prim = self.dimensions.loc[yr, 'DuneTop_prim_x']
+                if self.crossshore[dune_top_sec_idx] > dune_top_prim or dune_top_prim == np.nan:
+                    # Only if most seaward secondary peak is located seaward of the (most seaward) primary peak, save the secondary peak.
                     self.dimensions.loc[yr, 'DuneTop_sec_x'] = self.crossshore[dune_top_sec_idx]
                     self.dimensions.loc[yr, 'DuneTop_sec_y'] = elevation[dune_top_sec_idx]
-            else:
-                self.dimensions.loc[yr, 'DuneTop_prim_x'] = np.nan
-                self.dimensions.loc[yr, 'DuneTop_prim_y'] = np.nan
+            else: # Otherwise, assume that there is no seaward secondary peak, so no value filled in (i.e. it stays nan).
                 self.dimensions.loc[yr, 'DuneTop_sec_x'] = np.nan
                 self.dimensions.loc[yr, 'DuneTop_sec_y'] = np.nan
                 
@@ -750,9 +769,9 @@ class Extraction:
         # add info on landward boundary to dataframe
         self.dimensions['Seaward_x_DoC'] = stable_point
 
-    def get_dune_foot_fixed(self, trsct_idx):
-        #### Fixed dunefoot definition ####
-        DF_fixed_y = self.config['user defined']['dune foot fixed'] # in m above reference datum
+    def get_dune_toe_fixed(self, trsct_idx):
+        #### Fixed dunetoe definition ####
+        DF_fixed_y = self.config['user defined']['dune toe fixed'] # in m above reference datum
     
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
@@ -760,29 +779,40 @@ class Extraction:
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
             intersections_DF = find_intersections(elevation, self.crossshore, DF_fixed_y)
             if len(intersections_DF) != 0:
-                self.dimensions.loc[yr, 'Dunefoot_x_fix'] = intersections_DF[-1]
+                self.dimensions.loc[yr, 'Dunetoe_x_fix'] = intersections_DF[-1]
             else:
-                self.dimensions.loc[yr, 'Dunefoot_x_fix'] = np.nan
+                self.dimensions.loc[yr, 'Dunetoe_x_fix'] = np.nan
             
-    def get_dune_foot_derivative(self, trsct_idx):        
+    def get_dune_toe_derivative(self, trsct_idx):        
             ####  Derivative method - E.D. ####
             ###################################
-            ## Variable dunefoot definition based on first and second derivative of profile
-            if 'http' in self.config['data locations']['Jarkus']: # check whether it's a url
-                dunefoots = Dataset(self.config['data locations']['DuneFoot'])    
+            ## Variable dunetoe definition based on first and second derivative of profile
+            if 'http' in self.config['data locations']['Dunetoe']: # check whether it's a url
+                dunetoes = Dataset(self.config['data locations']['Dunetoe'])    
             else: # load from local file
-                dunefoots = Dataset(self.config['inputdir'] + self.config['data locations']['DuneFoot'])
+                dunetoes = Dataset(self.config['inputdir'] + self.config['data locations']['Dunetoe'])
                 
-            dunefoots_y = dunefoots.variables['dune_foot_2nd_deriv'][self.data.years_filtered_idxs, trsct_idx]
-            dunefoots_x = dunefoots.variables['dune_foot_2nd_deriv_cross'][self.data.years_filtered_idxs, trsct_idx]
+            time = dunetoes.variables['time'][:]
+            years = num2date(time, dunetoes.variables['time'].units)
+            years = [yr.year for yr in years]                    # convert to purely integers indicating the measurement year
+            years_filter =  np.isin(years, self.data.years_filtered)
+            years_filter_idxs = np.where(years_filter)[0]
+                
+            dunetoes_y = dunetoes.variables['dune_foot_2nd_deriv'][years_filter_idxs, trsct_idx]
+            dunetoes_x = dunetoes.variables['dune_foot_2nd_deriv_cross'][years_filter_idxs, trsct_idx]
             
-            self.dimensions.loc[:, 'Dunefoot_y_der'] = dunefoots_y
-            self.dimensions.loc[:, 'Dunefoot_x_der'] = dunefoots_x
+            if len(years_filter_idxs) < len(self.data.years_filtered):
+                rows = len(self.data.years_filtered) - len(years_filter_idxs)
+                dunetoes_y = np.append(dunetoes_y, np.empty((rows,1))*np.nan)
+                np.append(dunetoes_x, np.empty((rows,1))*np.nan)
+                        
+            self.dimensions.loc[:, 'Dunetoe_y_der'] = dunetoes_y
+            self.dimensions.loc[:, 'Dunetoe_x_der'] = dunetoes_x
                     
-    def get_dune_foot_pybeach(self, trsct_idx):
+    def get_dune_toe_pybeach(self, trsct_idx):
         ####  Pybeach methods ####
         from pybeach.beach import Profile
-        
+                
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
@@ -801,26 +831,30 @@ class Extraction:
                 x_ml = np.array(elevation.index) # pybeach asks ndarray, so convert with np.array(). Note it should be land-left, sea-right otherwise use np.flip()
                 y_ml = np.array(elevation.values) 
                 
-                p = Profile(x_ml, y_ml)
-                toe_ml, prob_ml = p.predict_dunetoe_ml('mixed_clf')  # predict toe using machine learning model
-                
-                self.dimensions.loc[yr, 'Dunefoot_y_pybeach_mix'] = y_ml[toe_ml[0]]
-                self.dimensions.loc[yr, 'Dunefoot_x_pybeach_mix'] = x_ml[toe_ml[0]]
+                try:
+                    p = Profile(x_ml, y_ml)
+                    toe_ml, prob_ml = p.predict_dunetoe_ml(self.config['user defined']['dune toe classifier'])  # predict toe using machine learning model
+                    self.dimensions.loc[yr, 'Dunetoe_y_pybeach_mix'] = y_ml[toe_ml[0]]
+                    self.dimensions.loc[yr, 'Dunetoe_x_pybeach_mix'] = x_ml[toe_ml[0]]
+                except Warning:
+                    self.dimensions.loc[yr, 'Dunetoe_y_pybeach_mix'] = np.nan
+                    self.dimensions.loc[yr, 'Dunetoe_x_pybeach_mix'] = np.nan
+
             else:
-                self.dimensions.loc[yr, 'Dunefoot_y_pybeach_mix'] = np.nan
-                self.dimensions.loc[yr, 'Dunefoot_x_pybeach_mix'] = np.nan
+                self.dimensions.loc[yr, 'Dunetoe_y_pybeach_mix'] = np.nan
+                self.dimensions.loc[yr, 'Dunetoe_x_pybeach_mix'] = np.nan
 
     def get_beach_width_fix(self):
-        self.dimensions['Beach_width_fix'] = self.dimensions['MSL_x'] - self.dimensions['Dunefoot_x_fix']
+        self.dimensions['Beach_width_fix'] = self.dimensions['MSL_x'] - self.dimensions['Dunetoe_x_fix']
     
     def get_beach_width_var(self):
-        self.dimensions['Beach_width_var'] = self.dimensions['MSL_x_var'] - self.dimensions['Dunefoot_x_fix']
+        self.dimensions['Beach_width_var'] = self.dimensions['MSL_x_var'] - self.dimensions['Dunetoe_x_fix']
             
     def get_beach_width_der(self):
-        self.dimensions['Beach_width_der'] = self.dimensions['MSL_x'] - self.dimensions['Dunefoot_x_der'] 
+        self.dimensions['Beach_width_der'] = self.dimensions['MSL_x'] - self.dimensions['Dunetoe_x_der'] 
     
     def get_beach_width_der_var(self):
-        self.dimensions['Beach_width_der_var'] = self.dimensions['MSL_x_var'] - self.dimensions['Dunefoot_x_der'] 
+        self.dimensions['Beach_width_der_var'] = self.dimensions['MSL_x_var'] - self.dimensions['Dunetoe_x_der'] 
 
     def get_beach_gradient_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
@@ -831,7 +865,7 @@ class Extraction:
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MSL_x']
             # Get landward boundary 
-            landward_x = self.dimensions.loc[yr, 'Dunefoot_x_fix'] 
+            landward_x = self.dimensions.loc[yr, 'Dunetoe_x_fix'] 
                 
             self.dimensions.loc[yr,'Beach_gradient_fix'] = get_gradient(elevation, seaward_x, landward_x)
     
@@ -844,7 +878,7 @@ class Extraction:
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MSL_x_var']
             # Get landward boundary 
-            landward_x = self.dimensions.loc[yr, 'Dunefoot_x_fix'] 
+            landward_x = self.dimensions.loc[yr, 'Dunetoe_x_fix'] 
                 
             self.dimensions.loc[yr,'Beach_gradient_var'] = get_gradient(elevation, seaward_x, landward_x)
     
@@ -857,21 +891,21 @@ class Extraction:
             # Get seaward boundary
             seaward_x = self.dimensions.loc[yr, 'MSL_x']
             # Get landward boundary 
-            landward_x = self.dimensions.loc[yr, 'Dunefoot_x_der'] 
+            landward_x = self.dimensions.loc[yr, 'Dunetoe_x_der'] 
                 
             self.dimensions.loc[yr,'Beach_gradient_der'] = get_gradient(elevation, seaward_x, landward_x)
        
     def get_dune_front_width_prim_fix(self):
-        self.dimensions['Dunefront_width_prim_fix'] = self.dimensions['Dunefoot_x_fix'] - self.dimensions['DuneTop_prim_x']
+        self.dimensions['Dunefront_width_prim_fix'] = self.dimensions['Dunetoe_x_fix'] - self.dimensions['DuneTop_prim_x']
     
     def get_dune_front_width_prim_der(self):
-        self.dimensions['Dunefront_width_prim_der'] = self.dimensions['Dunefoot_x_der'] - self.dimensions['DuneTop_prim_x']
+        self.dimensions['Dunefront_width_prim_der'] = self.dimensions['Dunetoe_x_der'] - self.dimensions['DuneTop_prim_x']
             
     def get_dune_front_width_sec_fix(self):
-        self.dimensions['Dunefront_width_sec_fix'] = self.dimensions['Dunefoot_x_fix'] - self.dimensions['DuneTop_sec_x'] 
+        self.dimensions['Dunefront_width_sec_fix'] = self.dimensions['Dunetoe_x_fix'] - self.dimensions['DuneTop_sec_x'] 
     
     def get_dune_front_width_sec_der(self):
-        self.dimensions['Dunefront_width_sec_der'] = self.dimensions['Dunefoot_x_der'] - self.dimensions['DuneTop_sec_x']
+        self.dimensions['Dunefront_width_sec_der'] = self.dimensions['Dunetoe_x_der'] - self.dimensions['DuneTop_sec_x']
     
     def get_dune_front_gradient_prim_fix(self, trsct_idx):
         for i, yr in enumerate(self.data.years_filtered):
@@ -882,7 +916,7 @@ class Extraction:
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_prim_x']
              # Get landward boundary 
-             landward_x = self.dimensions.loc[yr, 'Dunefoot_x_fix'] 
+             landward_x = self.dimensions.loc[yr, 'Dunetoe_x_fix'] 
                  
              self.dimensions.loc[yr,'Dunefront_gradient_prim_fix'] = get_gradient(elevation, seaward_x, landward_x)
  
@@ -895,7 +929,7 @@ class Extraction:
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_prim_x']
              # Get landward boundary 
-             landward_x = self.dimensions.loc[yr, 'Dunefoot_x_der'] 
+             landward_x = self.dimensions.loc[yr, 'Dunetoe_x_der'] 
                  
              self.dimensions.loc[yr,'Dunefront_gradient_prim_der'] = get_gradient(elevation, seaward_x, landward_x)
  
@@ -908,7 +942,7 @@ class Extraction:
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_sec_x']
              # Get landward boundary 
-             landward_x = self.dimensions.loc[yr, 'Dunefoot_x_fix'] 
+             landward_x = self.dimensions.loc[yr, 'Dunetoe_x_fix'] 
                  
              self.dimensions.loc[yr,'Dunefront_gradient_sec_fix'] = get_gradient(elevation, seaward_x, landward_x)
  
@@ -921,7 +955,7 @@ class Extraction:
              # Get seaward boundary
              seaward_x = self.dimensions.loc[yr, 'DuneTop_sec_x']
              # Get landward boundary 
-             landward_x = self.dimensions.loc[yr, 'Dunefoot_x_der'] 
+             landward_x = self.dimensions.loc[yr, 'Dunetoe_x_der'] 
                  
              self.dimensions.loc[yr,'Dunefront_gradient_sec_der'] = get_gradient(elevation, seaward_x, landward_x)
    
@@ -932,7 +966,7 @@ class Extraction:
             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
-            seaward_x = np.ceil(self.dimensions.loc[yr, 'Dunefoot_x_fix'])
+            seaward_x = np.ceil(self.dimensions.loc[yr, 'Dunetoe_x_fix'])
             # Get landward boundary 
             landward_x = np.floor(self.dimensions.loc[yr, 'Landward_x_variance'])
             
@@ -945,7 +979,7 @@ class Extraction:
             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
                  
             # Get seaward boundary
-            seaward_x = np.ceil(self.dimensions.loc[yr, 'Dunefoot_x_der'])
+            seaward_x = np.ceil(self.dimensions.loc[yr, 'Dunetoe_x_der'])
             # Get landward boundary 
             landward_x = np.floor(self.dimensions.loc[yr, 'Landward_x_variance'] )
             
