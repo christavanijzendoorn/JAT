@@ -17,7 +17,6 @@ C_dimensions_dataframes_per_transect/
 D_dataframes_per_dimension/
 E_filtered_dataframes/
 
-*.png
 *.pickle
 
 # Documentation #
