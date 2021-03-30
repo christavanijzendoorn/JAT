@@ -26,6 +26,12 @@ pybeach = 0.1.2
 
 # Installation
 
+Open anaconda prompt and activate the environment you created or want to use.
+
+Navigate to the directory where the Jarkus Ananlysis Toolbox is installed.
+
+Use the following command to install the JAT:
+
 ```
 python setup.py install
 ```
@@ -80,8 +86,8 @@ Overview of transects and ‘kustvakken’: https://puc.overheid.nl/rijkswaterst
 
 Parameter | Variable name | Variable output | Dependent on
 ------------ | ------------- | ------------- | ------------- 
-Dune height - Primary | dune_height_and_location | DuneTop_prim_x, DuneTop_prim_y | -
-Dune height - Secondary | dune_height_and_location | DuneTop_prim_x, DuneTop_prim_y, DuneTop_sec_x, DuneTop_sec_y | -
+Dune top - Primary | dune_top | DuneTop_prim_x, DuneTop_prim_y | -
+Dune top - Secondary | dune_top | DuneTop_prim_x, DuneTop_prim_y, DuneTop_sec_x, DuneTop_sec_y | -
 Mean Sea Level | mean_sea_level | MSL_x | -
 &nbsp; | mean_sea_level_variable | MSL_x_var | MLW_x_var & MHW_x_var
 Mean Low Water | mean_low_water_fixed | MLW_x_fix | -
@@ -128,7 +134,7 @@ Active profile volume | active_profile_volume | Active_profile_volume | Seaward_
 
 Parameter | Type | Explanation
 ------------ | ------------- | ------------ 
-Dune height | Primary  | Cross-shore location and elevation of the primary dune peak with elevation and prominence above user-defined value
+Dune top | Primary  | Cross-shore location and elevation of the primary dune peak with elevation and prominence above user-defined value
 &nbsp; | Secondary | Cross-shore location and elevation of the secondary dune peak with elevation and prominence above user-defined value
 Mean Sea Level | Fixed | Elevation and cross-shore location of Mean Sea level defined as user-defined value w.r.t. reference datum (default = 0)
 &nbsp;| Variable | Elevation and cross-shore location of Mean Sea level defined as the cross-shore location between the variable MHW and MLW location
