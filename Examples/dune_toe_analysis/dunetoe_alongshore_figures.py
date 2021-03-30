@@ -6,7 +6,7 @@ Created on Wed Aug  5 07:12:48 2020
 """
 
 ######################################
-# THIS SCRIPT CREATES PART OF FIGURE 1
+# THIS SCRIPT CREATES FIGURE 3
 ######################################
 
 ######################

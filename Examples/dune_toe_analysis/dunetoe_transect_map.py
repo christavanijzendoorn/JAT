@@ -4,6 +4,11 @@ Created on Fri Mar 13 17:14:22 2020
 
 @author: amton
 """
+# Script based on example provided by Anne Ton
+
+######################################
+# THIS SCRIPT CREATES PART OF FIGURE 1
+######################################
 
 ####
 # Basemap version 1.2.0 and basemap-data-hires need specific versions of matplotlib to work

@@ -6,6 +6,9 @@ Created on Thu Jan  9 09:19:29 2020
 
 @author: cijzendoornvan
 """
+######################################
+# THIS SCRIPT CREATES PART OF FIGURE 1
+######################################
 
 ######################
 # PACKAGES

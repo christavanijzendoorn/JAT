@@ -5,6 +5,10 @@ Created on Wed Sep 16 14:13:53 2020
 @author: cijzendoornvan
 """
 
+######################################
+# THIS SCRIPT CREATES FIGURE 4
+######################################
+
 import os
 import yaml
 import pandas as pd
