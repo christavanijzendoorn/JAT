@@ -24,7 +24,7 @@ outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Doc
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
    Jarkus: transect.nc
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
-   DuneFoot: DF_2nd_deriv.nc
+   Dunetoe: DF_2nd_deriv.nc
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc' 
    Nourishment: Suppletiedatabase.xlsx
            # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
@@ -47,6 +47,12 @@ user defined:
        # BUILD IN APPLY HERE
        years: 0 # Minimum percentage of values over all transect locations that has to be available for a single year, otherwise it is filtered out.
        locations: 0 # Minimum percentage of values over all years that has to be available for a single transect location, otherwise it is filtered out.
+   primary dune: # Values to determine the location of the primary/secondary dune peak. Definition based on https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+       height: 5
+       prominence: 2.0
+   secondary dune:
+       height: 3
+       prominence: 0.5
    mean sea level: 0
    mean high water: 1
    mean low water: -1
@@ -61,13 +67,17 @@ user defined:
        min depth: -5.0
        stddev threshold: 0.25
        low stddev length: 200
-   dune foot fixed: 3
-   normalization year: 1990
+   dune toe fixed: 3
+   dune toe classifier: 'mixed_clf' # options are: mixed_clf, wave_embayed_clf and barrier_island_clf
+   normalization:
+       type: 'mean' # 'norm_year' - normalize using a the value of the variable in the normalisation year, 'mean' - normalize using the mean of the variable at each location
+       year: 1990 # Necessary in case of type norm_year
 
 # SELECTION OF CHARACTERISTIC PARAMETERS
 dimensions: # Select which dimensions should be calculated for the transects
     setting:
-        dune_height_and_location    : True
+        primary_dune_top            : True
+        secondary_dune_top          : True
         
         mean_sea_level              : True
         mean_low_water_fixed        : True
@@ -87,9 +97,9 @@ dimensions: # Select which dimensions should be calculated for the transects
         seaward_point_activeprofile : True
         seaward_point_doc           : True
         
-        dune_foot_fixed             : True
-        dune_foot_derivative        : True
-        dune_foot_pybeach           : True
+        dune_toe_fixed              : True
+        dune_toe_derivative         : True
+        dune_toe_pybeach            : True
         
         beach_width_fix             : True
         beach_width_var             : True
@@ -124,7 +134,8 @@ dimensions: # Select which dimensions should be calculated for the transects
         active_profile_volume       : True
 
     variables:
-        dune_height_and_location    : ['DuneTop_prim_x', 'DuneTop_prim_y', 'DuneTop_sec_x', 'DuneTop_sec_y']
+        primary_dune_top            : ['DuneTop_prim_x', 'DuneTop_prim_y']
+        secondary_dune_top          : ['DuneTop_sec_x', 'DuneTop_sec_y']
         
         mean_sea_level              : ['MSL_x']
         mean_low_water_fixed        : ['MLW_x_fix']
@@ -144,9 +155,9 @@ dimensions: # Select which dimensions should be calculated for the transects
         seaward_point_activeprofile : ['Seaward_x_AP']
         seaward_point_doc           : ['Seaward_x_mindepth', 'Seaward_x_DoC']
         
-        dune_foot_fixed             : ['Dunefoot_x_fix']
-        dune_foot_derivative        : ['Dunefoot_y_der', 'Dunefoot_x_der']
-        dune_foot_pybeach           : ['Dunefoot_y_pybeach_mix', 'Dunefoot_x_pybeach_mix']
+        dune_toe_fixed              : ['Dunetoe_x_fix']
+        dune_toe_derivative         : ['Dunetoe_y_der', 'Dunetoe_x_der']
+        dune_toe_pybeach            : ['Dunetoe_y_pybeach_mix', 'Dunetoe_x_pybeach_mix']
         
         beach_width_fix             : ['Beach_width_fix']
         beach_width_var             : ['Beach_width_var']
