@@ -51,7 +51,7 @@ elevation = pickle.load(open(config['outputdir'] + config['save locations']['Dir
 data.get_transect_plot(config)
 
 # to reopen pickle file with figure:
-# figx = pickle.load(open(config['root'] + config['save locations']['DirB'] + 'Transect_' + transect + '.fig.pickle','rb'))    
+# figx = pickle.load(open(config['root'] + config['save locations']['DirB'] + 'Transect_' + str(transect) + '.fig.pickle','rb'))    
 # figx.show()
     
 #%%###################################
@@ -87,13 +87,13 @@ dimensions = pickle.load(open(config['outputdir'] + config['save locations']['Di
 
 ax1 = dimensions.plot(y='Landward_x_variance', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Cross-shore location of important characteristic parameters through time')
 dimensions.plot(y='DuneTop_prim_x', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
-dimensions.plot(y='Dunefoot_x_fix', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
+dimensions.plot(y='Dunetoe_x_fix', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
 dimensions.plot(y='Seaward_x_DoC', lw = '0', marker = '+', markersize=7, markeredgewidth=2, ax=ax1)
 ax1.legend(loc='best')
 
 
 dune_tops.plot()
-ax2 = dimensions.plot(y='Dunefoot_y_der', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Dune foot elevation through time')
+ax2 = dimensions.plot(y='Dunetoe_y_der', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Dune toe elevation through time')
 
 ax3 = dimensions.plot(y='DuneTop_prim_y', lw = '0', marker = '+', markersize=7, markeredgewidth=2, title = 'Dune top elevation through time')
 
