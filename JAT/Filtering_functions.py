@@ -1,27 +1,3 @@
-'''This file is part of Jarkus Analysis Toolbox.
-   
-JAT is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-   
-JAT is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-   
-You should have received a copy of the GNU General Public License
-along with JAT.  If not, see <http://www.gnu.org/licenses/>.
-   
-JAT  Copyright (C) 2020 Christa van IJzendoorn
-c.o.vanijzendoorn@tudelft.nl
-Delft University of Technology
-Faculty of Civil Engineering and Geosciences
-Stevinweg 1
-2628CN Delft
-The Netherlands
-'''
-
 # -*- coding: utf-8 -*-
 """
 Created on Mon Nov 30 19:08:50 2020
@@ -33,13 +9,13 @@ import math
 import pandas as pd
 import numpy as np
 
-def bad_locations_filter(dimension, location_filter):
+def bad_locations_filter(dimension, filter_file):
     # Filter dataframe
     dimension_filt = dimension.copy()
     removed_transects = []
     for i, col in dimension_filt.iteritems():
-        for key in location_filter.keys():
-            if int(i) >= int(location_filter[key][0]) and int(i) <= int(location_filter[key][-1]):
+        for key in filter_file.keys():
+            if int(i) >= filter_file[key][0] and int(i) <= filter_file[key][1]:
                 removed_transects.append(i)
                 dimension_filt.loc[:, i] = np.nan
     
@@ -91,7 +67,7 @@ def availability_filter_years(config, dimension):
     return dimension_filt
 
 def nourishment_filter(config, variable_dataframe):
-    Nourishments = pd.read_excel(config['root'] + config['data locations']['DirNourish'])
+    Nourishments = pd.read_excel(config['inputdir'] + config['data locations']['Nourishment'])
     filtered = []
     for index, row in Nourishments.iterrows():
         if math.isnan(row['BeginRaai']) or math.isnan(row['EindRaai']):# or row['Volume/m'] > 50: # or row['JaarBeginUitvoering'] < 2010: 
@@ -115,3 +91,48 @@ def nourishment_filter(config, variable_dataframe):
                 nourished_dataframe.loc[:, i] = np.nan
             
     return nourished_dataframe, not_nourished_dataframe
+
+# def nourishment_filter(variable_dataframe):
+#     Nourishments = pd.read_excel("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/Duneforce/JARKUS/Suppletiedatabase.xlsx")
+#     filtered = []
+#     for index, row in Nourishments.iterrows():
+#         if math.isnan(row['BeginRaai']) or math.isnan(row['EindRaai']):# or row['Volume/m'] > 50: # or row['JaarBeginUitvoering'] < 2010: 
+#             continue
+#         else:
+#             code_beginraai = int(row['KustVakNummer'] * 1000000 + row['BeginRaai'] * 100)
+#             code_eindraai = int(row['KustVakNummer'] * 1000000 + row['EindRaai'] * 100)
+#             nourished_transects = [i for i in variable_dataframe.columns if i >= code_beginraai and i <= code_eindraai]
+#             filtered.extend(nourished_transects)
+#     filtered = set(filtered)
+#     not_nourished_transects = [i for i in variable_dataframe.columns if i not in filtered]
+
+#     # Filter dataframe
+#     not_nourished_dataframe = variable_dataframe.copy()
+#     for i, col in not_nourished_dataframe.iteritems():
+#         if i in filtered:
+#                 not_nourished_dataframe.loc[:, i] = np.nan
+    
+#     nourished_dataframe = variable_dataframe.copy()
+#     for i, col in nourished_dataframe.iteritems():
+#         if i not in filtered:
+#                 nourished_dataframe.loc[:, i] = np.nan
+                
+#     types = ['anders', 'duin', 'duinsuppletie', 'duinverzwaring', 'strand-duinsuppleties', 'strandsuppletie']
+#     filtered = []
+#     for index, row in Nourishments.iterrows():
+#         if row['Type'] not in types or math.isnan(row['BeginRaai']) or math.isnan(row['EindRaai']):# or row['Volume/m'] > 50: # or row['JaarBeginUitvoering'] < 2010: 
+#             continue
+#         else:
+#             code_beginraai = int(row['KustVakNummer'] * 1000000 + row['BeginRaai'] * 100)
+#             code_eindraai = int(row['KustVakNummer'] * 1000000 + row['EindRaai'] * 100)
+#             other_nourishments = [i for i in variable_dataframe.columns if i >= code_beginraai and i <= code_eindraai]
+#             filtered.extend(other_nourishments)
+#     filtered = set(filtered)
+                
+#     justSFnourished_dataframe = nourished_dataframe.copy()
+#     for i, col in justSFnourished_dataframe.iteritems():
+#         if i in filtered:
+#                 justSFnourished_dataframe.loc[:, i] = np.nan
+            
+#     return nourished_dataframe, not_nourished_dataframe, justSFnourished_dataframe#, not_nourished_transects
+ 
