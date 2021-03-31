@@ -15,7 +15,7 @@ from JAT.Jarkus_Analysis_Toolbox import Transects, Extraction
 ######################
 # LOAD SETTINGS
 ######################
-config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/dune_toe_analysis/jarkus_04.yml"))
+config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/04_dune_toe_analysis/jarkus_04.yml"))
 
 #%%###################
 # LOAD DATA
