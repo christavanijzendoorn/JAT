@@ -20,7 +20,7 @@ transects:
 
 # DIRECTORIES
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
-outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\dune_toe_analysis\
+outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\03_extract_all\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
    Jarkus: transect.nc
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
@@ -89,52 +89,52 @@ dimensions: # Select which dimensions should be calculated for the transects
         mean_high_water_variable    : True
         mean_sea_level_variable     : True
 
-        intertidal_width_fixed      : False
-        intertidal_width_variable   : False
+        intertidal_width_fixed      : True
+        intertidal_width_variable   : True
         
-        landward_point_variance     : False
+        landward_point_variance     : True
         landward_point_derivative   : True
-        landward_point_bma          : False
+        landward_point_bma          : True
         
-        seaward_point_foreshore     : False
-        seaward_point_activeprofile : False
-        seaward_point_doc           : False
+        seaward_point_foreshore     : True
+        seaward_point_activeprofile : True
+        seaward_point_doc           : True
         
         dune_toe_fixed              : True
         dune_toe_derivative         : True
         dune_toe_pybeach            : True
         
-        beach_width_fix             : False
-        beach_width_var             : False
-        beach_width_der             : False
-        beach_width_der_var         : False
+        beach_width_fix             : True
+        beach_width_var             : True
+        beach_width_der             : True
+        beach_width_der_var         : True
         
-        beach_gradient_fix          : False
-        beach_gradient_var          : False
-        beach_gradient_der          : False
+        beach_gradient_fix          : True
+        beach_gradient_var          : True
+        beach_gradient_der          : True
 
-        dune_front_width_prim_fix   : False
-        dune_front_width_prim_der   : False
-        dune_front_width_sec_fix    : False
-        dune_front_width_sec_der    : False
+        dune_front_width_prim_fix   : True
+        dune_front_width_prim_der   : True
+        dune_front_width_sec_fix    : True
+        dune_front_width_sec_der    : True
         
-        dune_front_gradient_prim_fix: False
-        dune_front_gradient_prim_der: False
-        dune_front_gradient_sec_fix : False
-        dune_front_gradient_sec_der : False
+        dune_front_gradient_prim_fix: True
+        dune_front_gradient_prim_der: True
+        dune_front_gradient_sec_fix : True
+        dune_front_gradient_sec_der : True
         
-        dune_volume_fix             : False
-        dune_volume_der             : False
+        dune_volume_fix             : True
+        dune_volume_der             : True
         
-        intertidal_gradient         : False
-        intertidal_volume_fix       : False
-        intertidal_volume_var       : False
+        intertidal_gradient         : True
+        intertidal_volume_fix       : True
+        intertidal_volume_var       : True
         
-        foreshore_gradient          : False
-        foreshore_volume            : False
+        foreshore_gradient          : True
+        foreshore_volume            : True
         
-        active_profile_gradient     : False
-        active_profile_volume       : False
+        active_profile_gradient     : True
+        active_profile_volume       : True
 
     variables:
         primary_dune_top            : ['DuneTop_prim_x', 'DuneTop_prim_y']
