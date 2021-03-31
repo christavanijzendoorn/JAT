@@ -25,7 +25,7 @@ import os
 ######################
 # LOAD SETTINGS + DATA
 ######################
-config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/dune_toe_analysis/jarkus_04.yml"))
+config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/04_dune_toe_analysis/jarkus_04.yml"))
 filter_file = yaml.safe_load(open(config['inputdir'] + config['data locations']['LocFilter']))
 
 DirDimensions = config['outputdir'] + config['save locations']['DirD']
