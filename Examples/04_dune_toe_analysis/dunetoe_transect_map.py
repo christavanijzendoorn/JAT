@@ -31,7 +31,7 @@ os.environ['PROJ_IB'] = r'C:\Users\cijzendoornvan\AppData\Local\Continuum\anacon
 mpl_toolkits.__path__.append(r'C:\Users\cijzendoornvan\AppData\Local\Continuum\anaconda3\envs\map\Lib\site-packages\mpl_toolkits')
 from mpl_toolkits.basemap import Basemap
 
-config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/dune_toe_analysis/jarkus_04.yml"))
+config = yaml.safe_load(open("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/DuneForce/JARKUS/JAT/Examples/04_dune_toe_analysis/jarkus_04.yml"))
 DirFigures = config['outputdir'] + config['save locations']['DirFig']
 if os.path.isdir(DirFigures) == False:
             os.mkdir(DirFigures)
