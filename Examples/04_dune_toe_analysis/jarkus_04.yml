@@ -20,7 +20,7 @@ transects:
 
 # DIRECTORIES
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
-outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\dune_toe_analysis\
+outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\04_dune_toe_analysis\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
    Jarkus: transect.nc
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
