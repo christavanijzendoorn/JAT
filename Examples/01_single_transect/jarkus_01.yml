@@ -2,8 +2,8 @@ name: jarkus
 
 # REQUEST YEARS AND TRANSECTS
 years:
-    start_yr: 1980
-    end_yr: 2020
+    start_yr: 1980 
+    end_yr: 2020 # the end year is never included if you want e.g. 1995, fill in start_yr: 1995 and end_yr: 1996
 
 transects: 
     # Choose the type of analysis: single, multiple, range or all
@@ -16,7 +16,7 @@ transects:
         - 8009350 
     range: # for range
         start: 8008850
-        end: 8009726 
+        end: 8009726 # the last transect is never included if you want e.g. 8008850 up to and including 8009726, fill in start: 8008850  and end_yr: 8009727
 
 # DIRECTORIES
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
@@ -26,10 +26,10 @@ data locations: # When saved locally fill in directory of dataset (and leave out
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
    Dunetoe: DF_2nd_deriv.nc
            # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc' 
-   Nourishment: Suppletiedatabase.xlsx
+   Nourishment: Suppletiedatabase.xlsx # not necessary for this example
            # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
-   LocFilter: location_filter.yml # not necessary for single transect
-   Titles: plot_titles.yml # not necessary for single transect
+   LocFilter: location_filter.yml # not necessary for this example
+   Titles: plot_titles.yml # not necessary for this example
 save locations:
    DirA: A_elevation_dataframes\ # This is combined with root to find directory
    DirB: B_transect_plots\
@@ -157,7 +157,7 @@ dimensions: # Select which dimensions should be calculated for the transects
         
         dune_toe_fixed              : ['Dunetoe_x_fix']
         dune_toe_derivative         : ['Dunetoe_y_der', 'Dunetoe_x_der']
-        dune_toe_pybeach            : ['Dunetoe_y_pybeach_mix', 'Dunetoe_x_pybeach_mix']
+        dune_toe_pybeach            : ['Dunetoe_y_pybeach', 'Dunetoe_x_pybeach']
         
         beach_width_fix             : ['Beach_width_fix']
         beach_width_var             : ['Beach_width_var']
