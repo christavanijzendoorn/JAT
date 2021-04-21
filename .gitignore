@@ -22,8 +22,6 @@ E_filtered_dataframes/
 
 # Documentation #
 #####################
-docs/
-
 *.docx
 *.pptx
 

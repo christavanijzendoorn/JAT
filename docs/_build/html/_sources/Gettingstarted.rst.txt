@@ -9,11 +9,11 @@ Or use git and navigate to a convenient location and clone the repository::
 
   $ git clone https://github.com/christavanijzendoorn/JAT.git
 
-Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`):. The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.
+Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`:). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.
 
 Navigate to the directory where the Jarkus Ananlysis Toolbox is located and the `setup.py` file is present. Use the following command to install the JAT::
  
-	$  python setup.py install
+  $  python setup.py install
 
 Using the JAT
 --------------
