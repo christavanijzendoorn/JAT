@@ -46,7 +46,7 @@ The convention that is used in the JAT is as follows::
 
 Vaknummer + raainummer = VNNNNNN:
 	* always 6 transect (raai) related numbers
-	* 1 or 2 kustvak related numbers, 2 in case of kustvak of 10+
+	* 1 or 2 coastal section (kustvak) related numbers, 2 in case of kustvak of 10+
 
 Example Sand Engine: Vak 9, raai 11109 = 9011109
 
