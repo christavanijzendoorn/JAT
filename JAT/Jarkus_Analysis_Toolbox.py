@@ -1,47 +1,35 @@
-'''This file is part of Jarkus Analysis Toolbox.
-   
-JAT is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-   
-JAT is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-   
-You should have received a copy of the GNU General Public License
-along with JAT.  If not, see <http://www.gnu.org/licenses/>.
-   
-JAT  Copyright (C) 2020 Christa van IJzendoorn
-c.o.vanijzendoorn@tudelft.nl
-Delft University of Technology
-Faculty of Civil Engineering and Geosciences
-Stevinweg 1
-2628CN Delft
-The Netherlands
-'''
-
 """
 Created on Tue Nov 19 11:31:25 2019
 
 @author: cijzendoornvan
 """
 
+""" Most important functionalities of the JAT inclusing retrieving data and extracting profile dimensions """
+
 import numpy as np
 import pandas as pd
 import pickle
 import os
-# import jarkus
-# import xarray as xr
 from netCDF4 import Dataset, num2date
+from JAT.Geometric_functions import *
 
 #################################
 ####     DATA-EXTRACTION     ####
 #################################
 
 class Transects:
+    """Loading and plotting transects.
 
+    Extended description of function.
+
+    Args:
+        arg1 (int): Description of arg1
+        arg2 (str): Description of arg2
+
+    Returns:
+        bool: Description of return value
+
+    """
     def __init__(self, config): 
         # create a dataset object, based on JARKUS dataset saved locally or on server
         if 'http' in config['data locations']['Jarkus']: # check whether it's a url
@@ -205,76 +193,6 @@ class Transects:
             
         return conversion_alongshore2ids, conversion_ids2alongshore
 
-def find_intersections(elevation, crossshore, y_value):
-    value_vec = np.array([y_value] * len(elevation))
-    elevation = pd.Series(elevation).interpolate().tolist()
-        
-    with np.errstate(invalid='ignore'):
-        diff = np.nan_to_num(np.diff(np.sign(elevation - value_vec)))
-    intersection_idxs = np.nonzero(diff)
-    intersection_x = np.array([crossshore[idx] for idx in intersection_idxs[0]])
-    
-    return intersection_x
-
-def zero_runs(y_der, threshold_zeroes):                    
-    # Create an array that is 1 where y_der is 0, and pad each end with an extra 0.
-    iszero = np.concatenate(([0], np.equal(y_der, 0).view(np.int8), [0]))
-    absdiff = np.abs(np.diff(iszero))
-    # Runs start and end where absdiff is 1.
-    zero_sections = np.where(absdiff == 1)[0].reshape(-1, 2)                     
-    zero_section_len = zero_sections[:,1] - zero_sections[:,0]
-    
-    zero_sections = zero_sections[zero_section_len > threshold_zeroes]
-            
-    return zero_sections
-
-def get_gradient(elevation, seaward_x, landward_x):
-
-    # Remove everything outside of boundaries
-    elevation = elevation.drop(elevation.index[elevation.index > seaward_x]) # drop everything seaward of seaward boundary
-    elevation = elevation.drop(elevation.index[elevation.index < landward_x]).interpolate() # drop everything landward of landward boundary and interpolate remaining data
-    
-    # remove nan values otherqise polyfit does not work
-    elevation = elevation.dropna(axis=0)
-    
-    # Calculate gradient for domain
-    if sum(elevation.index) == 0:
-        gradient = np.nan
-    elif pd.isnull(seaward_x) or pd.isnull(landward_x):
-        gradient = np.nan
-    elif pd.isnull(elevation.first_valid_index()) or pd.isnull(elevation.last_valid_index()):
-        gradient = np.nan 
-    elif elevation.first_valid_index() > landward_x or elevation.last_valid_index() < seaward_x:
-        gradient = np.nan
-    else:
-        gradient = np.polyfit(elevation.index, elevation.values, 1)[0]    
-            
-    return gradient
-
-def get_volume(elevation, seaward_x, landward_x):
-    from scipy import integrate
-        
-    if pd.isnull(seaward_x) == True or pd.isnull(landward_x) == True:
-        volume = np.nan
-    elif pd.isnull(elevation.first_valid_index()) == True or pd.isnull(elevation.last_valid_index()) == True:
-        volume = np.nan    
-    elif elevation.first_valid_index() > landward_x or elevation.last_valid_index() < seaward_x:
-        volume = np.nan
-    else:
-        # Remove everything outside of boundaries
-        elevation = elevation.drop(elevation.index[elevation.index > seaward_x]) # drop everything seaward of seaward boundary
-        elevation = elevation.drop(elevation.index[elevation.index < landward_x]).interpolate() # drop everything landward of landward boundary and interpolate remaining data
-        
-        if elevation.empty == False:
-            volume_y = elevation - elevation.min()
-            # volume_trapz = np.trapz(volume_y, x = volume_y.index)
-            volume_simps = integrate.simps(volume_y.values.transpose(), x = volume_y.index)
-            volume = volume_simps
-        else:
-            volume = np.nan
-    
-    return volume
-
 class Extraction:
     
     def __init__(self, data, config):    
@@ -294,6 +212,8 @@ class Extraction:
     def get_all_dimensions(self):
         import warnings # This error occurs due to nan values in less than boolean operations.
         warnings.filterwarnings("ignore", message="invalid value encountered")
+        warnings.filterwarnings("ignore", message="Mean of empty slice")
+        warnings.filterwarnings("ignore", message="Polyfit may be poorly conditioned")
         
         if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirC']) == False:
             os.mkdir(self.config['outputdir'] + self.config['save locations']['DirC'])
@@ -424,12 +344,13 @@ class Extraction:
             for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
                 trsct = str(self.data.transects_filtered[i])
                 pickle_file = self.config['outputdir'] + self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
-                variable_dataframe[trsct] = np.nan
+                variable_dataframe.loc[:, trsct] = np.nan
         
                 if os.path.exists(pickle_file):
                     dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of transect
+                    
                 if variable not in dimensions.columns:
-                    variable_dataframe.loc[trsct] = np.nan
+                    variable_dataframe.loc[:, trsct] = np.nan
                 else:
                     for yr, row in dimensions.iterrows(): 
                         variable_dataframe.loc[yr, trsct] = dimensions.loc[yr, variable] #extract column that corresponds to the requested variable
@@ -659,7 +580,7 @@ class Extraction:
         
         height_of_peaks = self.config['user defined']['landward derivative']['min height'] #m
         height_constraint = self.config['user defined']['landward derivative']['height constraint'] #m
-        peaks_threshold = height_of_peaks + self.dimensions['MHW_y_var'].iloc[0]
+        peaks_threshold = height_of_peaks + self.dimensions['MHW_y_var'].iloc[0]  # adjust this based on matlab version?
         
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
@@ -834,15 +755,15 @@ class Extraction:
                 try:
                     p = Profile(x_ml, y_ml)
                     toe_ml, prob_ml = p.predict_dunetoe_ml(self.config['user defined']['dune toe classifier'])  # predict toe using machine learning model
-                    self.dimensions.loc[yr, 'Dunetoe_y_pybeach_mix'] = y_ml[toe_ml[0]]
-                    self.dimensions.loc[yr, 'Dunetoe_x_pybeach_mix'] = x_ml[toe_ml[0]]
+                    self.dimensions.loc[yr, 'Dunetoe_y_pybeach'] = y_ml[toe_ml[0]]
+                    self.dimensions.loc[yr, 'Dunetoe_x_pybeach'] = x_ml[toe_ml[0]]
                 except Warning:
-                    self.dimensions.loc[yr, 'Dunetoe_y_pybeach_mix'] = np.nan
-                    self.dimensions.loc[yr, 'Dunetoe_x_pybeach_mix'] = np.nan
+                    self.dimensions.loc[yr, 'Dunetoe_y_pybeach'] = np.nan
+                    self.dimensions.loc[yr, 'Dunetoe_x_pybeach'] = np.nan
 
             else:
-                self.dimensions.loc[yr, 'Dunetoe_y_pybeach_mix'] = np.nan
-                self.dimensions.loc[yr, 'Dunetoe_x_pybeach_mix'] = np.nan
+                self.dimensions.loc[yr, 'Dunetoe_y_pybeach'] = np.nan
+                self.dimensions.loc[yr, 'Dunetoe_x_pybeach'] = np.nan
 
     def get_beach_width_fix(self):
         self.dimensions['Beach_width_fix'] = self.dimensions['MSL_x'] - self.dimensions['Dunetoe_x_fix']
