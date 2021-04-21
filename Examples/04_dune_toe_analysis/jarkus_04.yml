@@ -3,7 +3,7 @@ name: jarkus
 # REQUEST YEARS AND TRANSECTS
 years:
     start_yr: 1965
-    end_yr: 2018
+    end_yr: 2018 # the end year is never included if you want e.g. 1995, fill in start_yr: 1995 and end_yr: 1996
 
 transects: 
     # Choose the type of analysis: single, multiple, range or all
@@ -16,7 +16,7 @@ transects:
         - 8009350 
     range: # for range
         start: 8008850
-        end: 8009726 
+        end: 8009726 # the last transect is never included if you want e.g. 8008850 up to and including 8009726, fill in start: 8008850  and end_yr: 8009727
 
 # DIRECTORIES
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
