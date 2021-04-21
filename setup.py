@@ -14,12 +14,14 @@ setuptools.setup(
     url="https://github.com/christavanijzendoorn/JAT.git",
     packages=setuptools.find_packages(),
 	install_requires=[
-		'numpy',
+		'numpy==1.17.2',
 		'pandas==0.25.1',
 		'netCDF4',
 		'scipy==1.3.1',
 		'matplotlib',
-		'pybeach'],
+		'cftime==1.0.3.4',
+		'joblib==0.13.2',
+		'pybeach',],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
