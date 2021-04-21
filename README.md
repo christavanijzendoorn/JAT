@@ -12,12 +12,7 @@ The modular set-up of the JAT makes sure that new extraction techniques can be a
 
 The output of the extraction methods for all years and transects produced with the JAT are available online (ref. TUdelft server). In the future, some examples of visualizing these data will be provided in this repository.
 
-For a complete guide on how to use the Jarkus Analysis Toolbox go to the [documentation] (). 
-
-Refer to [examples](https://github.com/christavanijzendoorn/JAT/tree/master/Examples)
-
-## Available characteristic parameters
-Currently, these characteristic parameters are available:
+For a complete guide on how to use the Jarkus Analysis Toolbox, with examples and explanation of the available characterstic parameters, go to the [Documentation](https://jarkus-analysis-toolbox.readthedocs.io/). 
 
 
 
