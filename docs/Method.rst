@@ -1,8 +1,6 @@
 Method
 ================
 
-The image below shows an overview of the method used by the JAT.
-
 .. image:: ./_static/flowchart.png
 ..
 
@@ -14,7 +12,7 @@ The Jarkus Analysis Toolbox helps to analyse the Jarkus dataset. This dataset is
 
 Based on user input the necessary data is retrieved from this dataset by the JAT for certain years and locations. The JAT contains the option to save the elevation information of the requested coastal transects and to create a quickplot that shows all measured years per requested transect.
 
-The core of the JAT is in the parameter extraction. This means that characteristic parameters are extracted from the elevation profile of each requested coastal transect. User input determines which characteristic parameters are extracted and it is expected that more extraction methods will be added to the JAT in the future. A guide on how to add a new method is provided HERE.
+The core of the JAT is in the parameter extraction. This means that characteristic parameters are extracted from the elevation profile of each requested coastal transect. User input determines which characteristic parameters are extracted and it is expected that more extraction methods will be added to the JAT in the future. A guide on how to add a new method is provided in the :doc:`Help`: section.
 
 The raw output parameters that were extracted by using the currently available methods are made avaiable through `4TU repository`_. 
 

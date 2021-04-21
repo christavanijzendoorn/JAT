@@ -97,25 +97,6 @@ Explanation of characteristic parameters
 +-------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-.. |long_sentence1| replace:: Approximation of the depth of closure below a user-defined minimum  (default = -5.0m) where the standard deviation of the elevation through time is below a user-defined value (default = 0.25) for at least a user-defined length (default = 200m) (Hinton, 2007)
-.. |long_sentence2| replace:: Dune volume calculated as the volume under the coastal profile between location of the dune toe based on the second derivative method and the landward boundary based on the variance
-
-
-
-\* These values vary alongshore (per transect), but are constant through time (per year)
-
-** It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
-
-
---------
-
-.. [#Dia] Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., & de Vries, S.   "An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast."     Journal of Coastal Research, 36(3)(2020): 668-675. https://doi.org/10.2112/JCOASTRES-D-19-00056.1
-.. [#Beu] Beuzen, Tomas. "pybeach: A Python package for extracting the location of dune toes on beach profile transects." Journal of Open Source Software 4(44) (2019): 1890. https://doi.org/10.21105/joss.01890
-.. [#Hint] Hinton, Claire L. Decadal morphodynamic behaviour of the Holland shoreface. Diss. Middlesex University, 2000. https://eprints.mdx.ac.uk/id/eprint/6601
-
---------
-
-
 Variable names and dependencies of characteristic parameters
 =============================================================
 
@@ -259,4 +240,22 @@ Variable names and dependencies of characteristic parameters
 |                         |                     |                                   |                                        | Landward_x_bma                                                                                       |
 +-------------------------+---------------------+-----------------------------------+----------------------------------------+------------------------------------------------------------------------------------------------------+
 
+
+.. |long_sentence1| replace:: Approximation of the depth of closure below a user-defined minimum  (default = -5.0m) where the standard deviation of the elevation through time is below a user-defined value (default = 0.25) for at least a user-defined length (default = 200m) (Hinton, 2007)
+.. |long_sentence2| replace:: Dune volume calculated as the volume under the coastal profile between location of the dune toe based on the second derivative method and the landward boundary based on the variance
+
+
+
+\* These values vary alongshore (per transect), but are constant through time (per year)
+
+** It should be checked whether this method corresponds to the way it was implemented by Nicha Zwarenstein Tutunji in his MSc work
+
+
+--------
+
+.. [#Dia] Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., & de Vries, S.   "An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast."     Journal of Coastal Research, 36(3)(2020): 668-675. https://doi.org/10.2112/JCOASTRES-D-19-00056.1
+.. [#Beu] Beuzen, Tomas. "pybeach: A Python package for extracting the location of dune toes on beach profile transects." Journal of Open Source Software 4(44) (2019): 1890. https://doi.org/10.21105/joss.01890
+.. [#Hint] Hinton, Claire L. Decadal morphodynamic behaviour of the Holland shoreface. Diss. Middlesex University, 2000. https://eprints.mdx.ac.uk/id/eprint/6601
+
+--------
 

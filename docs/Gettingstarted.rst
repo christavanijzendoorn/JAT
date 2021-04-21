@@ -53,6 +53,7 @@ Example Sand Engine: Vak 9, raai 11109 = 9011109
 To check which transects are present in the area you want to analyse use the following sources:
 	* Overview of transects: https://maps.rijkswaterstaat.nl/geoweb55/index.html?viewer=Kustlijnkaart 
 	* Overview of transects and ‘kustvakken’: https://puc.overheid.nl/rijkswaterstaat/doc/PUC_629858_31/
+
 	
 In the `jarkus.yml` file you can choose how many transects you want to analyse. First, you choose the type of analysis:
 	* **single** - analyse just one transect
@@ -98,7 +99,7 @@ User-defined settings
 ----------------------
 Below you can find a list of all user-defined settings that are included in the `jarkus.yml` file. For each setting a link to the documentation of the corresponding function is provided which explains how the setting is used.
 
-FILL INNNNNN
+Upcoming!
 
 Dependencies
 ---------------
