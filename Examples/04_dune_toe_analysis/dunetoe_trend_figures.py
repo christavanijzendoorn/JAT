@@ -43,11 +43,11 @@ pickle_file = config['outputdir'] + config['save locations']['DirD'] + var + '_d
 DF_x_der = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
 
 # Load pybeach method version
-var = 'Dunetoe_x_pybeach_mix' # Dune toe elevation
+var = 'Dunetoe_x_pybeach' # Dune toe elevation
 pickle_file = config['outputdir'] + config['save locations']['DirD'] + var + '_dataframe.pickle'    
 DF_x_pybeach = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
    
-var = 'Dunetoe_y_pybeach_mix' # Dune toe cross-shore location
+var = 'Dunetoe_y_pybeach' # Dune toe cross-shore location
 pickle_file = config['outputdir'] + config['save locations']['DirD'] + var + '_dataframe.pickle'    
 DF_y_pybeach = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
 
@@ -63,7 +63,7 @@ pickle_file = config['outputdir'] + config['save locations']['DirD'] + var + '_d
 DF_x_der_norm = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
 
 # Load pybeach method version
-var = 'Dunetoe_x_pybeach_mix_normalized' # Dune toe elevation
+var = 'Dunetoe_x_pybeach_normalized' # Dune toe elevation
 pickle_file = config['outputdir'] + config['save locations']['DirD'] + var + '_dataframe.pickle'    
 DF_x_pybeach_norm = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
 
