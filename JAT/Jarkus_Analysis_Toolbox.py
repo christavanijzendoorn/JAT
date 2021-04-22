@@ -97,6 +97,11 @@ class Transects:
         ----------
         config : dict
             The configuration file that contains the user-requested years and transects
+            
+        See Also
+        --------
+        Transects.get_years_filtered
+        Transects.get_transects_filtered
         """
         
         self.get_years_filtered(config['years']['start_yr'], config['years']['end_yr'])    

@@ -186,6 +186,10 @@
 <dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and transects</p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered" title="JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Transects.get_years_filtered()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered" title="JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Transects.get_transects_filtered()</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -193,12 +197,16 @@
 <code class="sig-name descname">get_conversion_dicts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_conversion_dicts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create conversion from transect number to alongshore meter and vice versa</p>
 <p>For each transect number in the jarkus dataset the alongshore kilometer is calculated. A dictionary is created that relates each transect number to its alongshore kilometer. Additionally, a dictionary is created that does the reverse.</p>
-<p>Returns:
-dict</p>
-<blockquote>
-<div><p>conversion_ids2alongshore: does the conversion from transect number to alongshore meter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>conversion_ids2alongshore: does the conversion from transect number to alongshore meter</p>
 <p>conversion_alongshore2ids: does the conversion from alongshore meter to transect number</p>
-</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
