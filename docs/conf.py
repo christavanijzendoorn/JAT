@@ -19,11 +19,11 @@ sys.path.insert(0, os.path.abspath('..'))
 import mock
 
 MOCK_MODULES = ['numpy', 'pandas']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
+	
 
 #'scipy', 'scipy.stats', 'scipy.signal', 'scipy.integrate', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'matplotlib.pyplot', 'matplotlib.colors', 'matplotlib.cm', 'pybeach.beach', 'cftime', 'joblib']
-
-or mod_name in MOCK_MODULES:
-    sys.modules[mod_name] = mock.Mock()
 
 #autodoc_mock_imports = ['numpy', 'scipy', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'pybeach', 'cftime', 'joblib', 'warnings', 'os']
 
