@@ -26,3 +26,9 @@ Contents
    CharacteristicParameters
    Functionalities
    Help
+   
+Modules
+=========
+
+.. automodule:: JAT.Filtering_functions
+    :members:

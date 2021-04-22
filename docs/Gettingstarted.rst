@@ -60,6 +60,7 @@ In the `jarkus.yml` file you can choose how many transects you want to analyse. 
 	* **multiple** - analyse a selection of tansects, these do not have to be next to each other spatially
 	* **range** - analyse transects between certain transect numbers. Especially around the boundaries of kustvakken, make sure to check whether the transects you want are indeed in increasing order
 	* **all** - analyse al available transect in the Jarkus dataset
+
 In all cases, the JAT will automatically filter transect numbers that do not exist.
 
 
