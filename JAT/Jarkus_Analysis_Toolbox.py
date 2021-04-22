@@ -22,6 +22,7 @@ class Transects:
     
     This class provides the functionalities to retrieve the jarkus dataset and filter out the years and locations requested by the user. This includes determining whether the user defined request is available. Additionally, the elevation of each requested transect can be saved and plotted to provide easy access for analysis, and the conversion of the transect number to the alongshore kilometer is provided.
     """
+    
     def __init__(self, config): 
         """Initialization
 
@@ -64,6 +65,7 @@ class Transects:
         Args:
             transects (dict): Part of the configuration file that includes which type of transects are requested (single, multiple, range or all) and (if applicable) which transects are associated with this request.   
         """
+        
         ids = self.variables['id'][:] # retrieve transect ids from jarkus dataset
         if transects['type'] == 'all':
             transects_requested = ids
@@ -87,6 +89,7 @@ class Transects:
         Args:
             config (dict): The configuration file that contains the user-requested years and transects
         """
+        
         self.get_years_filtered(config['years']['start_yr'], config['years']['end_yr'])    
         self.get_transects_filtered(config['transects'])    
         
@@ -123,7 +126,8 @@ class Transects:
     
         Args:
             config (dict): The configuration file that contains the user-requested years and transects, reference to the jarkus dataset and the save locations.
-        """              
+        """    
+          
         import matplotlib.pyplot as plt
         import matplotlib.colors as colors
         import matplotlib.cm as cm
