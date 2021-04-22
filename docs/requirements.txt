@@ -1,4 +1,6 @@
 # requirements file for RTD
+search-tools
+sphinx==3.5.4
 numpy==1.17.2
 pandas== 0.25.1
 netCDF4
