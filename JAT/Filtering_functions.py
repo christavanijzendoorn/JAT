@@ -9,7 +9,7 @@
 Blabla
 """
 
-# import math
+import math
 import pandas as pd
 import numpy as np
 
@@ -86,35 +86,35 @@ def availability_filter_years(config, dimension):
             
     return dimension_filt
 
-# def nourishment_filter(config, variable_dataframe):
-#     """
-#     Blabla
-#     """
+def nourishment_filter(config, variable_dataframe):
+    """
+    Blabla
+    """
     
-#     Nourishments = pd.read_excel(config['inputdir'] + config['data locations']['Nourishment'])
-#     filtered = []
-#     for index, row in Nourishments.iterrows():
-#         if math.isnan(row['BeginRaai']) or math.isnan(row['EindRaai']):# or row['Volume/m'] > 50: # or row['JaarBeginUitvoering'] < 2010: 
-#             continue
-#         else:
-#             code_beginraai = int(row['KustVakNummer'] * 1000000 + row['BeginRaai'] * 100)
-#             code_eindraai = int(row['KustVakNummer'] * 1000000 + row['EindRaai'] * 100)
-#             nourished_transects = [i for i in variable_dataframe.columns if int(i) >= code_beginraai and int(i) <= code_eindraai]
-#             filtered.extend(nourished_transects)
-#     filtered = set(filtered)
+    Nourishments = pd.read_excel(config['inputdir'] + config['data locations']['Nourishment'])
+    filtered = []
+    for index, row in Nourishments.iterrows():
+        if math.isnan(row['BeginRaai']) or math.isnan(row['EindRaai']):# or row['Volume/m'] > 50: # or row['JaarBeginUitvoering'] < 2010: 
+            continue
+        else:
+            code_beginraai = int(row['KustVakNummer'] * 1000000 + row['BeginRaai'] * 100)
+            code_eindraai = int(row['KustVakNummer'] * 1000000 + row['EindRaai'] * 100)
+            nourished_transects = [i for i in variable_dataframe.columns if int(i) >= code_beginraai and int(i) <= code_eindraai]
+            filtered.extend(nourished_transects)
+    filtered = set(filtered)
 
-#     # Filter dataframe
-#     not_nourished_dataframe = variable_dataframe.copy()
-#     for i, col in not_nourished_dataframe.iteritems():
-#         if i in filtered:
-#                 not_nourished_dataframe.loc[:, i] = np.nan
+    # Filter dataframe
+    not_nourished_dataframe = variable_dataframe.copy()
+    for i, col in not_nourished_dataframe.iteritems():
+        if i in filtered:
+                not_nourished_dataframe.loc[:, i] = np.nan
     
-#     nourished_dataframe = variable_dataframe.copy()
-#     for i, col in nourished_dataframe.iteritems():
-#         if i not in filtered:
-#                 nourished_dataframe.loc[:, i] = np.nan
+    nourished_dataframe = variable_dataframe.copy()
+    for i, col in nourished_dataframe.iteritems():
+        if i not in filtered:
+                nourished_dataframe.loc[:, i] = np.nan
             
-#     return nourished_dataframe, not_nourished_dataframe
+    return nourished_dataframe, not_nourished_dataframe
 
 # def nourishment_filter(variable_dataframe):
 #     Nourishments = pd.read_excel("C:/Users/cijzendoornvan/OneDrive - Delft University of Technology/Documents/Duneforce/JARKUS/Suppletiedatabase.xlsx")

@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="Enlish" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Help &mdash; Jarkus Analysis Toolbox 0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/../_templates/theme_overrides.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Functionalities" href="Functionalities.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Jarkus Analysis Toolbox
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Method.html">Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CharacteristicParameters.html">Characteristic parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functionalities.html">Functionalities</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#new-to-python">New to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-new-extraction-methods">Adding new extraction methods</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Jarkus Analysis Toolbox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Help</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Help.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="help">
+<h1>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="new-to-python">
+<h2>New to Python<a class="headerlink" href="#new-to-python" title="Permalink to this headline">¶</a></h2>
+<p>If you are new to Python it might be that you are not able to follow the instructions in <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a>. To help you I will tell about the set-up I use to work with Python. Note, there are many different options and everyone has different needs and preferences so this is just a suggestion.</p>
+<p>First of all, install Anaconda! You can find an installation guide here: <a class="reference external" href="https://docs.anaconda.com/anaconda/install/windows/">https://docs.anaconda.com/anaconda/install/windows/</a>.</p>
+<p>As you may or may not know Python works with packages. These packages provide certain functionalities, for instance, installing the package matplotlib provides a library of functions that help to create graphs and plots. Often a package is dependent on other packages to be able to work. For instance, the package numpy provides scientific computing with Python and you can imagine that you will need this package for matplotlib to function. The packages that are needed are called the <cite>dependencies</cite>. The JAT has several specific dependencies which are listed in <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a>:.</p>
+<p>It might be that the specific packages that you need for the JAT do not go together with another project that you are working on that, for instance, works with a newer version of matplotlib. This can occur because the available packages for python are constantly evolving. To avoid these type of incompatibilities Anaconda works with environments. In this case, I advice you to make a jarkus specific environment (I called it <cite>jarkus</cite>). When you have created the environment make sure that you use python 3.7 because the JAT is not compatible with version 3.8. The best guide to follow is provided here: <a class="reference external" href="https://docs.anaconda.com/anaconda/navigator/getting-started/">https://docs.anaconda.com/anaconda/navigator/getting-started/</a>.</p>
+<p>The explanation on this web page relates to the Anaconda Navigator which is a nice visual way of looking at the environments. However, what you will often see is that people install packages using conda in the Anaconda prompt. That is also what we will need to do to install the JAT as explained in <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a>:.</p>
+<p>You can find information on managing environments in the Anaconda prompt here: <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html</a>. But don't get too lost in this! The only things you need to do is open the Anaconda Prompt and type the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  activate jarkus
+$  cd directory
+$  python setup.py install
+</pre></div>
+</div>
+<p>where <cite>jarkus</cite> is the environment you just created, the dollar sign represents the blinking cursor and <cite>directory</cite> should be the place where the <cite>setup.py</cite> file is located. For the JAT this directory is dependent on where you have saved the JAT files, but it should end in ...\JAT\setup.py.</p>
+<p>These commands will install the Jarkus Analysis Toolbox and all its dependencies so it works in one go.</p>
+<p>To work with the examples, I recommend Spyder. To make sure it is installed open the Anaconda Navigator and browse to the jarkus environment (Applications on ...). Here, install Spyder and then launch it. In Spyder load, from example 1, <cite>jarkus_01.yml</cite> to see what settings are used and then open <cite>JAT_use_single_transect.py</cite> to see the steps necessary for the analysis. I recommend Spyder's walkthrough to get a feeling for how it works: <a class="reference external" href="https://docs.spyder-ide.org/current/index.html">https://docs.spyder-ide.org/current/index.html</a>.</p>
+<dl class="simple">
+<dt>What I use most often:</dt><dd><ul class="simple">
+<li><p>F5 for running all the code in one script (green play button)</p></li>
+<li><p>crtl+Return for running current sections denoted by <cite>%##</cite> statements (green play button in yellow/white marking)</p></li>
+<li><p>F9 for running selected code</p></li>
+</ul>
+</dd>
+</dl>
+<p>This is the point where you can start using the <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a>: and <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a>: sections again. Hopefully, this helped and I always recommend using Google/Stack Overflow because the internet knows a lot and other people often have experience the same issues that you are running into.</p>
+</div>
+<div class="section" id="adding-new-extraction-methods">
+<h2>Adding new extraction methods<a class="headerlink" href="#adding-new-extraction-methods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add the extraction method in the <cite>Jarkus_analysis_toolbox.py</cite> in class <cite>Extraction</cite> as <cite>def get_parameter</cite> (fill in appropriate name <cite>for parameter</cite>). It is best to use the other available extraction methods as inspiration so the method is comparable. For the assigment of the output into the dimensions dataframe use an appropriate variable name.</p></li>
+<li><p>Add an <cite>if statement</cite> for the extraction of the parameter in <cite>get_all_dimensions</cite> of <cite>Extraction</cite> class in <cite>Jarkus_analysis_toolbox.py</cite></p></li>
+<li><p>Add the parameter name in the configuration file so the <cite>if statement</cite> (reference above) will work. This means the parameter name should be added in both dimensions→setting→variablename with a True/False statement, and in dimensions→variables→ variablename with the variable names as assigned in the <cite>get_parameter</cite> function, in the jarkus.yml file.</p></li>
+<li><p>Add these assigned variable names to the plot_tiles.yml file, so the distribution figures can be generated automatically. Note, that for cross-shore variables it is crucial to add an 'x' in the variable name, so it is picked up in the automatic normalization (Extraction → normalize_dimensions). Then, add a suitable title and label name for in the figure.</p></li>
+<li><p>Make sure to update the documentation!</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Functionalities.html" class="btn btn-neutral float-left" title="Functionalities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Christa van IJzendoorn.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
