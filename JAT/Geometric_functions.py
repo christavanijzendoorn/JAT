@@ -19,7 +19,6 @@ def find_intersections(elevation, crossshore, y_value):
     return intersection_x
 
 def get_gradient(elevation, seaward_x, landward_x):
-
     # Remove everything outside of boundaries
     elevation = elevation.drop(elevation.index[elevation.index > seaward_x]) # drop everything seaward of seaward boundary
     elevation = elevation.drop(elevation.index[elevation.index < landward_x]).interpolate() # drop everything landward of landward boundary and interpolate remaining data
