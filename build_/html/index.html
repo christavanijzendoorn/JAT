@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jarkus Analysis Toolbox documentation &#8212; JAT tbd documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Method" href="Method.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="jarkus-analysis-toolbox-documentation">
+<h1>Jarkus Analysis Toolbox documentation<a class="headerlink" href="#jarkus-analysis-toolbox-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The Jarkus Analysis Toolbox (JAT) is a Python-based open-source software, that can be used to analyze the Jarkus dataset. The Jarkus dataset is one of the most elaborate coastal datasets in the world and consists of coastal profiles of the entire Dutch coast, spaced about 250-500 m apart, which have been measured yearly since 1965. The main purpose of the JAT is to provide stakeholders (e.g. scientists, engineers and coastal managers) with the techniques that are necessary to study the spatial and temporal variations in characteristic parameters like dune height, dune volume, dune foot, beach width and closure depth. Different available definitions for extracting these characteristic parameters were collected and implemented in the JAT.</p>
+<p>The software that is described in this documentation can be found in this <a class="reference external" href="https://github.com/christavanijzendoorn/JAT">Github repository</a>. Additionally, the extracted parameters for the entire Jarkus dataset are made available through the <a class="reference external" href="https://github.com/christavanijzendoorn/JAT">4TU repository</a>.</p>
+<img alt="_images/parameters.png" src="_images/parameters.png" />
+<blockquote>
+<div><div class="line-block">
+<div class="line">Example of characteristic parameters that can be extracted using the <strong>JAT</strong>.</div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Method.html">Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#using-the-jat">Using the JAT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#jarkus-transect-numbers">Jarkus transect numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#user-defined-settings">User-defined settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gettingstarted.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#single-transect">1. Single transect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#regional-analysis">2. Regional analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#extract-all">3. Extract all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#dune-toe-analysis">4. Dune toe analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#working-with-nc-file">5. Working with nc-file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CharacteristicParameters.html">Characteristic parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CharacteristicParameters.html#explanation-of-characteristic-parameters">Explanation of characteristic parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CharacteristicParameters.html#variable-names-and-dependencies-of-characteristic-parameters">Variable names and dependencies of characteristic parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Functionalities.html">Functionalities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Functionalities.html#model-classes">Model classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functionalities.html#jat-filtering-functions">JAT.Filtering_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functionalities.html#jat-geometric-functions">JAT.Geometric_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functionalities.html#transects">Transects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Help.html">Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Help.html#new-to-python">New to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Help.html#adding-new-extraction-methods">Adding new extraction methods</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">JAT</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Method.html">Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CharacteristicParameters.html">Characteristic parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functionalities.html">Functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Help.html">Help</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="Method.html" title="next chapter">Method</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Christa van IJzendoorn.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

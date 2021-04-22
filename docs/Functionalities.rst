@@ -7,26 +7,13 @@ The Jarkus Analysis Toolbox provides several functionalities.
 * Extraction
 * Filtering
 
-Model classes
----------------
 
-JAT.Filtering\_functions
--------------------------------
 
-.. autoclass:: Filtering_functions
-   :members:
-   :undoc-members:
+.. automodule:: JAT.Jarkus_Analysis_Toolbox
+    :members:
 
-JAT.Geometric\_functions
--------------------------------
-
-.. autoclass:: Geometric_functions
-   :members:
-   :undoc-members:
-
-Transects
-------------------------------------
-
-.. autoclass:: JAT.Jarkus\_Analysis\_Toolbox.Transects
-   :members:
-   :undoc-members:
+.. automodule:: JAT.Geometric_functions
+    :members:
+	
+.. automodule:: JAT.Filtering_functions
+    :members:

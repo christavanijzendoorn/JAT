@@ -26,7 +26,3 @@ Contents
    CharacteristicParameters
    Functionalities
    Help
-
-
-
-

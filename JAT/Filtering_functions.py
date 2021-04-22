@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 30 19:08:50 2020
+# """
+# Created on Mon Nov 30 19:08:50 2020
 
-@author: cijzendoornvan
+# @author: cijzendoornvan
+# """
+
+"""
+Blabla
 """
 
 import math
@@ -10,6 +14,10 @@ import pandas as pd
 import numpy as np
 
 def bad_locations_filter(dimension, filter_file):
+    """
+    Blabla
+    """
+
     # Filter dataframe
     dimension_filt = dimension.copy()
     removed_transects = []
@@ -25,6 +33,10 @@ def bad_locations_filter(dimension, filter_file):
     return dimension_filt
 
 def bad_yrs_filter(dimension, begin_year, end_year):
+    """
+    Blabla
+    """
+    
     # Filter dataframebased on a user-defined range. This should be based on analysis of the data availability in which this filter is NOT used.
     # so use the availability_filter_years to see the years in which the availability is lowest.
     dimension_filt = dimension.copy()
@@ -35,6 +47,10 @@ def bad_yrs_filter(dimension, begin_year, end_year):
     return dimension_filt
 
 def availability_filter_locations(config, dimension):
+    """
+    Blabla
+    """
+    
     availability_per_transect = pd.DataFrame({'transects': dimension.columns})
     availability_per_transect.set_index('transects', inplace=True)
     

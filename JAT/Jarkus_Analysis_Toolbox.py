@@ -1,8 +1,8 @@
-"""
-Created on Tue Nov 19 11:31:25 2019
+# """
+# Created on Tue Nov 19 11:31:25 2019
 
-@author: cijzendoornvan
-"""
+# @author: cijzendoornvan
+# """
 
 """ Includes the most important functionalities of the JAT inclusing retrieving data and extracting profile dimensions """
 
@@ -28,8 +28,10 @@ class Transects:
 
         The initialization loads the jarkus dataset.
     
-        Args:
-            config (dict): Configuration that includes the location of the jarkus dataset
+        Parameters
+        ----------
+        config : dict
+            Configuration that includes the location of the jarkus dataset
         """
         # create a dataset object, based on JARKUS dataset saved locally or on server
         if 'http' in config['data locations']['Jarkus']:        # check whether it's a url
@@ -43,9 +45,12 @@ class Transects:
 
         All years in the jarkus dataset are extracted and compared to the user-requested years. Only the available (requested) years and their indices are retained.
     
-        Args:
-            start_yr (int): Starting year of the user-requested period
-            end_yr (int): Ending year of the user-requested period
+        Parameters
+        ----------
+        start_yr : int
+            Starting year of the user-requested period
+        end_yr : int
+            Ending year of the user-requested period
 
         """
         
@@ -62,8 +67,10 @@ class Transects:
 
         It is determined what type of request is made and which transects are associated with this request. Then all transects in the jarkus dataset are extracted and compared to the user-requested years. Only the available (requested) years and their indices are retained.
     
-        Args:
-            transects (dict): Part of the configuration file that includes which type of transects are requested (single, multiple, range or all) and (if applicable) which transects are associated with this request.   
+        Parameters
+        ----------
+        transects : dict
+            Part of the configuration file that includes which type of transects are requested (single, multiple, range or all) and (if applicable) which transects are associated with this request.   
         """
         
         ids = self.variables['id'][:] # retrieve transect ids from jarkus dataset
@@ -86,8 +93,10 @@ class Transects:
 
         This function executes the get_years_filtered and get_transects_filtered functions based on a configuration file containing the requested years and transects.
     
-        Args:
-            config (dict): The configuration file that contains the user-requested years and transects
+        Parameters
+        ----------
+        config : dict
+            The configuration file that contains the user-requested years and transects
         """
         
         self.get_years_filtered(config['years']['start_yr'], config['years']['end_yr'])    
@@ -98,8 +107,10 @@ class Transects:
 
         The elevation and corresponding cross-shore location of each requested year and requested transect location are saved as a dataframe. Note that each resulting file contains the profiles for all requested years of one requested transect. The function provides the option to use a filter that leaves out profiles when there is no elevation data present between a certain minimum and maximum elevation. This can, for instance, be useful when only the foreshore is studied and all transects that do not have elevation data in this region are redundant. The user-defined values for filter1 are included in the configuration file. Currently this filter does not have an effect on the extraction of the characteristic parameters because these are determined based on the elevation that is directly extracted from the jarkus dataset. Therefore, the default setting for filter1 is that is it not applied (config['user defined']['filter1']['apply']=False), but this could be changed in the future.
     
-        Args:
-            config (dict): The configuration file that contains the user-requested years and transects, reference to the jarkus dataset, the filter1 settings and the save locations.
+        Parameters
+        ----------
+        config : dict
+            The configuration file that contains the user-requested years and transects, reference to the jarkus dataset, the filter1 settings and the save locations.
         """        
 
         crossshore = self.variables['cross_shore'][:]
@@ -124,8 +135,10 @@ class Transects:
 
         For each requested transect a quickplot is created and saved (as png and picle file) that shows all the requested years. The colors in the plot go from the start year in red to the end year in blue. Currently the axes are set automatically but this can be changed to user-defined limits in the future, which is mostly relevant for single transect plotting.
     
-        Args:
-            config (dict): The configuration file that contains the user-requested years and transects, reference to the jarkus dataset and the save locations.
+        Parameters
+        ----------
+        config : dict
+            The configuration file that contains the user-requested years and transects, reference to the jarkus dataset and the save locations.
         """    
           
         import matplotlib.pyplot as plt
@@ -188,9 +201,12 @@ class Transects:
 
         For each transect number in the jarkus dataset the alongshore kilometer is calculated. A dictionary is created that relates each transect number to its alongshore kilometer. Additionally, a dictionary is created that does the reverse.
              
-        Returns:
-            conversion_ids2alongshore (dict): does the conversion from transect number to alongshore meter
-            conversion_alongshore2ids (dict): does the conversion from alongshore meter to transect number
+        Returns
+        -------
+        dict
+            conversion_ids2alongshore: does the conversion from transect number to alongshore meter
+            
+            conversion_alongshore2ids: does the conversion from alongshore meter to transect number
         """
         
         trscts = self.variables['id'][:] # load all transect numbers
