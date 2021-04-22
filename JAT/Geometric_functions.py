@@ -25,6 +25,7 @@ def find_intersections(elevation, crossshore, y_value):
     int
         intersection_x: Cross-shore location of the intersection between the coastal profile and horizontal line
     """    
+    
     value_vec = np.array([y_value] * len(elevation))
     elevation = pd.Series(elevation).interpolate().tolist()
         
@@ -36,6 +37,23 @@ def find_intersections(elevation, crossshore, y_value):
     return intersection_x
 
 def get_gradient(elevation, seaward_x, landward_x):
+    """Find cross-shore location of intersection between profile and horizontal line at a fixed elevation
+
+    Parameters
+    ----------
+    elevation : np.array
+        np.array containing the elevation of the coastal profile in meters
+    crossshore : np.array
+        np.array containing the crossshore location in meters
+    y_value : float
+        Elevation of the horizontal line in meters
+        
+    Returns
+    -------
+    int
+        intersection_x: Cross-shore location of the intersection between the coastal profile and horizontal line
+    """
+    
     # Remove everything outside of boundaries
     elevation = elevation.drop(elevation.index[elevation.index > seaward_x]) # drop everything seaward of seaward boundary
     elevation = elevation.drop(elevation.index[elevation.index < landward_x]).interpolate() # drop everything landward of landward boundary and interpolate remaining data

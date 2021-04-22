@@ -9,11 +9,5 @@ The Jarkus Analysis Toolbox provides several functionalities.
 
 
 
-.. automodule:: JAT.Jarkus_Analysis_Toolbox
-    :members:
-
-.. automodule:: JAT.Geometric_functions
-    :members:
-	
-.. automodule:: JAT.Filtering_functions
+.. automodule:: JAT.Geometric_functions.find_intersections
     :members:
