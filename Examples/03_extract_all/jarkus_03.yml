@@ -43,7 +43,7 @@ save locations:
 # USER-DEFINED VALUES
 user defined:
    filter1: # If no data is present between the min and max value (in m NAP) the transect is dropped
-       apply: True # or True
+       apply: False # or True
        min: -1 
        max: 5
    filter2: 
