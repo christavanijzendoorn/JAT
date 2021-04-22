@@ -9,21 +9,24 @@ import numpy as np
 import pandas as pd
 
 def find_intersections(elevation, crossshore, y_value):
-    """Find cross-shore location of intersection between profile and horizontal line at a fixed elevation
+    """Find cross-shore location of intersection between profile and 
+    horizontal line at a fixed elevation.
 
     Parameters
     ----------
     elevation : np.array
-        np.array containing the elevation of the coastal profile in meters
+        np.array containing the elevation of the coastal profile in meters.
     crossshore : np.array
-        np.array containing the crossshore location in meters
+        np.array containing the crossshore location in meters.
     y_value : float
-        Elevation of the horizontal line in meters
+        Elevation of the horizontal line in meters.
         
     Returns
     -------
     int
-        intersection_x: Cross-shore location of the intersection between the coastal profile and horizontal line
+    
+        intersection_x: Cross-shore location of the intersection between the coastal profile and horizontal line.
+        
     """    
     
     value_vec = np.array([y_value] * len(elevation))
@@ -52,6 +55,7 @@ def get_gradient(elevation, seaward_x, landward_x):
     -------
     int
         intersection_x: Cross-shore location of the intersection between the coastal profile and horizontal line
+        
     """
     
     # Remove everything outside of boundaries
