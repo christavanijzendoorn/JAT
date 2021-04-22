@@ -1,13 +1,20 @@
 Functionalities
-----------
+-------------------
 
-The Jarkus Analysis Toolbox provides several functionalities. 
+The Jarkus Analysis Toolbox provides several functionalities.
+ 
 * Transects
 * Extraction
 * Filtering
 
 
+Jarkus_Analysis_Toolbox.Transects
+------------------------------------
 
+.. automodule:: JAT.Jarkus_Analysis_Toolbox.Transects
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 
     """Summary line.

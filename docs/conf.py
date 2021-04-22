@@ -9,11 +9,19 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
 
+import os
+import sys
+#sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../JAT'))
+sys.path.insert(0, os.path.abspath('../..'))
+
+# See http://blog.rtwilson.com/how-to-make-your-sphinx-documentation-compile-with-readthedocs-when-youre-using-numpy-and-scipy/
+import mock
+
+MOCK_MODULES = ['numpy', 'scipy', 'scipy.stats', 'pandas', 'xarray']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
 
 # -- Project information -----------------------------------------------------
 
@@ -31,6 +39,7 @@ release = 'tbd'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.autodoc',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
