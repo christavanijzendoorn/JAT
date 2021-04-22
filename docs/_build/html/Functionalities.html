@@ -170,98 +170,8 @@
 <li><p>Extraction</p></li>
 <li><p>Filtering</p></li>
 </ul>
-<span class="target" id="module-JAT.Jarkus_Analysis_Toolbox"></span><p>Includes the most important functionalities of the JAT inclusing retrieving data and extracting profile dimensions</p>
-<dl class="class">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects">
-<em class="property">class </em><code class="sig-prename descclassname">JAT.Jarkus_Analysis_Toolbox.</code><code class="sig-name descname">Transects</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loading and plotting transects.</p>
-<p>This class provides the functionalities to retrieve the jarkus dataset and filter out the years and locations requested by the user. This includes determining whether the user defined request is available. Additionally, the elevation of each requested transect can be saved and plotted to provide easy access for analysis, and the conversion of the transect number to the alongshore kilometer is provided.</p>
-<dl class="method">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_availability">
-<code class="sig-name descname">get_availability</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_availability" title="Permalink to this definition">¶</a></dt>
-<dd><p>Getting available years and transects</p>
-<p>This function executes the get_years_filtered and get_transects_filtered functions based on a configuration file containing the requested years and transects.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and transects</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered" title="JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Transects.get_years_filtered()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered" title="JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Transects.get_transects_filtered()</span></code></a></p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_conversion_dicts">
-<code class="sig-name descname">get_conversion_dicts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_conversion_dicts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create conversion from transect number to alongshore meter and vice versa</p>
-<p>For each transect number in the jarkus dataset the alongshore kilometer is calculated. A dictionary is created that relates each transect number to its alongshore kilometer. Additionally, a dictionary is created that does the reverse.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><p>conversion_ids2alongshore: does the conversion from transect number to alongshore meter</p>
-<p>conversion_alongshore2ids: does the conversion from alongshore meter to transect number</p>
-</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_transect_plot">
-<code class="sig-name descname">get_transect_plot</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transect_plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save plot with all coastal profiles for each requested transect</p>
-<p>For each requested transect a quickplot is created and saved (as png and picle file) that shows all the requested years. The colors in the plot go from the start year in red to the end year in blue. Currently the axes are set automatically but this can be changed to user-defined limits in the future, which is mostly relevant for single transect plotting.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and transects, reference to the jarkus dataset and the save locations.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered">
-<code class="sig-name descname">get_transects_filtered</code><span class="sig-paren">(</span><em class="sig-param">transects</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filtering requested transects</p>
-<p>It is determined what type of request is made and which transects are associated with this request. Then all transects in the jarkus dataset are extracted and compared to the user-requested years. Only the available (requested) years and their indices are retained.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>transects</strong> (<em>dict</em>) -- Part of the configuration file that includes which type of transects are requested (single, multiple, range or all) and (if applicable) which transects are associated with this request.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered">
-<code class="sig-name descname">get_years_filtered</code><span class="sig-paren">(</span><em class="sig-param">start_yr</em>, <em class="sig-param">end_yr</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filtering requested years</p>
-<p>All years in the jarkus dataset are extracted and compared to the user-requested years. Only the available (requested) years and their indices are retained.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>start_yr</strong> (<em>int</em>) -- Starting year of the user-requested period</p></li>
-<li><p><strong>end_yr</strong> (<em>int</em>) -- Ending year of the user-requested period</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.save_elevation_dataframes">
-<code class="sig-name descname">save_elevation_dataframes</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.save_elevation_dataframes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save elevation of all years for each transect as a dataframe</p>
-<p>The elevation and corresponding cross-shore location of each requested year and requested transect location are saved as a dataframe. Note that each resulting file contains the profiles for all requested years of one requested transect. The function provides the option to use a filter that leaves out profiles when there is no elevation data present between a certain minimum and maximum elevation. This can, for instance, be useful when only the foreshore is studied and all transects that do not have elevation data in this region are redundant. The user-defined values for filter1 are included in the configuration file. Currently this filter does not have an effect on the extraction of the characteristic parameters because these are determined based on the elevation that is directly extracted from the jarkus dataset. Therefore, the default setting for filter1 is that is it not applied (config['user defined']['filter1']['apply']=False), but this could be changed in the future.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and transects, reference to the jarkus dataset, the filter1 settings and the save locations.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<p>#.. automodule:: JAT.Jarkus_Analysis_Toolbox
+#    :members:</p>
 <span class="target" id="module-JAT.Geometric_functions"></span><dl class="function">
 <dt id="JAT.Geometric_functions.find_intersections">
 <code class="sig-prename descclassname">JAT.Geometric_functions.</code><code class="sig-name descname">find_intersections</code><span class="sig-paren">(</span><em class="sig-param">elevation</em>, <em class="sig-param">crossshore</em>, <em class="sig-param">y_value</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Geometric_functions.find_intersections" title="Permalink to this definition">¶</a></dt>
@@ -283,25 +193,8 @@
 </dl>
 </dd></dl>
 
-<span class="target" id="module-JAT.Filtering_functions"></span><p>Blabla</p>
-<dl class="function">
-<dt id="JAT.Filtering_functions.availability_filter_locations">
-<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">availability_filter_locations</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">dimension</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.availability_filter_locations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Blabla</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JAT.Filtering_functions.bad_locations_filter">
-<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">bad_locations_filter</code><span class="sig-paren">(</span><em class="sig-param">dimension</em>, <em class="sig-param">filter_file</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.bad_locations_filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Blabla</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JAT.Filtering_functions.bad_yrs_filter">
-<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">bad_yrs_filter</code><span class="sig-paren">(</span><em class="sig-param">dimension</em>, <em class="sig-param">begin_year</em>, <em class="sig-param">end_year</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.bad_yrs_filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Blabla</p>
-</dd></dl>
-
+<p>#.. automodule:: JAT.Filtering_functions
+#    :members:</p>
 </div>
 
 
