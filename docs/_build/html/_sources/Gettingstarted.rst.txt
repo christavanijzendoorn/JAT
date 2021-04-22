@@ -62,6 +62,7 @@ In the `jarkus.yml` file you can choose how many transects you want to analyse. 
 	* **all** - analyse al available transect in the Jarkus dataset
 In all cases, the JAT will automatically filter transect numbers that do not exist.
 
+
 Input files
 --------------
 

@@ -25,7 +25,6 @@ Contents
    Examples 
    CharacteristicParameters
    Functionalities
-   JAT
    Help
 
 

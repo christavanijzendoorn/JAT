@@ -1,5 +1,5 @@
 Functionalities
--------------------
+================
 
 The Jarkus Analysis Toolbox provides several functionalities.
  
@@ -7,8 +7,26 @@ The Jarkus Analysis Toolbox provides several functionalities.
 * Extraction
 * Filtering
 
+Model classes
+---------------
 
+JAT.Filtering\_functions
+-------------------------------
 
+.. autoclass:: Filtering_functions
+   :members:
+   :undoc-members:
 
-	
-	
+JAT.Geometric\_functions
+-------------------------------
+
+.. autoclass:: Geometric_functions
+   :members:
+   :undoc-members:
+
+Transects
+------------------------------------
+
+.. autoclass:: JAT.Jarkus\_Analysis\_Toolbox.Transects
+   :members:
+   :undoc-members:
