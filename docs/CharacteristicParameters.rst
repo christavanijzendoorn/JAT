@@ -257,5 +257,3 @@ Variable names and dependencies of characteristic parameters
 .. [#Beu] Beuzen, Tomas. "pybeach: A Python package for extracting the location of dune toes on beach profile transects." Journal of Open Source Software 4(44) (2019): 1890. https://doi.org/10.21105/joss.01890
 .. [#Hint] Hinton, Claire L. Decadal morphodynamic behaviour of the Holland shoreface. Diss. Middlesex University, 2000. https://eprints.mdx.ac.uk/id/eprint/6601
 
---------
-
