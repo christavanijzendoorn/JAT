@@ -18,9 +18,9 @@ sys.path.insert(0, os.path.abspath('..'))
 # See http://blog.rtwilson.com/how-to-make-your-sphinx-documentation-compile-with-readthedocs-when-youre-using-numpy-and-scipy/
 #import mock
 
-#MOCK_MODULES = ['numpy', 'scipy', 'scipy.stats', 'scipy.signal', 'scipy.integrate', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'matplotlib.pyplot', 'matplotlib.colors', 'matplotlib.cm', 'pybeach.beach', 'cftime', 'joblib', 'warnings', 'os']
+#MOCK_MODULES = ['numpy', 'scipy', 'scipy.stats', 'scipy.signal', 'scipy.integrate', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'matplotlib.pyplot', 'matplotlib.colors', 'matplotlib.cm', 'pybeach.beach', 'cftime', 'joblib']
 
-#for mod_name in MOCK_MODULES:
+#or mod_name in MOCK_MODULES:
 #    sys.modules[mod_name] = mock.Mock()
 
 #autodoc_mock_imports = ['numpy', 'scipy', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'pybeach', 'cftime', 'joblib', 'warnings', 'os']
@@ -59,11 +59,6 @@ language = 'Enlish'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-def setup(app):
-   app.add_javascript("custom.js")
-   app.add_stylesheet("custom.css")
-
 
 # -- Options for HTML output -------------------------------------------------
 
