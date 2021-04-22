@@ -1,0 +1,12 @@
+# requirements file for RTD
+numpy
+pandas
+math
+scipy
+pandas
+pickle
+xarray
+netCDF4
+pybeach
+cftime
+joblib
