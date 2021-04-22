@@ -9,6 +9,22 @@ import numpy as np
 import pandas as pd
 
 def find_intersections(elevation, crossshore, y_value):
+    """Find cross-shore location of intersection between profile and horizontal line at a fixed elevation
+
+    Parameters
+    ----------
+    elevation : np.array
+        np.array containing the elevation of the coastal profile in meters
+    crossshore : np.array
+        np.array containing the crossshore location in meters
+    y_value : float
+        Elevation of the horizontal line in meters
+        
+    Returns
+    -------
+    int
+        intersection_x: Cross-shore location of the intersection between the coastal profile and horizontal line
+    """    
     value_vec = np.array([y_value] * len(elevation))
     elevation = pd.Series(elevation).interpolate().tolist()
         
