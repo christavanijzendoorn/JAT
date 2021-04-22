@@ -35,6 +35,9 @@ release = 'tbd'
 
 # -- General configuration ---------------------------------------------------
 
+# If your documentation needs a minimal Sphinx version, state it here.
+needs_sphinx = '1.3' # 1.3+ for automatic inclusion of sphinxcontrib-napoleon as sphix.ext.napoleon
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
