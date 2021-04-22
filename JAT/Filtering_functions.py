@@ -67,6 +67,10 @@ def availability_filter_locations(config, dimension):
     return dimension_filt
 
 def availability_filter_years(config, dimension):
+    """
+    Blabla
+    """
+    
     availability_per_year = pd.DataFrame({'years': dimension.index})
     availability_per_year.set_index('years', inplace=True)
     
@@ -83,6 +87,10 @@ def availability_filter_years(config, dimension):
     return dimension_filt
 
 def nourishment_filter(config, variable_dataframe):
+    """
+    Blabla
+    """
+    
     Nourishments = pd.read_excel(config['inputdir'] + config['data locations']['Nourishment'])
     filtered = []
     for index, row in Nourishments.iterrows():
