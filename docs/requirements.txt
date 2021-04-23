@@ -12,3 +12,4 @@ pybeach==0.1.2
 python-math==0.0.1
 pytest-warnings
 pickle-mixin
+netcdf4-python
