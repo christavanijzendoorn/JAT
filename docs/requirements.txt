@@ -3,10 +3,12 @@ search-tools
 sphinx==3.5.4
 numpy==1.17.2
 pandas== 0.25.1
-netCDF4
+netCDF4==1.5.1.2
 scipy== 1.3.1
-matplotlib
+matplotlib==3.1.0
 cftime== 1.0.3.4
 joblib== 0.13.2
-pybeach
-python-math
+pybeach==0.1.2
+python-math==0.0.1
+pytest-warnings
+pickle-mixin
