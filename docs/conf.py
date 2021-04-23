@@ -18,11 +18,11 @@ sys.path.insert(0, os.path.abspath('..'))
 # See http://blog.rtwilson.com/how-to-make-your-sphinx-documentation-compile-with-readthedocs-when-youre-using-numpy-and-scipy/
 import mock
 
-MOCK_MODULES = ['numpy', 'pandas', 'python-math', 'netCDF4', 'netCDF4.num2date', 'netCDF4.Dataset']
+MOCK_MODULES = ['numpy', 'pandas', 'python-math']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 	
-#'scipy', 'scipy.stats', 'scipy.signal', 'scipy.integrate', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'matplotlib.pyplot', 'matplotlib.colors', 'matplotlib.cm', 'pybeach.beach', 'cftime', 'joblib']
+#'scipy', 'scipy.stats', 'scipy.signal', 'scipy.integrate', 'pandas', 'pickle', 'xarray', 'netCDF4', 'netCDF4.num2date', 'netCDF4.Dataset', 'matplotlib', 'matplotlib.pyplot', 'matplotlib.colors', 'matplotlib.cm', 'pybeach.beach', 'cftime', 'joblib']
 
 #autodoc_mock_imports = ['numpy', 'scipy', 'pandas', 'pickle', 'xarray', 'netCDF4', 'matplotlib', 'pybeach', 'cftime', 'joblib', 'warnings', 'os']
 
