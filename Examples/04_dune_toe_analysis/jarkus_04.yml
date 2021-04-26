@@ -22,12 +22,12 @@ transects:
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
 outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\04_dune_toe_analysis\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
-   Jarkus: transect.nc
-           # 'http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/jarkus/profiles/transect.nc'
-   Dunetoe: DF_2nd_deriv_Diam.nc
+   Jarkus: transect_DF.nc
+           # 'https://opendap.tudelft.nl/thredds/fileServer/data2/deltares/rijkswaterstaat/jarkus/profiles/transect_r20180914.nc'
+   Dunetoe: DF_2nd_deriv_DF.nc
            # Download from: https://doi.org/10.4121/uuid:0a5237ec-8ccc-4bbe-8d41-01716d835471
    Nourishment: Suppletiedatabase.xlsx
-           # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
+           # 'https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/suppleties/nourishments.nc'
    SLR: zeespiegelstijging_clo.xlsx # Downloaded from https://www.clo.nl/indicatoren/nl022910-zeespiegelstand-nederland-en-mondiaal
    LocFilter: location_filter.yml # not necessary for single transect
    Titles: plot_titles.yml # not necessary for single transect

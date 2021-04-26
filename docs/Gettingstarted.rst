@@ -9,7 +9,7 @@ Or use git and navigate to a convenient location and clone the repository::
 
   $ git clone https://github.com/christavanijzendoorn/JAT.git
 
-Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`:). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.
+Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.
 
 Navigate to the directory where the Jarkus Ananlysis Toolbox is located and the `setup.py` file is present. Use the following command to install the JAT::
  
@@ -49,6 +49,9 @@ Vaknummer + raainummer = VNNNNNN:
 	* 1 or 2 coastal section (kustvak) related numbers, 2 in case of kustvak of 10+
 
 Example Sand Engine: Vak 9, raai 11109 = 9011109
+Example Meijendel: Vak 8, raai 9325 = 8009325
+Example Westenschouwen: Vak 13, raai 1465 = 13001465
+
 
 To check which transects are present in the area you want to analyse use the following sources:
 	* Overview of transects: https://maps.rijkswaterstaat.nl/geoweb55/index.html?viewer=Kustlijnkaart 
@@ -70,9 +73,9 @@ Input files
 **Jarkus**
 
 The Jarkus Analysis Toolbox was developed to make the analysis of the Jarkus dataset more accessible.
-To work with the JAT, the Jarkus data has to be accessed here.
+To work with the JAT, the Jarkus data has to be accessed through this link.
 
-.. _here: http://opendap.deltares.nl/thredds/catalog/opendap/rijkswaterstaat/jarkus/profiles/catalog.html?dataset=varopendap/rijkswaterstaat/jarkus/profiles/transect.nc 
+.. _link: https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/jarkus/profiles/transect.nc
 
 When you want to access large amounts of data (i.e. many transects and years) or want to be independent of internet access it is advisable to download the dataset (approx. 3 GB). Make sure to include their directory in the settings file (`jarkus.yml`).
 
@@ -80,13 +83,13 @@ When you want to access large amounts of data (i.e. many transects and years) or
 
 When you want to work with the *dune toes* that were extracted using the second derivative method. These can be found here.
 
-.. _here: http://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc
+.. _here: https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/DuneFoot/DF.nc
 
 **Nourishment**
 
-The *nourishment* database can be found here.
+This is where the *nourishment* database can be found.
 
-.. _here: https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
+.. _This: https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
 
 **LocFilter**
 
