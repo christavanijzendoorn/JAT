@@ -4,7 +4,8 @@
 # @author: cijzendoornvan
 # """
 
-""" Includes the most important functionalities of the JAT inclusing retrieving data and extracting profile dimensions """
+""" Includes the most important functionalities of the JAT inclusing 
+retrieving data and extracting profile dimensions """
 
 import numpy as np
 import pandas as pd
@@ -20,7 +21,12 @@ from JAT.Geometric_functions import find_intersections, get_gradient, get_volume
 class Transects:
     """Loading and plotting transects.
     
-    This class provides the functionalities to retrieve the jarkus dataset and filter out the years and locations requested by the user. This includes determining whether the user defined request is available. Additionally, the elevation of each requested transect can be saved and plotted to provide easy access for analysis, and the conversion of the transect number to the alongshore kilometer is provided.
+    This class provides the functionalities to retrieve the jarkus dataset 
+    and filter out the years and locations requested by the user. This 
+    includes determining whether the user defined request is available. 
+    Additionally, the elevation of each requested transect can be saved and 
+    plotted to provide easy access for analysis, and the conversion of the 
+    transect number to the alongshore kilometer is provided.
     """
     
     def __init__(self, config): 
@@ -43,7 +49,9 @@ class Transects:
     def get_years_filtered(self, start_yr, end_yr):
         """Filtering requested years
 
-        All years in the jarkus dataset are extracted and compared to the user-requested years. Only the available (requested) years and their indices are retained.
+        All years in the jarkus dataset are extracted and compared to the 
+        user-requested years. Only the available (requested) years and their 
+        indices are retained.
     
         Parameters
         ----------
@@ -65,12 +73,17 @@ class Transects:
     def get_transects_filtered(self, transects):
         """Filtering requested transects
 
-        It is determined what type of request is made and which transects are associated with this request. Then all transects in the jarkus dataset are extracted and compared to the user-requested years. Only the available (requested) years and their indices are retained.
+        It is determined what type of request is made and which transects are 
+        associated with this request. Then all transects in the jarkus dataset 
+        are extracted and compared to the user-requested years. Only the 
+        available (requested) years and their indices are retained.
     
         Parameters
         ----------
         transects : dict
-            Part of the configuration file that includes which type of transects are requested (single, multiple, range or all) and (if applicable) which transects are associated with this request.   
+            Part of the configuration file that includes which type of 
+            transects are requested (single, multiple, range or all) and (if 
+            applicable) which transects are associated with this request.   
         """
         
         ids = self.variables['id'][:] # retrieve transect ids from jarkus dataset
@@ -91,12 +104,15 @@ class Transects:
     def get_availability(self, config):
         """Getting available years and transects
 
-        This function executes the get_years_filtered and get_transects_filtered functions based on a configuration file containing the requested years and transects.
+        This function executes the get_years_filtered and 
+        get_transects_filtered functions based on a configuration file 
+        containing the requested years and transects.
     
         Parameters
         ----------
         config : dict
-            The configuration file that contains the user-requested years and transects
+            The configuration file that contains the user-requested years and 
+            transects
             
         See Also
         --------
@@ -110,12 +126,28 @@ class Transects:
     def save_elevation_dataframes(self, config):
         """Save elevation of all years for each transect as a dataframe
 
-        The elevation and corresponding cross-shore location of each requested year and requested transect location are saved as a dataframe. Note that each resulting file contains the profiles for all requested years of one requested transect. The function provides the option to use a filter that leaves out profiles when there is no elevation data present between a certain minimum and maximum elevation. This can, for instance, be useful when only the foreshore is studied and all transects that do not have elevation data in this region are redundant. The user-defined values for filter1 are included in the configuration file. Currently this filter does not have an effect on the extraction of the characteristic parameters because these are determined based on the elevation that is directly extracted from the jarkus dataset. Therefore, the default setting for filter1 is that is it not applied (config['user defined']['filter1']['apply']=False), but this could be changed in the future.
+        The elevation and corresponding cross-shore location of each requested 
+        year and requested transect location are saved as a dataframe. Note 
+        that each resulting file contains the profiles for all requested years 
+        of one requested transect. The function provides the option to use a 
+        filter that leaves out profiles when there is no elevation data 
+        present between a certain minimum and maximum elevation. This can, 
+        for instance, be useful when only the foreshore is studied and all 
+        transects that do not have elevation data in this region are 
+        redundant. The user-defined values for filter1 are included in the 
+        configuration file. Currently this filter does not have an effect on 
+        the extraction of the characteristic parameters because these are 
+        determined based on the elevation that is directly extracted from the 
+        jarkus dataset. Therefore, the default setting for filter1 is that is 
+        it not applied (config['user defined']['filter1']['apply']=False), 
+        but this could be changed in the future.
     
         Parameters
         ----------
         config : dict
-            The configuration file that contains the user-requested years and transects, reference to the jarkus dataset, the filter1 settings and the save locations.
+            The configuration file that contains the user-requested years and 
+            transects, reference to the jarkus dataset, the filter1 settings 
+            and the save locations.
         """        
 
         crossshore = self.variables['cross_shore'][:]
@@ -138,12 +170,18 @@ class Transects:
     def get_transect_plot(self, config):
         """Save plot with all coastal profiles for each requested transect
 
-        For each requested transect a quickplot is created and saved (as png and picle file) that shows all the requested years. The colors in the plot go from the start year in red to the end year in blue. Currently the axes are set automatically but this can be changed to user-defined limits in the future, which is mostly relevant for single transect plotting.
+        For each requested transect a quickplot is created and saved (as png 
+        and picle file) that shows all the requested years. The colors in the 
+        plot go from the start year in red to the end year in blue. Currently 
+        the axes are set automatically but this can be changed to user-defined 
+        limits in the future, which is mostly relevant for single transect 
+        plotting.
     
         Parameters
         ----------
         config : dict
-            The configuration file that contains the user-requested years and transects, reference to the jarkus dataset and the save locations.
+            The configuration file that contains the user-requested years and 
+            transects, reference to the jarkus dataset and the save locations.
         """    
           
         import matplotlib.pyplot as plt
@@ -202,16 +240,22 @@ class Transects:
             plt.close()
         
     def get_conversion_dicts(self): # Create conversion dictionary
-        """Create conversion from transect number to alongshore meter and vice versa
+        """Create conversion from transect number to alongshore meter and 
+        vice versa
 
-        For each transect number in the jarkus dataset the alongshore kilometer is calculated. A dictionary is created that relates each transect number to its alongshore kilometer. Additionally, a dictionary is created that does the reverse.
+        For each transect number in the jarkus dataset the alongshore 
+        kilometer is calculated. A dictionary is created that relates each 
+        transect number to its alongshore kilometer. Additionally, a 
+        dictionary is created that does the reverse.
              
         Returns
         -------
         dict
-            conversion_ids2alongshore: does the conversion from transect number to alongshore meter
+            conversion_ids2alongshore: does the conversion from transect 
+            number to alongshore meter
             
-            conversion_alongshore2ids: does the conversion from alongshore meter to transect number
+            conversion_alongshore2ids: does the conversion from alongshore 
+            meter to transect number
         """
         
         trscts = self.variables['id'][:] # load all transect numbers
@@ -265,14 +309,44 @@ class Transects:
         return conversion_alongshore2ids, conversion_ids2alongshore
 
 class Extraction:
+    """Extracting characteristic parameters from coastal profiles.
+    
+    This class provides the functionalities to extract the characteristic 
+    parameters requested by the user from transects of the jarkus dataset. 
+    Additionally, it provides functions to post-process the outcome of the
+    extraction.
+    """
     
     def __init__(self, data, config):    
+        """Initialization
+
+        The initialization loads the output of the Transects class and 
+        configuration file.
+    
+        Parameters
+        ----------
+        data : object
+            Output resulting from the Transects class
+        config : dict
+            Configuration file that includes all user-defined settings
+        """
         self.dimensions = pd.DataFrame()
         self.data = data
         self.config = config
         self.crossshore = data.variables['cross_shore'][:]
         
     def get_requested_variables(self):
+        """Retrieve all variables that are related to the requested 
+        characteristic parameters
+          
+        Returns
+        -------
+        list
+            variables_req: List of all variable that are related to the 
+            requested characteristic parameters as included in the 
+            configuration file
+        
+        """    
         self.variables_req = []
         for key in self.config['dimensions']['setting']:
             if self.config['dimensions']['setting'][key] == True:
@@ -281,26 +355,43 @@ class Extraction:
         return self.variables_req
                 
     def get_all_dimensions(self):
+        """Extracts all requested characteristic parameters for all requested 
+        years and transects.
+        
+        Checks whether the saving directory is in place and proceeds to go
+        through all requested transects. Per characteristic parameter it is 
+        checked whether it was requested, and, if so, the values for all 
+        requested years are extracted. Ultimately, per transect a dataframe 
+        is saved that includes the values of all requested characteristic 
+        parameters for all years at that location.
+                
+        """    
+        # Repress errors that occur due to the profiles with many nans
         import warnings # This error occurs due to nan values in less than boolean operations.
         warnings.filterwarnings("ignore", message="invalid value encountered")
         warnings.filterwarnings("ignore", message="Mean of empty slice")
         warnings.filterwarnings("ignore", message="Polyfit may be poorly conditioned")
         
+        # Check whether saving directory is avaialable, if not, create it.
         if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirC']) == False:
             os.mkdir(self.config['outputdir'] + self.config['save locations']['DirC'])
-            
+        
+        # Go through all requested transects            
         for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
             trsct = str(self.data.transects_filtered[i])
             print("Extracting parameters of transect " + trsct)
             
             pickle_file = self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
-    
+            
+            # If file is already present, open the dataframe with all characteristic parameters
             if pickle_file in os.listdir(self.config['outputdir'] + self.config['save locations']['DirC']):
                 self.dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
-            else:
+            else: # Create dataframe
                 self.dimensions = pd.DataFrame({'transect': trsct, 'years':self.data.years_filtered})
                 self.dimensions.set_index('years', inplace=True)
             
+            # Go through all characteristic parameters to see whether they were requested in the config file
+            # If so, execute the function that extracts the parameter
             if self.config['dimensions']['setting']['primary_dune_top'] == True:
                 self.get_primary_dune_top(trsct_idx)
             if self.config['dimensions']['setting']['secondary_dune_top'] == True:
@@ -406,34 +497,57 @@ class Extraction:
             self.dimensions.to_pickle(self.config['outputdir'] + pickle_file)
             
     def get_dataframe_per_dimension(self):
+        """Creates and saves a dataframe per characteristic parameter from the 
+        dataframes with all requested characteristic parameters per transect.
+
+        """
         variable_dataframe = pd.DataFrame({'years': self.data.years_filtered})
         variable_dataframe.set_index('years', inplace=True)   
         
         variables = self.variables_req
-                
+        # Go through all requested variables                
         for variable in variables:
             for i, trsct_idx in enumerate(self.data.transects_filtered_idxs):
+                # Go through all transects 
                 trsct = str(self.data.transects_filtered[i])
                 pickle_file = self.config['outputdir'] + self.config['save locations']['DirC'] + 'Transect_' + trsct + '_dataframe.pickle'
                 variable_dataframe.loc[:, trsct] = np.nan
-        
+                
+                # Check whether each corresponding dataframe with characteristic parameters exists, and if so, load it
                 if os.path.exists(pickle_file):
                     dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of transect
                     
+                # If a requested variable is not available in the dataframe it is set to nan in the new dataframe
                 if variable not in dimensions.columns:
                     variable_dataframe.loc[:, trsct] = np.nan
                 else:
+                    # Go through each year and set the value in the new dataframe.
                     for yr, row in dimensions.iterrows(): 
                         variable_dataframe.loc[yr, trsct] = dimensions.loc[yr, variable] #extract column that corresponds to the requested variable
                 print('Extracted transect ' + str(trsct) + ' for variable ' + variable)
-                    
+            
+            # Check whether saving directory exists, create it if necessary and save dataframe with all years and transect locations for one characteristic parameter.                    
             if os.path.isdir(self.config['outputdir'] + self.config['save locations']['DirD']) == False:
                 os.mkdir(self.config['outputdir'] + self.config['save locations']['DirD'])
             variable_dataframe.to_pickle(self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle')
             print('The dataframe of ' + variable + ' was saved')
 
     
-    def normalize_dimensions(self):    
+    def normalize_dimensions(self):  
+        """Normalize the cross-shore location values of all requested 
+        characteristic parameters
+        
+        Normalization of the cross-shore locations is done to make cross-shore
+        values between transects comparable. The normalization is executed by 
+        subtracting a normalization value from the value of each year of a 
+        characteristic parameter. This function provides the option to apply 
+        a normalization based on the mean of all the years available for a 
+        transect. Additionally, a normalization based on the value of a fixed 
+        user-defined year is available. The normalized cross-shore locations 
+        are saved as a dataframe.
+            
+        """
+        
         # Get all variables that have to be normalized based on the requirement that _x should be in the column name, 
         # and that change values do not have to be normalized.
         variables = self.variables_req
@@ -442,6 +556,7 @@ class Extraction:
             pickle_file = self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_dataframe' + '.pickle'
             dimensions = pickle.load(open(pickle_file, 'rb')) #load pickle of dimensions   
             normalized = dimensions.copy()
+            # Retrieve normalization type that should be applied from the configuration file
             norm_type = self.config['user defined']['normalization']['type']
             if norm_type == 'mean':
                 for i, col in dimensions.iteritems():
@@ -456,17 +571,37 @@ class Extraction:
             normalized.to_pickle(self.config['outputdir'] + self.config['save locations']['DirD'] + variable + '_normalized_dataframe' + '.pickle')
             print('The dataframe of ' + variable + ' was normalized and saved')
 
-    def get_primary_dune_top(self, trsct_idx):        
-        from scipy.signal import find_peaks
-        # Documentation:
-        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
-        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences    
-        # The prominence of a peak measures how much a peak stands out from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
+    def get_primary_dune_top(self, trsct_idx): 
+        """Extract the primary dune top height (DuneTop_prim_y) and 
+        cross-shore location (DuneTop_prim_x).
         
+        The primary dune top is defined as the most seaward dune top that
+        has a height that is larger than a user-defined threshold (default = 
+        5 m) and a prominence that is larger than a user-defined value 
+        (default = 2.0). This function uses scipy.signal.find_peaks [1]. The 
+        prominence of a peak measures how much a peak stands out from the 
+        surrounding baseline of the signal and is defined as the vertical 
+        distance between the peak and its lowest contour line [2].
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles
+
+        .. _[1]:
+        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+        .. _[2]:
+        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
+        """
+
+        from scipy.signal import find_peaks
+        # Go through all years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
+            # Extract elevation
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
+            # Find all peaks that meet the user-defined height and prominence
             dune_top_prim = find_peaks(elevation, height = self.config['user defined']['primary dune']['height'], prominence = self.config['user defined']['primary dune']['prominence'])
 
             if len(dune_top_prim[0]) != 0: # If a peak is found in the profile
@@ -479,17 +614,42 @@ class Extraction:
                 self.dimensions.loc[yr, 'DuneTop_prim_y'] = np.nan
                 
     def get_secondary_dune_top(self, trsct_idx):        
-        from scipy.signal import find_peaks
-        # Documentation:
-        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
-        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences    
-        # The prominence of a peak measures how much a peak stands out from the surrounding baseline of the signal and is defined as the vertical distance between the peak and its lowest contour line.
+        """Extract the secondary dune top height (DuneTop_sec_y) and 
+        cross-shore location (DuneTop_sec_x).
         
+        The secondary dune top is defined as the most seaward dune top that
+        has a height that is larger than a user-defined threshold (default = 
+        3 m) and a prominence that is larger than a user-defined value 
+        (default = 0.5) and is located seaward of the primary dune top. 
+        This function uses scipy.signal.find_peaks [1]. The prominence of a 
+        peak measures how much a peak stands out from the surrounding baseline 
+        of the signal and is defined as the vertical distance between the peak 
+        and its lowest contour line [2]. The goal of this function is to be
+        able to identify embryo dune formation.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles
+
+        .. _[1]:
+        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+        .. _[2]:
+        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
+        
+        See also
+        --------
+        Extraction.get_primary_dune_top
+        """
+        
+        from scipy.signal import find_peaks
+        # Go through all years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
-            
+            # Extract elevation
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
+            # Find all peaks that meet the user-defined height and prominence
             dune_top_sec = find_peaks(elevation, height = self.config['user defined']['secondary dune']['height'], prominence = self.config['user defined']['secondary dune']['prominence'])
 
             if len(dune_top_sec[0]) != 0: # If a peak is found in the profile
@@ -505,18 +665,55 @@ class Extraction:
                 self.dimensions.loc[yr, 'DuneTop_sec_y'] = np.nan
                 
     def get_mean_sea_level(self, trsct_idx):
+        """Extract the cross-shore location of mean sea level (MSL_x).
+        
+        Here, the mean sea level is defined as a fixed, user-defined elevation 
+        (default = 0 m). The intersections between this elevation and the 
+        coastal profile are determined. The most seaward intersection is 
+        selected as the cross-shore location if no primary dune top is 
+        available. Otherwise, all intersections landward of the primary dune 
+        top are filtered out. Then, if the distance between the most seaward 
+        and landward intersection is equal or smaller than 100 m the most 
+        seaward intersection is selected as the cross-shore MSL location. 
+        Otherwise, if the distance is larger than 100 m, only the 
+        intersections 100 m landward of the most seaward intersection are 
+        selected. Of this selection, the most seaward intersection is 
+        selected as the cross-shore MSL location. This filtering is necessary 
+        to make sure landward intersections behind the dunes and seaward 
+        intersections due to the presence of shoals are not selected as the 
+        MSL location.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+        
+        See also
+        --------
+        Extraction.get_primary_dune_top
+        
+        To-do
+        -----
+        Convert default value of 100 meter to user-defined value included in 
+        configuration file.
+
+        """
+        
         MSL_y = self.config['user defined']['mean sea level'] # in m above reference datum
         
         for i, yr in enumerate(self.data.years_filtered):
+            # Go through all years
             yr_idx = self.data.years_filtered_idxs[i]
             
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
-            
+            # Find location where MSL intersects with the coastal profile
             intersections = find_intersections(elevation, self.crossshore, MSL_y)
+            # Select most seaward intersection if no primary dune top is available.
             if len(intersections) != 0 and np.isnan(self.dimensions.loc[yr, 'DuneTop_prim_x']):
                 self.dimensions.loc[yr, 'MSL_x'] = intersections[-1] # get most seaward intersect
             
-            # The following filtering is implemented to make sure offshore shallow parts are not identified as MSL. This is mostyl applicable for the Wadden Islands and Zeeland.
+            # The following filtering is implemented to make sure offshore shallow parts are not identified as MSL. 
+            # This is mostly applicable to the Wadden Islands and Zeeland.
             elif len(intersections) != 0: 
                 # get all intersections seaward of dunetop
                 intersection_sw = intersections[intersections > self.dimensions.loc[yr, 'DuneTop_prim_x']] 
@@ -536,6 +733,31 @@ class Extraction:
                 self.dimensions.loc[yr, 'MSL_x'] = np.nan
                 
     def get_mean_low_water_fixed(self, trsct_idx):
+        """Extract the cross-shore location of mean low water (MLW_x_fix).
+        
+        Here, the mean low water is defined as a fixed, user-defined elevation 
+        (default = -1 m). The intersections between this elevation and the 
+        coastal profile are determined. Then, intersections that are further 
+        than 250 m seaward of the location of the mean sea level (MSL_x) are
+        excluded. This filtering is necessary to make sure seaward 
+        intersections caused by for instance the presence of shoals are not 
+        selected as the MLW location.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+        
+        See also
+        --------
+        Extraction.get_mean_sea_level
+        
+        To-do
+        -----
+        Convert default value of 250 meter to user-defined value included in 
+        configuration file.
+
+        """
         MLW_y_fixed   = self.config['user defined']['mean low water'] # in m above reference datum
             
         for i, yr in enumerate(self.data.years_filtered):
@@ -554,6 +776,36 @@ class Extraction:
                 self.dimensions.loc[yr, 'MLW_x_fix'] = np.nan
     
     def get_mean_low_water_variable(self, trsct_idx):
+        """Extract the elevation (MLW_y_var) and cross-shore location 
+        (MLW_x_var) of mean low water.
+        
+        Here, the mean low water is defined as a spatially variable elevation. 
+        This elevation is provided per transect location in the jarkus 
+        database (determined with tidal modeling). The intersections between 
+        this elevation and the coastal profile are determined. Then, 
+        intersections that are further than 250 m seaward of the location of 
+        the mean sea level (MSL_x) are excluded. This filtering is necessary 
+        to make sure seaward intersections caused by for instance the presence 
+        of shoals are not selected as the MLW location. Both the cross-shore
+        location and variable elevation are saved. Note, that the spatially 
+        variable elevation is not variable in time, so each transect has a 
+        constant MLW elevation assigned that is constant throughout the years.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+        
+        See also
+        --------
+        Extraction.get_mean_sea_level
+        
+        To-do
+        -----
+        Convert default value of 250 meter to user-defined value included in 
+        configuration file.
+
+        """
         MLW_y_variable   = self.data.variables['mean_low_water'][trsct_idx]     # gets the mean low water level as included in the Jarkus dataset, so it varies per location
         self.dimensions.loc[:, 'MLW_y_var'] = MLW_y_variable     # save assumed mean low water level as extracted from the jarkus dataset
             
@@ -573,6 +825,31 @@ class Extraction:
                 self.dimensions.loc[yr, 'MLW_x_var'] = np.nan
     
     def get_mean_high_water_fixed(self, trsct_idx):
+        """Extract the cross-shore location of mean high water (MHW_x_fix).
+        
+        Here, the mean high water is defined as a fixed, user-defined 
+        elevation (default = + 1 m). The intersections between this elevation 
+        and the coastal profile are determined. Then, intersections that are 
+        further than 250 m landward of the location of the mean sea level 
+        (MSL_x) are excluded. This filtering is necessary to make sure 
+        landward intersections behind the dunes are not selected as the MHW 
+        location.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles
+        
+        See also
+        --------
+        Extraction.get_mean_sea_level
+        
+        To-do
+        -----
+        Convert default value of 250 meter to user-defined value included in 
+        configuration file.
+
+        """
         MHW_y_fixed   = self.config['user defined']['mean high water'] # in m above reference datum
         
         for i, yr in enumerate(self.data.years_filtered):
@@ -591,6 +868,36 @@ class Extraction:
                 self.dimensions.loc[yr, 'MHW_x_fix'] = np.nan
     
     def get_mean_high_water_variable(self, trsct_idx):
+        """Extract the elevation (MHW_y_var) and cross-shore location 
+        (MHW_x_var) of mean low water.
+        
+        Here, the mean high water is defined as a spatially variable elevation. 
+        This elevation is provided per transect location in the jarkus 
+        database (determined with tidal modeling). The intersections between 
+        this elevation and the coastal profile are determined. Then, 
+        intersections that are further than 250 m landward of the location of 
+        the mean sea level (MSL_x) are excluded. This filtering is necessary 
+        to make sure landward intersections behind the dunes are not selected 
+        as the MHW location. Both the cross-shore location and variable 
+        elevation are saved. Note, that the spatially variable elevation is 
+        not variable in time, so each transect has a constant MHW elevation 
+        assigned that is constant throughout the years.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+        
+        See also
+        --------
+        Extraction.get_mean_sea_level
+        
+        To-do
+        -----
+        Convert default value of 250 meter to user-defined value included in 
+        configuration file.
+
+        """
         MHW_y_variable   = self.data.variables['mean_high_water'][trsct_idx]     # gets the mean low water level as included in the Jarkus dataset, so it varies per location
         self.dimensions.loc[:, 'MHW_y_var'] = MHW_y_variable     # save assumed mean low water level as extracted from the jarkus dataset
         
@@ -610,18 +917,77 @@ class Extraction:
                 self.dimensions.loc[yr, 'MHW_x_var'] = np.nan
     
     def get_mean_sea_level_variable(self):
+        """Extract the cross-shore mean sea level location (MSL_x_var) based 
+        on the variable mean high and low water.
+        
+        Here, the mean sea level location is determined by calculating the 
+        middle point between the cross-shore location of the variable mean 
+        high water and the variable mean low water.
+
+        See also
+        --------
+        Extraction.get_mean_low_water_variable
+        Extraction.get_mean_high_water_variable
+
+        """
         self.dimensions.loc[:, 'MSL_x_var'] = (self.dimensions.loc[:, 'MLW_x_var'] + self.dimensions.loc[:, 'MHW_x_var'])/2 # Base MSL on the varying location of the low and high water line
 
-    def get_intertidal_width_variable(self):
-        # Collect info on seaward boundary in dataframe
-        self.dimensions.loc[:,'Intertidal_width_var'] = self.dimensions.loc[:,'MLW_x_var'] - self.dimensions.loc[:,'MHW_x_var']
-    
     def get_intertidal_width_fixed(self):
+        """Extract the width of the intertidal area (Intertidal_width_fix).
+              
+        Here, the width of the intertidal area is determined by calculating 
+        the cross-shore distance between the fixed mean low water and the 
+        fixed mean high water.
+
+        See also
+        --------
+        Extraction.get_mean_low_water_fixed
+        Extraction.get_mean_high_water_fixed
+
+        """
+        
         self.dimensions.loc[:, 'Intertidal_width_fix'] = self.dimensions.loc[:, 'MLW_x_fix'] - self.dimensions.loc[:, 'MHW_x_fix']
 
+    def get_intertidal_width_variable(self):
+        """Extract the width of the intertidal area (Intertidal_width_var).
+              
+        Here, the width of the intertidal area is determined by calculating 
+        the cross-shore distance between the variable mean low water and the 
+        variable mean high water.
+
+        See also
+        --------
+        Extraction.get_mean_low_water_variable
+        Extraction.get_mean_high_water_variable
+
+        """
+        
+        self.dimensions.loc[:,'Intertidal_width_var'] = self.dimensions.loc[:,'MLW_x_var'] - self.dimensions.loc[:,'MHW_x_var']
+    
+
     def get_landward_point_variance(self, trsct_idx):
-            
-        ####  Variance method - Sierd de Vries ####
+        """Extract the cross-shore location of the landward boundary based on 
+        variance (Landward_x_variance).
+        
+        The landward boundary is determined by calculating the variance of the 
+        elevation of a transect location throughout all available years. 
+        Stable points are located based on where the variance of the elevation 
+        through time is below a user-defined threshold (default = 0.1). The 
+        stable points landward of the primary dune top are filtered out and 
+        the cross-shore location and elevation of the most seaward stable 
+        point is are selected as the landward boundary.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+        
+        See also
+        --------
+        Extraction.get_primary_dune_top
+        
+        """
+        
         var_threshold = self.config['user defined']['landward variance threshold'] # very dependent on area and range of years!
         
         elevation = pd.DataFrame(self.data.variables['altitude'][:, trsct_idx, :], columns = self.crossshore)
@@ -643,7 +1009,25 @@ class Extraction:
         self.dimensions['Landward_x_variance'] = stable_point
             
     def get_landward_point_derivative(self, trsct_idx):
-            
+        """Extract the cross-shore location of the landward boundary based on 
+        steps in the second derivative method (Landward_x_der) [3].
+        
+        The landward boundary is determined by ...
+        Landward boundary defined as dune peak above a fixed threshold (default = +2.4 m) and with a maximum elevation (default = +6.0m) used for second derivative method    
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+        
+        See also
+        --------
+        Extraction.get_mean_high_water_variable
+        
+        .. _[3]:
+        Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., & de Vries, S. "An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast." Journal of Coastal Research, 36(3)(2020): 668-675. https://doi.org/10.2112/JCOASTRES-D-19-00056.1
+        
+        """
         ####  Derivative method - Diamantidou ####
         ###################################
         # Get landward boundary from peaks in profile
@@ -673,46 +1057,91 @@ class Extraction:
 
                             
     def get_landward_point_bma(self, trsct_idx):
-        ####       Bma calculation     ####
-        ###################################
-        # Calculating the approximate boundary between the marine and aeolian zone.
-        # Based on De Vries et al, 2010, published in Coastal Engeineering.
+        """Extract the cross-shore location of the landward boundary based on 
+        the boundary between the marine and aeolian zone (Landward_x_bma) [4].
+        
+        The landward boundary is defined as a fixed, user-defined elevation 
+        (default = +2 m). The intersections between this elevation and the 
+        coastal profile are determined. Then, the cross-shore location of the 
+        most seaward intersection is selected as the landward boundary.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+               
+        .. _[4]:
+        De Vries, S., de Schipper, M., Stive, M., & Ranasinghe, R. "Sediment exchange between the sub-aqeous and sub-aerial coastal zones." Coastal Engineering. 2 (2010).
+        
+        """
     
         bma_y = self.config['user defined']['landward bma']
-        
+        # Go through years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
-            
+            # Extract elevation
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
+            # Find intersections
             intersections_bma = find_intersections(elevation, self.crossshore, bma_y)
             if len(intersections_bma) != 0:
-                self.dimensions.loc[yr, 'Landward_x_bma'] = intersections_bma[-1]
+                self.dimensions.loc[yr, 'Landward_x_bma'] = intersections_bma[-1] # Select most seaward intersection
             else:
                 self.dimensions.loc[yr, 'Landward_x_bma'] = np.nan
 
     def get_seaward_point_foreshore(self, trsct_idx):
-        seaward_FS_y = self.config['user defined']['seaward foreshore']
+        """Extract the cross-shore location of the seaward foreshore boundary 
+        (Seaward_x_FS).
         
+        The seaward boundary is defined as a fixed, user-defined elevation 
+        (default = -4 m). The intersections between this elevation and the 
+        coastal profile are determined. Then, the cross-shore location of the 
+        most seaward intersection is selected as the seaward boundary.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+               
+        """
+        seaward_FS_y = self.config['user defined']['seaward foreshore']
+        # Go through years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
-            
-            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
+            # Extract elevation
+            elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
+            # Find intersections
             intersections_FS = find_intersections(elevation, self.crossshore, seaward_FS_y)
             if len(intersections_FS) != 0:
-                self.dimensions.loc[yr, 'Seaward_x_FS'] = intersections_FS[-1]
+                self.dimensions.loc[yr, 'Seaward_x_FS'] = intersections_FS[-1] # Select most seaward intersection
             else:
                 self.dimensions.loc[yr, 'Seaward_x_FS'] = np.nan
             
     def get_seaward_point_activeprofile(self, trsct_idx):
+        """Extract the cross-shore location of the seaward active profile 
+        boundary (Seaward_x_AP).
+        
+        The seaward boundary is defined as a fixed, user-defined elevation 
+        (default = -8 m). The intersections between this elevation and the 
+        coastal profile are determined. Then, the cross-shore location of the 
+        most seaward intersection is selected as the seaward boundary.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+               
+        """
+        
         seaward_ActProf_y = self.config['user defined']['seaward active profile']
-    
+        # Go through years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
-            
+            # Extract elevation
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :] 
+            # Find intersections
             intersections_AP = find_intersections(elevation, self.crossshore, seaward_ActProf_y)
             if len(intersections_AP) != 0:
-                self.dimensions.loc[yr, 'Seaward_x_AP'] = intersections_AP[-1]
+                self.dimensions.loc[yr, 'Seaward_x_AP'] = intersections_AP[-1] # Select most seaward intersection
             else:
                 self.dimensions.loc[yr, 'Seaward_x_AP'] = np.nan
     
@@ -762,7 +1191,19 @@ class Extraction:
         self.dimensions['Seaward_x_DoC'] = stable_point
 
     def get_dune_toe_fixed(self, trsct_idx):
-        #### Fixed dunetoe definition ####
+        """Extract the cross-shore location of the dune toe (Dunetoe_x_fix).
+        
+        The dune toe is defined as a fixed, user-defined elevation 
+        (default = +3 m). The intersections between this elevation and the 
+        coastal profile are determined. Then, the cross-shore location of the 
+        most seaward intersection is selected as the dune toe.
+        
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation 
+        of the profiles.
+               
+        """
         DF_fixed_y = self.config['user defined']['dune toe fixed'] # in m above reference datum
     
         for i, yr in enumerate(self.data.years_filtered):
