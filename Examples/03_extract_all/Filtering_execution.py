@@ -38,10 +38,10 @@ conversion_alongshore2ids, conversion_ids2alongshore = data.get_conversion_dicts
 def get_filtered_transects(variable, start_yr, end_yr):
     dimension = pickle.load(open(config['outputdir'] + config['save locations']['DirD'] + variable + '_dataframe.pickle','rb')) 
     
-    dimension_filt = Ff.bad_locations_filter(dimension, location_filter)
-    dimension_filt = Ff.availability_filter_locations(config, dimension_filt)
-    dimension_filt = Ff.bad_yrs_filter(dimension_filt, start_yr, end_yr) 
-    dimension_filt = Ff.availability_filter_years(config, dimension_filt)
+    dimension_filt = Ff.locations_filter(dimension, location_filter)
+    dimension_filt = Ff.availability_locations_filter(config, dimension_filt)
+    dimension_filt = Ff.yrs_filter(dimension_filt, start_yr, end_yr) 
+    dimension_filt = Ff.availability_years_filter(config, dimension_filt)
     
     dimension_filt[dimension_filt > 10000] = np.nan # Check for values that have not been converted correctly to nans
 
