@@ -1,6 +1,7 @@
 Characteristic parameters
 ----------------------------
 
+Explain al the columns!!
 
 Explanation of characteristic parameters
 =========================================
@@ -9,13 +10,13 @@ Explanation of characteristic parameters
 +-------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Parameter               |   Type              |      Explanation                                                                                                                                                                  |
 +-------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Dune top                 | Primary             | Cross-shore location and elevation of the primary dune peak with elevation and prominence above user-defined value                                                                |
+|Dune top                 | Primary             | :py:mod:Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top                                                                |
 +                         +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                         | Secondary           | Cross-shore location and elevation of the secondary dune peak with elevation and prominence above user-defined value                                                              |
 +-------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |Mean Sea Level           | Fixed*              | Elevation and cross-shore location of Mean Sea level defined as user-defined value w.r.t. reference datum (default = 0)                                                           |
 +                         +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                         | Variable            | Elevation and cross-shore location of Mean Sea level defined as the cross-shore location between the variable MHW and MLW location                                                |
+|                         | Variable            | Cross-shore location of Mean Sea level defined as the cross-shore location between the variable MHW and MLW location                                                |
 +-------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |Mean Low Water           | Fixed*              | Cross-shore location of Mean Low Water defined as user-defined value w.r.t. reference datum (default =  -1 m)                                                                     |
 +                         +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ 
