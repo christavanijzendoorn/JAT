@@ -18,10 +18,10 @@ The explanation on this web page relates to the Anaconda Navigator which is a ni
 You can find information on managing environments in the Anaconda prompt here: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html. But don't get too lost in this! The only things you need to do is open the Anaconda Prompt and type the following::
 
 	$  activate jarkus
-	$  cd directory
+	$  cd C:/JAT/setup.py
 	$  python setup.py install
 
-where `jarkus` is the environment you just created, the dollar sign represents the blinking cursor and `directory` should be the place where the `setup.py` file is located. For the JAT this directory is dependent on where you have saved the JAT files, but it should end in ...\\JAT\\setup.py.
+First, this activate the environment that you just created (in this case `jarkus`). Note, that the dollar sign represents the blinking cursor in the Anaconda Prompt. Subsequently, the 'cd' command indicates that you want to change the folder that is open in the Anaconda prompt. When typing the 'cd' command follow it with the directory (in this case C:\\JAT\\setup.py) where the `setup.py` file is located. For the JAT this directory is dependent on where you have saved the JAT files, but it should end in ...\\JAT\\setup.py.
 
 These commands will install the Jarkus Analysis Toolbox and all its dependencies so it works in one go.
 	
@@ -32,7 +32,7 @@ What I use most often:
 	* crtl+Return for running current sections denoted by `%##` statements (green play button in yellow/white marking)
 	* F9 for running selected code
 	
-This is the point where you can start using the :doc:`Gettingstarted`: and :doc:`Examples`: sections again. Hopefully, this helped and I always recommend using Google/Stack Overflow because the internet knows a lot and other people often have experience the same issues that you are running into.
+This is the point where you can start using the :doc:`Gettingstarted` and :doc:`Examples` sections again. Hopefully, this helped and I always recommend using Google/Stack Overflow because the internet knows a lot and other people often have experienced the same issues that you are running into.
 
 
 Adding new extraction methods
