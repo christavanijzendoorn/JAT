@@ -21,7 +21,8 @@ setuptools.setup(
 		'matplotlib',
 		'cftime==1.0.3.4',
 		'joblib==0.13.2',
-		'pybeach',],
+		'pybeach',
+		'pyyaml==5.2'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
