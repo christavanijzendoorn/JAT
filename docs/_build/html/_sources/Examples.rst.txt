@@ -1,7 +1,7 @@
 Examples
 ----------
 
-After going through the :doc:`Gettingstarted`: section you can try out the Jarkus Analysis Toolbox with th following examples.
+After going through the :doc:`Gettingstarted`: section you can try out the Jarkus Analysis Toolbox with the following examples.
 
 1. Single transect
 ====================
@@ -15,8 +15,8 @@ Example 2 shows how to extract the characteristic parameters from multiple trans
 
 3. Extract all
 ===============
-This Example shows how to extract all characteristic parameters from all transect locations. It provides the scripts that were used to create the dataset of characteristic parameters in the 4TU repository.
-Note, this analysis can take a long time, around 10 hours. The `Filtering_execution.py` file provides an example of how the filtering functionalities of the JAT can be used. These result in filtered dataframes with all characteristic parameters that are then visualized for all locations through time.
+This Example shows how to extract all characteristic parameters from all transect locations. It provides the script that was used to create the dataset of characteristic parameters in the 4TU repository (`Creation_netcdf.py`).
+Note, this analysis can take a long time, around 10 hours. The `Filtering_execution.py` file provides an example of how the filtering functionalities of the JAT can be used. These result in filtered dataframes with all characteristic parameters that are then visualized for all locations through time.  
 
 .. _4TU repository: https://github.com/christavanijzendoorn/JAT
 
@@ -42,8 +42,3 @@ The Figures folder includes all figures for reference so you can check whether y
 .. _here: https://www.clo.nl/indicatoren/nl022910-zeespiegelstand-nederland-en-mondiaal
 
 .. [#IJz] Van IJzendoorn, C.O., De Vries, S., Hallin, C. & Hesp, P.A. (2021). Sea level outpaced by coastal dune toe translation. `In review`
-
-
-5. Working with nc-file
-=========================
-Upcoming!!

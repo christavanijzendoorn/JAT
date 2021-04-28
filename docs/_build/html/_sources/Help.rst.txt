@@ -31,6 +31,7 @@ What I use most often:
 	* F5 for running all the code in one script (green play button)
 	* crtl+Return for running current sections denoted by `%##` statements (green play button in yellow/white marking)
 	* F9 for running selected code
+	* The variable explorer
 	
 This is the point where you can start using the :doc:`Gettingstarted` and :doc:`Examples` sections again. Hopefully, this helped and I always recommend using Google/Stack Overflow because the internet knows a lot and other people often have experienced the same issues that you are running into.
 
