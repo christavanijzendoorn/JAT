@@ -178,7 +178,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/christavanijzendoorn/JAT.git
 </pre></div>
 </div>
-<p>Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to <a class="reference internal" href="Help.html"><span class="doc">Help</span></a>:). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.</p>
+<p>Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to <a class="reference internal" href="Help.html"><span class="doc">Help</span></a>). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.</p>
 <p>Navigate to the directory where the Jarkus Ananlysis Toolbox is located and the <cite>setup.py</cite> file is present. Use the following command to install the JAT:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  python setup.py install
 </pre></div>
@@ -221,14 +221,16 @@ Do not forget to change the directory of the <cite>jarkus.yml</cite> file in <ci
 <h2>Jarkus transect numbers<a class="headerlink" href="#jarkus-transect-numbers" title="Permalink to this headline">¶</a></h2>
 <p>To be able to decide what transects you want to analyse with the JAT, you need to know the way in which the transects are numbered.
 The convention that is used in the JAT is as follows:</p>
-<dl class="simple">
-<dt>Vaknummer + raainummer = VNNNNNN:</dt><dd><ul class="simple">
+<p>Vaknummer + raainummer = VNNNNNN:</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>always 6 transect (raai) related numbers</p></li>
 <li><p>1 or 2 coastal section (kustvak) related numbers, 2 in case of kustvak of 10+</p></li>
 </ul>
-</dd>
-</dl>
-<p>Example Sand Engine: Vak 9, raai 11109 = 9011109</p>
+</div></blockquote>
+<p>Example Sand Engine: Vak 9, raai 11109 = 9011109
+Example Meijendel: Vak 8, raai 9325 = 8009325
+Example Westenschouwen: Vak 13, raai 1465 = 13001465</p>
 <dl class="simple">
 <dt>To check which transects are present in the area you want to analyse use the following sources:</dt><dd><ul class="simple">
 <li><p>Overview of transects: <a class="reference external" href="https://maps.rijkswaterstaat.nl/geoweb55/index.html?viewer=Kustlijnkaart">https://maps.rijkswaterstaat.nl/geoweb55/index.html?viewer=Kustlijnkaart</a></p></li>
@@ -249,12 +251,12 @@ The convention that is used in the JAT is as follows:</p>
 <h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
 <p><strong>Jarkus</strong></p>
 <p>The Jarkus Analysis Toolbox was developed to make the analysis of the Jarkus dataset more accessible.
-To work with the JAT, the Jarkus data has to be accessed here.</p>
+To work with the JAT, the Jarkus data has to be accessed through this link.</p>
 <p>When you want to access large amounts of data (i.e. many transects and years) or want to be independent of internet access it is advisable to download the dataset (approx. 3 GB). Make sure to include their directory in the settings file (<cite>jarkus.yml</cite>).</p>
 <p><strong>Dunetoe</strong></p>
 <p>When you want to work with the <em>dune toes</em> that were extracted using the second derivative method. These can be found here.</p>
 <p><strong>Nourishment</strong></p>
-<p>The <em>nourishment</em> database can be found here.</p>
+<p>This is where the <em>nourishment</em> database can be found.</p>
 <p><strong>LocFilter</strong></p>
 <p>The <cite>location_filter.yml</cite> file is used to remove 'bad' transects, e.g. dams and dikes. It is used in Example 4 with MODULE.
 This file can be rewritten and used with the MODULE to do other types of filtering.</p>

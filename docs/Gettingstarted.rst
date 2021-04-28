@@ -45,6 +45,7 @@ To be able to decide what transects you want to analyse with the JAT, you need t
 The convention that is used in the JAT is as follows::
 
 Vaknummer + raainummer = VNNNNNN:
+
 	* always 6 transect (raai) related numbers
 	* 1 or 2 coastal section (kustvak) related numbers, 2 in case of kustvak of 10+
 

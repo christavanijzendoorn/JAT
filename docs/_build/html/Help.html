@@ -13,7 +13,6 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="_static/../_templates/theme_overrides.css" type="text/css" />
 
   
@@ -35,7 +34,6 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -176,11 +174,11 @@
 <p>The explanation on this web page relates to the Anaconda Navigator which is a nice visual way of looking at the environments. However, what you will often see is that people install packages using conda in the Anaconda prompt. That is also what we will need to do to install the JAT as explained in <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a>:.</p>
 <p>You can find information on managing environments in the Anaconda prompt here: <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html</a>. But don't get too lost in this! The only things you need to do is open the Anaconda Prompt and type the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  activate jarkus
-$  cd directory
+$  cd C:/JAT/setup.py
 $  python setup.py install
 </pre></div>
 </div>
-<p>where <cite>jarkus</cite> is the environment you just created, the dollar sign represents the blinking cursor and <cite>directory</cite> should be the place where the <cite>setup.py</cite> file is located. For the JAT this directory is dependent on where you have saved the JAT files, but it should end in ...\JAT\setup.py.</p>
+<p>First, this activate the environment that you just created (in this case <cite>jarkus</cite>). Note, that the dollar sign represents the blinking cursor in the Anaconda Prompt. Subsequently, the 'cd' command indicates that you want to change the folder that is open in the Anaconda prompt. When typing the 'cd' command follow it with the directory (in this case C:\JAT\setup.py) where the <cite>setup.py</cite> file is located. For the JAT this directory is dependent on where you have saved the JAT files, but it should end in ...\JAT\setup.py.</p>
 <p>These commands will install the Jarkus Analysis Toolbox and all its dependencies so it works in one go.</p>
 <p>To work with the examples, I recommend Spyder. To make sure it is installed open the Anaconda Navigator and browse to the jarkus environment (Applications on ...). Here, install Spyder and then launch it. In Spyder load, from example 1, <cite>jarkus_01.yml</cite> to see what settings are used and then open <cite>JAT_use_single_transect.py</cite> to see the steps necessary for the analysis. I recommend Spyder's walkthrough to get a feeling for how it works: <a class="reference external" href="https://docs.spyder-ide.org/current/index.html">https://docs.spyder-ide.org/current/index.html</a>.</p>
 <dl class="simple">
@@ -191,7 +189,7 @@ $  python setup.py install
 </ul>
 </dd>
 </dl>
-<p>This is the point where you can start using the <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a>: and <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a>: sections again. Hopefully, this helped and I always recommend using Google/Stack Overflow because the internet knows a lot and other people often have experience the same issues that you are running into.</p>
+<p>This is the point where you can start using the <a class="reference internal" href="Gettingstarted.html"><span class="doc">Getting Started</span></a> and <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a> sections again. Hopefully, this helped and I always recommend using Google/Stack Overflow because the internet knows a lot and other people often have experienced the same issues that you are running into.</p>
 </div>
 <div class="section" id="adding-new-extraction-methods">
 <h2>Adding new extraction methods<a class="headerlink" href="#adding-new-extraction-methods" title="Permalink to this headline">¶</a></h2>

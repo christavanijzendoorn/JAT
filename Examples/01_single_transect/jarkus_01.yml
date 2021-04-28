@@ -2,15 +2,15 @@ name: jarkus
 
 # REQUEST YEARS AND TRANSECTS
 years:
-    start_yr: 1980 
-    end_yr: 2021 # the end year is never included if you want e.g. 1995, fill in start_yr: 1995 and end_yr: 1996
+    start_yr: 2010 #1980 
+    end_yr: 2020 #2021 # the end year is never included if you want e.g. 1995, fill in start_yr: 1995 and end_yr: 1996
 
 transects: 
     # Choose the type of analysis: single, multiple, range or all
     type: single 
     # below the retrieval request for the single, multiple and range type are defined
     # Note! If type is set to 'all' it overrides the input below 
-    single: 8009325 # for single
+    single: 7004525 #8009325 # for single
     multiple: # for multiple 
         - 8009325
         - 8009350 

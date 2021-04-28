@@ -32,9 +32,6 @@ def find_intersections(elevation, crossshore, y_value):
         intersection_x: Cross-shore location of the intersection between the 
         coastal profile and horizontal line.
     
-    See Also
-    --------
-    Jarkus_Analysis_Toolbox.Extraction
         
     """    
     
@@ -62,16 +59,12 @@ def get_gradient(elevation, seaward_x, landward_x):
     seaward_x : float or int
         Cross-shore seaward boundary
     landward_x : float or int
-        Cross-shore seaward boundary
+        Cross-shore landward boundary
         
     Returns
     -------
     float
         gradient: slope of the best fit line
-    
-    See Also
-    --------
-    Jarkus_Analysis_Toolbox.Extraction
         
     """
     
@@ -113,17 +106,13 @@ def get_volume(elevation, seaward_x, landward_x):
     seaward_x : float or int
         Cross-shore seaward boundary
     landward_x : float or int
-        Cross-shore seaward boundary
+        Cross-shore landward boundary
         
     Returns
     -------
     float
         volume: surface under the graph in m^2. Can be interpreted as m^3 by 
         assuming the profile is 1 m wide.
-    
-    See Also
-    --------
-    Jarkus_Analysis_Toolbox.Extraction
         
     """
     

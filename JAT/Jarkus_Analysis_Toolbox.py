@@ -585,13 +585,13 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
 
-        .. _[1]:
-        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
-        .. _[2]:
-        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
+
+        .. [1] https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+        .. [2] https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
+            
         """
 
         from scipy.signal import find_peaks
@@ -629,20 +629,23 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
 
-        .. _[1]:
-        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
-        .. _[2]:
-        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
-        
         See also
         --------
-        Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        
+        
+        .. [1] https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+        .. [2] https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
+        
         """
         
         from scipy.signal import find_peaks
+        # initliaze location in dataframe
+        self.dimensions.loc[:, 'DuneTop_sec_x'] = np.nan
+        self.dimensions.loc[:, 'DuneTop_sec_y'] = np.nan
         # Go through all years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
@@ -667,7 +670,7 @@ class Extraction:
     def get_mean_sea_level(self, trsct_idx):
         """Extract the cross-shore location of mean sea level (MSL_x).
         
-        Here, the mean sea level is defined as a fixed, user-defined elevation 
+        The mean sea level is defined as a fixed, user-defined elevation 
         (default = 0 m). The intersections between this elevation and the 
         coastal profile are determined. The most seaward intersection is 
         selected as the cross-shore location if no primary dune top is 
@@ -685,14 +688,14 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
         
         See also
         --------
-        Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
         
-        To-do
+        Todo
         -----
         Convert default value of 100 meter to user-defined value included in 
         configuration file.
@@ -735,7 +738,7 @@ class Extraction:
     def get_mean_low_water_fixed(self, trsct_idx):
         """Extract the cross-shore location of mean low water (MLW_x_fix).
         
-        Here, the mean low water is defined as a fixed, user-defined elevation 
+        The mean low water is defined as a fixed, user-defined elevation 
         (default = -1 m). The intersections between this elevation and the 
         coastal profile are determined. Then, intersections that are further 
         than 250 m seaward of the location of the mean sea level (MSL_x) are
@@ -745,14 +748,14 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
         
         See also
         --------
-        Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
         
-        To-do
+        Todo
         -----
         Convert default value of 250 meter to user-defined value included in 
         configuration file.
@@ -779,7 +782,7 @@ class Extraction:
         """Extract the elevation (MLW_y_var) and cross-shore location 
         (MLW_x_var) of mean low water.
         
-        Here, the mean low water is defined as a spatially variable elevation. 
+        The mean low water is defined as a spatially variable elevation. 
         This elevation is provided per transect location in the jarkus 
         database (determined with tidal modeling). The intersections between 
         this elevation and the coastal profile are determined. Then, 
@@ -793,14 +796,14 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
         
         See also
         --------
-        Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
         
-        To-do
+        Todo
         -----
         Convert default value of 250 meter to user-defined value included in 
         configuration file.
@@ -827,7 +830,7 @@ class Extraction:
     def get_mean_high_water_fixed(self, trsct_idx):
         """Extract the cross-shore location of mean high water (MHW_x_fix).
         
-        Here, the mean high water is defined as a fixed, user-defined 
+        The mean high water is defined as a fixed, user-defined 
         elevation (default = + 1 m). The intersections between this elevation 
         and the coastal profile are determined. Then, intersections that are 
         further than 250 m landward of the location of the mean sea level 
@@ -837,14 +840,14 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
         
         See also
         --------
-        Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
         
-        To-do
+        Todo
         -----
         Convert default value of 250 meter to user-defined value included in 
         configuration file.
@@ -871,7 +874,7 @@ class Extraction:
         """Extract the elevation (MHW_y_var) and cross-shore location 
         (MHW_x_var) of mean low water.
         
-        Here, the mean high water is defined as a spatially variable elevation. 
+        The mean high water is defined as a spatially variable elevation. 
         This elevation is provided per transect location in the jarkus 
         database (determined with tidal modeling). The intersections between 
         this elevation and the coastal profile are determined. Then, 
@@ -885,14 +888,14 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
         
         See also
         --------
-        Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
         
-        To-do
+        Todo
         -----
         Convert default value of 250 meter to user-defined value included in 
         configuration file.
@@ -920,14 +923,14 @@ class Extraction:
         """Extract the cross-shore mean sea level location (MSL_x_var) based 
         on the variable mean high and low water.
         
-        Here, the mean sea level location is determined by calculating the 
+        The mean sea level location is determined by calculating the 
         middle point between the cross-shore location of the variable mean 
         high water and the variable mean low water.
 
         See also
         --------
-        Extraction.get_mean_low_water_variable
-        Extraction.get_mean_high_water_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable
 
         """
         self.dimensions.loc[:, 'MSL_x_var'] = (self.dimensions.loc[:, 'MLW_x_var'] + self.dimensions.loc[:, 'MHW_x_var'])/2 # Base MSL on the varying location of the low and high water line
@@ -935,14 +938,14 @@ class Extraction:
     def get_intertidal_width_fixed(self):
         """Extract the width of the intertidal area (Intertidal_width_fix).
               
-        Here, the width of the intertidal area is determined by calculating 
+        The width of the intertidal area is determined by calculating 
         the cross-shore distance between the fixed mean low water and the 
         fixed mean high water.
 
         See also
         --------
-        Extraction.get_mean_low_water_fixed
-        Extraction.get_mean_high_water_fixed
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed
 
         """
         
@@ -951,14 +954,14 @@ class Extraction:
     def get_intertidal_width_variable(self):
         """Extract the width of the intertidal area (Intertidal_width_var).
               
-        Here, the width of the intertidal area is determined by calculating 
+        The width of the intertidal area is determined by calculating 
         the cross-shore distance between the variable mean low water and the 
         variable mean high water.
 
         See also
         --------
-        Extraction.get_mean_low_water_variable
-        Extraction.get_mean_high_water_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable
 
         """
         
@@ -979,12 +982,12 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
         
         See also
         --------
-        Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
         
         """
         
@@ -1012,38 +1015,50 @@ class Extraction:
         """Extract the cross-shore location of the landward boundary based on 
         steps in the second derivative method (Landward_x_der) [3].
         
-        The landward boundary is determined by ...
-        Landward boundary defined as dune peak above a fixed threshold (default = +2.4 m) and with a maximum elevation (default = +6.0m) used for second derivative method    
-        
+        The landward boundary is determined by finding the peaks with a 
+        prominence larger than a fixed threshold (default = +2.4 m). If peaks 
+        are found and those peaks are larger than a user-defined elevation 
+        (default = 6.0), the cross-shore location of the intersection of this 
+        elevation with the coastal profile is the landward boundary. 
+        Otherwise, the peaks above the peaks threshold (variable MHW + 
+        prominence threshold) are selected and the most seaward selected peak 
+        is the landward boundary. If none of these selection cannot be applied 
+        a NaN value is inserted. This function uses scipy.signal.find_peaks 
+        [1]. The prominence of a peak measures how much a peak stands out from 
+        the surrounding baseline of the signal and is defined as the vertical 
+        distance between the peak and its lowest contour line [2].
+
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : index of the transect necessary to extract the elevation of the profiles.
         
-        See also
-        --------
-        Extraction.get_mean_high_water_variable
+        Todo
+        -----
+        Alter based on matlab version
         
-        .. _[3]:
-        Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., & de Vries, S. "An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast." Journal of Coastal Research, 36(3)(2020): 668-675. https://doi.org/10.2112/JCOASTRES-D-19-00056.1
+                
+        .. [3] Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., & de Vries, S.   "An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast."     Journal of Coastal Research, 36(3)(2020): 668-675. https://doi.org/10.2112/JCOASTRES-D-19-00056.1
+        .. [1] https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks
+        .. [2] https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences                
         
         """
-        ####  Derivative method - Diamantidou ####
-        ###################################
-        # Get landward boundary from peaks in profile
+
         from scipy.signal import find_peaks
         
-        height_of_peaks = self.config['user defined']['landward derivative']['min height'] #m
-        height_constraint = self.config['user defined']['landward derivative']['height constraint'] #m
+        # Get user-defined values
+        height_of_peaks = self.config['user defined']['landward derivative']['min height'] # in meter
+        height_constraint = self.config['user defined']['landward derivative']['height constraint'] # in meter
         peaks_threshold = height_of_peaks + self.dimensions['MHW_y_var'].iloc[0]  # adjust this based on matlab version?
-        
+        # Go through years
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
-            
+            # Extract elevation
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
-            peaks = find_peaks(elevation, prominence = height_of_peaks)[0] # Documentation see get_dune_top
-            
+            # Find peaks that have a prominence larger than height_of_peaks
+            peaks = find_peaks(elevation, prominence = height_of_peaks)[0] 
+            # Get elevation of peaks
             peaks = elevation[peaks]
+            # Select peaks that are larger or equal to the peaks threshold
             peaks_filt = peaks[peaks >= peaks_threshold]
             
             if len(peaks) != 0 and np.nanmax(peaks) > height_constraint:
@@ -1067,11 +1082,11 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
                
-        .. _[4]:
-        De Vries, S., de Schipper, M., Stive, M., & Ranasinghe, R. "Sediment exchange between the sub-aqeous and sub-aerial coastal zones." Coastal Engineering. 2 (2010).
+            
+        .. [4] De Vries, S., de Schipper, M., Stive, M., & Ranasinghe, R. "Sediment exchange between the sub-aqeous and sub-aerial coastal zones." Coastal Engineering. 2 (2010).
         
         """
     
@@ -1099,8 +1114,8 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
                
         """
         seaward_FS_y = self.config['user defined']['seaward foreshore']
@@ -1127,8 +1142,8 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
                
         """
         
@@ -1146,6 +1161,31 @@ class Extraction:
                 self.dimensions.loc[yr, 'Seaward_x_AP'] = np.nan
     
     def get_seaward_point_doc(self, trsct_idx):
+        """Extract the cross-shore location (Seaward_x_DoC) of the depth of 
+        closure based on the method of Hinton [5].
+        
+        Approximation of the depth of closure below a user-defined minimum  
+        (default = -5.0 m) (Seaward_x_mindepth) where the standard deviation 
+        of the elevation through time is below a user-defined value (default 
+        = 0.25) for at least a user-defined length (default = 200m), based on 
+        the method by Hinton [5]. 
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        Todo
+        -----
+        Check whether this method gives the same results as the work of
+        Nicha Zwarenstein (2021) [6].
+                
+        
+        .. [5] Hinton, Claire L. Decadal morphodynamic behaviour of the Holland shoreface. Diss. Middlesex University, 2000. https://eprints.mdx.ac.uk/id/eprint/6601
+        .. [6] Zwarenstein Tutunji, Nicha. "Classification of coastal profile development in the Hoogheemraadschap Hollands Noorderkwartier area: Using advanced data analysis techniques." (2021).
+
+        """
+
         # Gives most seaward cross-shore location where where depth is -5.0 m NAP
         min_depth = self.config['user defined']['seaward DoC']['min depth']
     
@@ -1200,8 +1240,8 @@ class Extraction:
         
         Parameters
         ----------
-        trsct_idx : index of the transect necessary to extract the elevation 
-        of the profiles.
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
                
         """
         DF_fixed_y = self.config['user defined']['dune toe fixed'] # in m above reference datum
@@ -1216,34 +1256,93 @@ class Extraction:
             else:
                 self.dimensions.loc[yr, 'Dunetoe_x_fix'] = np.nan
             
-    def get_dune_toe_derivative(self, trsct_idx):        
-            ####  Derivative method - E.D. ####
-            ###################################
-            ## Variable dunetoe definition based on first and second derivative of profile
-            if 'http' in self.config['data locations']['Dunetoe']: # check whether it's a url
-                dunetoes = Dataset(self.config['data locations']['Dunetoe'])    
-            else: # load from local file
-                dunetoes = Dataset(self.config['inputdir'] + self.config['data locations']['Dunetoe'])
-                
-            time = dunetoes.variables['time'][:]
-            years = num2date(time, dunetoes.variables['time'].units)
-            years = [yr.year for yr in years]                    # convert to purely integers indicating the measurement year
-            years_filter =  np.isin(years, self.data.years_filtered)
-            years_filter_idxs = np.where(years_filter)[0]
-                
-            dunetoes_y = dunetoes.variables['dune_foot_2nd_deriv'][years_filter_idxs, trsct_idx]
-            dunetoes_x = dunetoes.variables['dune_foot_2nd_deriv_cross'][years_filter_idxs, trsct_idx]
+    def get_dune_toe_derivative(self, trsct_idx): 
+        """Extract the elevation (Dunetoe_y_der) and cross-shore location
+        (Dunetoe_x_der) of the dune toe based on the second derivative 
+        method [3]. 
+        
+        The dune toe elevation is extracted from the repository where the work
+        of Diamantidou et al. [3] is saved. First, the method selects part of 
+        the coastal profile. This selection is between the landward boundary 
+        (get_landward_point_derivative) and the variable MHW. Then, the first 
+        and second derivative of this part of the coastal profile is 
+        calculated. The most seaward location where the first derivative is 
+        lower than 0.001 and the second derivative is lower than 0.01 is 
+        selected as the dune toe [3].
+
+        Parameters
+        ----------
+        trsct_idx : index of the transect necessary to extract the elevation of the profiles.
+        
+        Todo
+        -----
+        Alter based on matlab version
+        
+        See Also
+        ---------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative
+        
+        
+        .. [3] Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., & de Vries, S.   "An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast."     Journal of Coastal Research, 36(3)(2020): 668-675. https://doi.org/10.2112/JCOASTRES-D-19-00056.1
+        
+        """
+
+        ## Variable dunetoe definition based on first and second derivative of profile
+        if 'http' in self.config['data locations']['Dunetoe']: # check whether it's a url
+            dunetoes = Dataset(self.config['data locations']['Dunetoe'])    
+        else: # load from local file
+            dunetoes = Dataset(self.config['inputdir'] + self.config['data locations']['Dunetoe'])
             
-            if len(years_filter_idxs) < len(self.data.years_filtered):
-                rows = len(self.data.years_filtered) - len(years_filter_idxs)
-                dunetoes_y = np.append(dunetoes_y, np.empty((rows,1))*np.nan)
-                np.append(dunetoes_x, np.empty((rows,1))*np.nan)
-                        
-            self.dimensions.loc[:, 'Dunetoe_y_der'] = dunetoes_y
-            self.dimensions.loc[:, 'Dunetoe_x_der'] = dunetoes_x
+        time = dunetoes.variables['time'][:]
+        years = num2date(time, dunetoes.variables['time'].units)
+        years = [yr.year for yr in years]                    # convert to purely integers indicating the measurement year
+        years_filter =  np.isin(years, self.data.years_filtered)
+        years_filter_idxs = np.where(years_filter)[0]
+            
+        dunetoes_y = dunetoes.variables['dune_foot_2nd_deriv'][years_filter_idxs, trsct_idx]
+        dunetoes_x = dunetoes.variables['dune_foot_2nd_deriv_cross'][years_filter_idxs, trsct_idx]
+        
+        if len(years_filter_idxs) < len(self.data.years_filtered):
+            rows = len(self.data.years_filtered) - len(years_filter_idxs)
+            dunetoes_y = np.append(dunetoes_y, np.empty((rows,1))*np.nan)
+            np.append(dunetoes_x, np.empty((rows,1))*np.nan)
+                    
+        self.dimensions.loc[:, 'Dunetoe_y_der'] = dunetoes_y
+        self.dimensions.loc[:, 'Dunetoe_x_der'] = dunetoes_x
                     
     def get_dune_toe_pybeach(self, trsct_idx):
-        ####  Pybeach methods ####
+        """Extract the elevation (Dunetoe_y_pybeach) and cross-shore location
+        (Dunetoe_x_pybeach) of the dune toe based on pybeach machine learning 
+        method [7]_. 
+        
+        Pybeach provides three different pre-trained machine learning models 
+        (barrier-island, wave-embayed and mixed) that can extract the dune toe
+        location. Here, the user can define which model to use (default = 
+        'mixed') These models were based on the identification of the dune 
+        toe by experts. To make the applicaiton of the pybeach machine 
+        learning method comparable to the second derivative method a similar 
+        reduction of the coastal profile (with a landward and seaward 
+        boundary) is executed.
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        Todo
+        -----
+        Alter based on matlab version
+        
+        See Also
+        ---------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+        
+        
+        .. [7] Beuzen, Tomas. "pybeach: A Python package for extracting the location of dune toes on beach profile transects." Journal of Open Source Software 4(44) (2019): 1890. https://doi.org/10.21105/joss.01890
+        
+        """
+        
         from pybeach.beach import Profile
                 
         for i, yr in enumerate(self.data.years_filtered):
@@ -1278,18 +1377,89 @@ class Extraction:
                 self.dimensions.loc[yr, 'Dunetoe_x_pybeach'] = np.nan
 
     def get_beach_width_fix(self):
+        """Extract the width of the beach (Beach_width_fix).
+              
+        The width of the beach is determined by calculating 
+        the cross-shore distance between the fixed mean sea level and the 
+        fixed dune toe location.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+
+        """
+        
         self.dimensions['Beach_width_fix'] = self.dimensions['MSL_x'] - self.dimensions['Dunetoe_x_fix']
     
     def get_beach_width_var(self):
+        """Extract the width of the beach (Beach_width_var).
+              
+        The width of the beach is determined by calculating 
+        the cross-shore distance between the variable mean sea level and the 
+        fixed dune toe location.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+
+        """
+        
         self.dimensions['Beach_width_var'] = self.dimensions['MSL_x_var'] - self.dimensions['Dunetoe_x_fix']
             
     def get_beach_width_der(self):
+        """Extract the width of the beach (Beach_width_der).
+              
+        The width of the beach is determined by calculating 
+        the cross-shore distance between the fixed mean sea level and the 
+        dune toe location based on the second derivative method.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+
+        """
+                
         self.dimensions['Beach_width_der'] = self.dimensions['MSL_x'] - self.dimensions['Dunetoe_x_der'] 
     
     def get_beach_width_der_var(self):
+        """Extract the width of the beach (Beach_width_der_var).
+              
+        The width of the beach is determined by calculating 
+        the cross-shore distance between the variable mean sea level and the 
+        dune toe location based on the second derivative method.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+
+        """
+                     
         self.dimensions['Beach_width_der_var'] = self.dimensions['MSL_x_var'] - self.dimensions['Dunetoe_x_der'] 
 
     def get_beach_gradient_fix(self, trsct_idx):
+        """Extract the gradient of the beach (Beach_gradient_fix).
+              
+        The gradient of the beach is determined by finding the slope of  
+        the line of best fit along the coastal profile between the fixed 
+        mean sea level and the fixed dune toe location.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
@@ -1303,6 +1473,25 @@ class Extraction:
             self.dimensions.loc[yr,'Beach_gradient_fix'] = get_gradient(elevation, seaward_x, landward_x)
     
     def get_beach_gradient_var(self, trsct_idx):
+        """Extract the gradient of the beach (Beach_gradient_var).
+              
+        The gradient of the beach is determined by finding the slope of  
+        the line of best fit along the coastal profile between the variable 
+        mean sea level and the fixed dune toe location.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
@@ -1316,6 +1505,25 @@ class Extraction:
             self.dimensions.loc[yr,'Beach_gradient_var'] = get_gradient(elevation, seaward_x, landward_x)
     
     def get_beach_gradient_der(self, trsct_idx):
+        """Extract the gradient of the beach (Beach_gradient_der).
+              
+        The gradient of the beach is determined by finding the slope of  
+        the line of best fit along the coastal profile between the fixed 
+        mean sea level and the second derivative dune toe location.
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
             
@@ -1329,18 +1537,94 @@ class Extraction:
             self.dimensions.loc[yr,'Beach_gradient_der'] = get_gradient(elevation, seaward_x, landward_x)
        
     def get_dune_front_width_prim_fix(self):
+        """Extract the width of the primary dune front 
+        (Dunefront_width_prim_fix).
+              
+        The width of the primary dune front is determined by calculating 
+        the cross-shore distance between the cross-shore location of the 
+        primary dune top and the fixed dune toe location.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+
+        """
+        
         self.dimensions['Dunefront_width_prim_fix'] = self.dimensions['Dunetoe_x_fix'] - self.dimensions['DuneTop_prim_x']
     
     def get_dune_front_width_prim_der(self):
+        """Extract the width of the primary dune front 
+        (Dunefront_width_prim_der).
+              
+        The width of the primary dune front is determined by calculating 
+        the cross-shore distance between the cross-shore location of the 
+        primary dune top and the derivative dune toe location.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+
+        """
+        
         self.dimensions['Dunefront_width_prim_der'] = self.dimensions['Dunetoe_x_der'] - self.dimensions['DuneTop_prim_x']
             
     def get_dune_front_width_sec_fix(self):
+        """Extract the width of the secondary dune front 
+        (Dunefront_width_sec_fix).
+              
+        The width of the secondary dune front is determined by calculating 
+        the cross-shore distance between the cross-shore location of the 
+        secondary dune top and the fixed dune toe location.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+
+        """
+        
         self.dimensions['Dunefront_width_sec_fix'] = self.dimensions['Dunetoe_x_fix'] - self.dimensions['DuneTop_sec_x'] 
     
     def get_dune_front_width_sec_der(self):
+        """Extract the width of the secondary dune front 
+        (Dunefront_width_sec_der).
+              
+        The width of the secondary dune front is determined by calculating 
+        the cross-shore distance between the cross-shore location of the 
+        secondary dune top and the derivative dune toe location.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+
+        """
+                
         self.dimensions['Dunefront_width_sec_der'] = self.dimensions['Dunetoe_x_der'] - self.dimensions['DuneTop_sec_x']
     
     def get_dune_front_gradient_prim_fix(self, trsct_idx):
+        """Extract the gradient of the primary dune front 
+        (Dunefront_gradient_prim_fix).
+              
+        The gradient of the dune front is determined by finding the slope of  
+        the line of best fit along the coastal profile between the primary 
+        dune top  and the fixed dune toe location.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1354,6 +1638,26 @@ class Extraction:
              self.dimensions.loc[yr,'Dunefront_gradient_prim_fix'] = get_gradient(elevation, seaward_x, landward_x)
  
     def get_dune_front_gradient_prim_der(self, trsct_idx):
+        """Extract the gradient of the primary dune front 
+        (Dunefront_gradient_prim_der).
+              
+        The gradient of the dune front is determined by finding the slope of  
+        the line of best fit along the coastal profile between the primary 
+        dune top  and the derivative dune toe location.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+                
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1367,6 +1671,26 @@ class Extraction:
              self.dimensions.loc[yr,'Dunefront_gradient_prim_der'] = get_gradient(elevation, seaward_x, landward_x)
  
     def get_dune_front_gradient_sec_fix(self, trsct_idx):
+        """Extract the gradient of the secondary dune front 
+        (Dunefront_gradient_sec_fix).
+              
+        The gradient of the dune front is determined by finding the slope of  
+        the line of best fit along the coastal profile between the secondary 
+        dune top and the fixed dune toe location.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+        JAT.Geometric_functions.get_gradient
+
+        """
+                
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1380,6 +1704,26 @@ class Extraction:
              self.dimensions.loc[yr,'Dunefront_gradient_sec_fix'] = get_gradient(elevation, seaward_x, landward_x)
  
     def get_dune_front_gradient_sec_der(self, trsct_idx):
+        """Extract the gradient of the secondary dune front 
+        (Dunefront_gradient_sec_der).
+              
+        The gradient of the dune front is determined by finding the slope of  
+        the line of best fit along the coastal profile between the secondary 
+        dune top and the derivative dune toe location.
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+        JAT.Geometric_functions.get_gradient
+
+        """
+                      
         for i, yr in enumerate(self.data.years_filtered):
              yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1393,6 +1737,24 @@ class Extraction:
              self.dimensions.loc[yr,'Dunefront_gradient_sec_der'] = get_gradient(elevation, seaward_x, landward_x)
    
     def get_dune_volume_fix(self, trsct_idx):
+        """Extract the dune volume (DuneVol_fix).
+              
+        The dune volume is determined by finding the surface under the coastal 
+        profile between the primary dune top  and the fixed dune toe location.
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
+        JAT.Geometric_functions.get_volume
+
+        """
+                
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1406,6 +1768,24 @@ class Extraction:
             self.dimensions.loc[yr,'DuneVol_fix'] = get_volume(elevation, seaward_x, landward_x)
         
     def get_dune_volume_der(self, trsct_idx):
+        """Extract the dune volume (DuneVol_der).
+              
+        The dune volume is determined by finding the surface under the coastal 
+        profile between the primary dune top  and the derivative dune toe 
+        location.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+        JAT.Geometric_functions.get_volume
+
+        """        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1419,6 +1799,26 @@ class Extraction:
             self.dimensions.loc[yr, 'DuneVol_der'] = get_volume(elevation, seaward_x, landward_x)
   
     def get_intertidal_gradient_fix(self, trsct_idx):
+        """Extract the gradient of the intertidal area 
+        (Intertidal_gradient_fix).
+              
+        The gradient of the intertidal area is determined by finding the slope 
+        of the line of best fit along the coastal profile between the fixed 
+        mean low water and the fixed mean high water.
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
                 
@@ -1432,7 +1832,25 @@ class Extraction:
             
     
     def get_intertidal_volume_fix(self, trsct_idx):
-        for i, yr in enumerate(self.data.years_filtered):
+        """Extract the volume of the intertidal area (Intertidal_volume_fix).
+              
+        The intertidal area volume is determined by finding the surface under 
+        the coastal profile between the fixed mean low water and the fixed 
+        mean high water.
+        
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed
+        JAT.Geometric_functions.get_volume
+
+        """
+        for i, yr in enumerate(self.data.years_filtered):            
             yr_idx = self.data.years_filtered_idxs[i]
              
             elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
@@ -1445,6 +1863,25 @@ class Extraction:
             self.dimensions.loc[yr, 'Intertidal_volume_fix'] = get_volume(elevation, seaward_x, landward_x)
 
     def get_intertidal_volume_var(self, trsct_idx):
+        """Extract the volume of the intertidal area (Intertidal_volume_var).
+              
+        The intertidal area volume is determined by finding the surface under 
+        the coastal profile between the variable mean low water and the 
+        variable mean high water.
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable
+        JAT.Geometric_functions.get_volume
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1458,6 +1895,26 @@ class Extraction:
             self.dimensions.loc[yr, 'Intertidal_volume_var'] = get_volume(elevation, seaward_x, landward_x)
 
     def get_foreshore_gradient(self, trsct_idx):
+        """Extract the gradient of the foreshore (Foreshore_gradient).
+              
+        The gradient of the foreshore is determined by finding the slope 
+        of the line of best fit along the coastal profile between the seaward 
+        foreshore boundary and the landward boundary between the marine and 
+        aeolian zone (BMA).
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
                 
@@ -1470,6 +1927,25 @@ class Extraction:
             self.dimensions.loc[yr, 'Foreshore_gradient'] = get_gradient(elevation, seaward_x, landward_x)
 
     def get_foreshore_volume(self, trsct_idx):
+        """Extract the volume of the foreshore (Foreshore_volume).
+              
+        The foreshore volume is determined by finding the surface under 
+        the coastal profile between the seaward foreshore boundary and the 
+        landward boundary between the marine and aeolian zone (BMA).
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma
+        JAT.Geometric_functions.get_volume
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
@@ -1483,6 +1959,27 @@ class Extraction:
             self.dimensions.loc[yr, 'Foreshore_volume'] = get_volume(elevation, seaward_x, landward_x)
 
     def get_active_profile_gradient(self, trsct_idx):
+        """Extract the gradient of the active profile 
+        (Active_profile_gradient).
+              
+        The gradient of the active profile is determined by finding the slope 
+        of the line of best fit along the coastal profile between the seaward 
+        active profile boundary and the landward boundary between the marine 
+        and aeolian zone (BMA).
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma
+        JAT.Geometric_functions.get_gradient
+
+        """
+        
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
                 
@@ -1495,6 +1992,25 @@ class Extraction:
             self.dimensions.loc[yr, 'Active_profile_gradient'] = get_gradient(elevation, seaward_x, landward_x)            
     
     def get_active_profile_volume(self, trsct_idx):
+        """Extract the volume of the active profile (Active_profile_volume).
+              
+        The volume of the active profile is determined by finding the surface 
+        under the coastal profile between the seaward active profile boundary 
+        and the landward boundary between the marine and aeolian zone (BMA).
+
+        Parameters
+        ----------
+        trsct_idx : int
+            index of the transect necessary to extract the elevation of the profiles.
+        
+        See also
+        --------
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma
+        JAT.Geometric_functions.get_volume
+
+        """
+                
         for i, yr in enumerate(self.data.years_filtered):
             yr_idx = self.data.years_filtered_idxs[i]
              
