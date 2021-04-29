@@ -5,15 +5,14 @@ The Jarkus Analysis Toolbox (JAT) is a Python-based open-source software, that c
 <img src="https://github.com/christavanijzendoorn/JAT/blob/master/images/parameters.png" width="500">
 Example of characteristic parameters that can be extracted using the JAT
 
-The modular set-up of the JAT makes sure that new extraction techniques can be added in the future. For instance, we are currently working on the inclusion of:
+
+The modular set-up of the JAT makes sure that new extraction techniques can be added in the future. For instance, expected extraction methods are:
 - a closure depth method
 - the python based version of the second derivative method
 - the momentary coastline calculation
 
-The output of the extraction methods for all years and transects produced with the JAT are available online (ref. TUdelft server). In the future, some examples of visualizing these data will be provided in this repository.
+The output of the extraction methods for all years and transects produced with the JAT are available on the [4TU repository](https://doi.org/10.4121/14514213). Example 5 in this repository provides a script that can be used to load and visualize these data.
 
 For a complete guide on how to use the Jarkus Analysis Toolbox, with examples and explanation of the available characterstic parameters, go to the [Documentation](https://jarkus-analysis-toolbox.readthedocs.io/). 
-
-All extracted characteristic parameters can be download from the [4TU repository] (https://doi.org/10.4121/14514213)
 
 
