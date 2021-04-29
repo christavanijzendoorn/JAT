@@ -70,8 +70,8 @@ DF_x_pybeach_norm = pickle.load(open(pickle_file, 'rb')) #load pickle of dimensi
 #%%# Filtering based on transects and years
 
 def apply_filters(variable_dataframe, filter_file, begin_yr, end_yr, variable): 
-    DF_filtered = Ff.bad_locations_filter(variable_dataframe, filter_file)
-    DF_filtered = Ff.bad_yrs_filter(DF_filtered, begin_yr, end_yr)
+    DF_filtered = Ff.locations_filter(variable_dataframe, filter_file)
+    DF_filtered = Ff.yrs_filter(DF_filtered, begin_yr, end_yr)
 
     return DF_filtered
 

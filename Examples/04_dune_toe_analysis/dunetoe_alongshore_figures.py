@@ -57,12 +57,12 @@ trscts = DF_y_der.columns
 var = 'MHW_y_var'
 pickle_file = DirDimensions + var + '_dataframe.pickle'    
 DF_MHW = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
-DF_MHW = Ff.bad_locations_filter(DF_MHW, filter_file)
+DF_MHW = Ff.locations_filter(DF_MHW, filter_file)
    
 var = 'MLW_y_var'
 pickle_file = DirDimensions + var + '_dataframe.pickle'    
 DF_MLW = pickle.load(open(pickle_file, 'rb')) #load pickle of dimension    
-DF_MLW = Ff.bad_locations_filter(DF_MLW, filter_file)
+DF_MLW = Ff.locations_filter(DF_MLW, filter_file)
 
 tidal_range = DF_MHW.loc[1965] - DF_MLW.loc[1965]
 MHW = DF_MHW.loc[1965]
@@ -71,8 +71,8 @@ MHW = DF_MHW.loc[1965]
 begin_yr = 1980
 end_yr = 2017
 
-# Filter bad locations from dataframe
-variable_DF = Ff.bad_locations_filter(DF_y_der, filter_file)
+# Filter locations from dataframe
+variable_DF = Ff.locations_filter(DF_y_der, filter_file)
 
 # Get conversion dictionary needed to convert from transect number to alongshore value
 data = Transects(config)
