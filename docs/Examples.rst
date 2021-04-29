@@ -56,5 +56,5 @@ The output of Example 3 was converted into a netcdf file that is publicly availa
 The `Load_data_from_netcdf.py` script shows how to load the extracted characteristic parameters from the netcdf file and gives a first glimpse of how to work with these data. 
 
 
-.. _4TU repository: https://github.com/christavanijzendoorn/JAT
-.. _repository: https://github.com/christavanijzendoorn/JAT
+.. _4TU repository: https://doi.org/10.4121/14514213
+.. _repository: https://doi.org/10.4121/14514213

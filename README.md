@@ -14,6 +14,6 @@ The output of the extraction methods for all years and transects produced with t
 
 For a complete guide on how to use the Jarkus Analysis Toolbox, with examples and explanation of the available characterstic parameters, go to the [Documentation](https://jarkus-analysis-toolbox.readthedocs.io/). 
 
-
+All extracted characteristic parameters can be download from the [4TU repository] (https://doi.org/10.4121/14514213)
 
 
