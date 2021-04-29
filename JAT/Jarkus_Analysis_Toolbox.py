@@ -4,7 +4,7 @@
 # @author: cijzendoornvan
 # """
 
-""" Includes the most important functionalities of the JAT inclusing 
+""" Includes the most important functionalities of the JAT including 
 retrieving data and extracting profile dimensions """
 
 import numpy as np
@@ -41,9 +41,15 @@ class Transects:
         """
         # create a dataset object, based on JARKUS dataset saved locally or on server
         if 'http' in config['data locations']['Jarkus']:        # check whether it's a url
-            self.dataset = Dataset(config['data locations']['Jarkus'])    
+            try:
+                self.dataset = Dataset(config['data locations']['Jarkus'])
+            except IOError as e:
+                print("Unable to open netcdf file containing jarkus dataset - check url under data locations - Jarkus in jarkus.yml file")
         else: # load from local file
-            self.dataset = Dataset(config['inputdir'] + config['data locations']['Jarkus'])
+            try:
+                self.dataset = Dataset(config['inputdir'] + config['data locations']['Jarkus'])
+            except IOError as e:
+                print("Unable to open netcdf file containing jarkus dataset - check directory under data locations - Jarkus in jarkus.yml file")
         self.variables = self.dataset.variables
         
     def get_years_filtered(self, start_yr, end_yr):
@@ -1289,9 +1295,15 @@ class Extraction:
 
         ## Variable dunetoe definition based on first and second derivative of profile
         if 'http' in self.config['data locations']['Dunetoe']: # check whether it's a url
-            dunetoes = Dataset(self.config['data locations']['Dunetoe'])    
+            try:
+                dunetoes = Dataset(self.config['data locations']['Dunetoe'])   
+            except IOError as e:
+                print("Unable to open netcdf file containing dunetoes dataset - check url under data locations - Dunetoe in jarkus.yml file")
         else: # load from local file
-            dunetoes = Dataset(self.config['inputdir'] + self.config['data locations']['Dunetoe'])
+            try:
+                dunetoes = Dataset(self.config['inputdir'] + self.config['data locations']['Dunetoe'])
+            except IOError as e:
+                print("Unable to open netcdf file containing dunetoes dataset - check directory under data locations - Dunetoe in jarkus.yml file")
             
         time = dunetoes.variables['time'][:]
         years = num2date(time, dunetoes.variables['time'].units)
