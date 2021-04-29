@@ -27,7 +27,7 @@ data locations: # When saved locally fill in directory of dataset (and leave out
    Dunetoe: DF_2nd_deriv_DF.nc
            # Download from: https://doi.org/10.4121/uuid:0a5237ec-8ccc-4bbe-8d41-01716d835471
    Nourishment: Suppletiedatabase.xlsx
-           # 'https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/suppleties/nourishments.nc'
+           # 'http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/suppleties/nourishments.nc'
    SLR: zeespiegelstijging_clo.xlsx # Downloaded from https://www.clo.nl/indicatoren/nl022910-zeespiegelstand-nederland-en-mondiaal
    LocFilter: location_filter.yml # not necessary for single transect
    Titles: plot_titles.yml # not necessary for single transect

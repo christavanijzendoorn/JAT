@@ -2,15 +2,15 @@ name: jarkus
 
 # REQUEST YEARS AND TRANSECTS
 years:
-    start_yr: 2010 #1980 
-    end_yr: 2020 #2021 # the end year is never included if you want e.g. 1995, fill in start_yr: 1995 and end_yr: 1996
+    start_yr: 1980 
+    end_yr: 2021 # the end year is never included if you want e.g. 1995, fill in start_yr: 1995 and end_yr: 1996
 
 transects: 
     # Choose the type of analysis: single, multiple, range or all
     type: single 
     # below the retrieval request for the single, multiple and range type are defined
     # Note! If type is set to 'all' it overrides the input below 
-    single: 7004525 #8009325 # for single
+    single: 8009325 # for single
     multiple: # for multiple 
         - 8009325
         - 8009350 
@@ -22,12 +22,12 @@ transects:
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
 outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\01_single_transect\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
-   Jarkus: transect.nc
-           # 'https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/jarkus/profiles/transect.nc'
-   Dunetoe: DF_2nd_deriv.nc
-           # 'https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/DuneFoot/DF.nc'
+   Jarkus: 'http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/jarkus/profiles/transect.nc'
+           # transect.nc
+   Dunetoe: 'http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc'
+           # DF_2nd_deriv.nc 
    Nourishment: Suppletiedatabase.xlsx # not necessary for this example
-           # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
+           # http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/suppleties/nourishments.nc
    LocFilter: location_filter.yml # not necessary for this example
    Titles: plot_titles.yml # not necessary for this example
 save locations:

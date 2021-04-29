@@ -22,12 +22,12 @@ transects:
 inputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Input\
 outputdir: C:\Users\cijzendoornvan\OneDrive - Delft University of Technology\Documents\DuneForce\JARKUS\JAT\Examples\02_region_transects\
 data locations: # When saved locally fill in directory of dataset (and leave out the root)
-   Jarkus: transect.nc
-           # 'https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/jarkus/profiles/transect.nc'
-   Dunetoe: DF_2nd_deriv.nc
-           # 'https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/DuneFoot/DF.nc'
+   Jarkus: 'http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/jarkus/profiles/transect.nc'
+           # transect.nc
+   Dunetoe: 'http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc'
+           # DF_2nd_deriv.nc 
    Nourishment: Suppletiedatabase.xlsx # not necessary for this example
-           # https://opendap.tudelft.nl/thredds/dodsC/data2/deltares/rijkswaterstaat/suppleties/nourishments.nc.html
+           # http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/suppleties/nourishments.nc
    LocFilter: location_filter.yml # not necessary for this example
    Titles: plot_titles.yml # not necessary for this example
 save locations:
