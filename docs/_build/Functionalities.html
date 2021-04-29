@@ -1,0 +1,1476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="Enlish" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Functionalities &mdash; Jarkus Analysis Toolbox 0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/../_templates/theme_overrides.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Help" href="Help.html" />
+    <link rel="prev" title="Characteristic parameters" href="CharacteristicParameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Jarkus Analysis Toolbox
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Method.html">Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CharacteristicParameters.html">Characteristic parameters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functionalities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-JAT.Geometric_functions">Geometric functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-JAT.Jarkus_Analysis_Toolbox">Jarkus Analysis Toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-JAT.Filtering_functions">Filtering functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Help.html">Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Jarkus Analysis Toolbox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Functionalities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Functionalities.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="functionalities">
+<h1>Functionalities<a class="headerlink" href="#functionalities" title="Permalink to this headline">¶</a></h1>
+<p>The Jarkus Analysis Toolbox provides many functionalities. Here, all available modules are explained per category.</p>
+<div class="section" id="module-JAT.Geometric_functions">
+<span id="geometric-functions"></span><h2>Geometric functions<a class="headerlink" href="#module-JAT.Geometric_functions" title="Permalink to this headline">¶</a></h2>
+<p>Provides basic geometric functions that execute calculations based on the
+coastal profile.</p>
+<dl class="function">
+<dt id="JAT.Geometric_functions.find_intersections">
+<code class="sig-prename descclassname">JAT.Geometric_functions.</code><code class="sig-name descname">find_intersections</code><span class="sig-paren">(</span><em class="sig-param">elevation</em>, <em class="sig-param">crossshore</em>, <em class="sig-param">y_value</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Geometric_functions.find_intersections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find cross-shore location of intersection between profile and
+horizontal line at a fixed elevation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elevation</strong> (<em>np.array</em>) -- np.array containing the elevation of the coastal profile in meters.</p></li>
+<li><p><strong>crossshore</strong> (<em>np.array</em>) -- np.array containing the crossshore location in meters.</p></li>
+<li><p><strong>y_value</strong> (<em>float</em>) -- Elevation of the horizontal line in meters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>intersection_x: Cross-shore location of the intersection between the
+coastal profile and horizontal line.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="JAT.Geometric_functions.get_gradient">
+<code class="sig-prename descclassname">JAT.Geometric_functions.</code><code class="sig-name descname">get_gradient</code><span class="sig-paren">(</span><em class="sig-param">elevation</em>, <em class="sig-param">seaward_x</em>, <em class="sig-param">landward_x</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Geometric_functions.get_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find gradient of a profile between two points</p>
+<p>The gradient of a coastal profile is determined by finding the slope of
+the line of best fit along the elevation between a landward and seaward
+boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elevation</strong> (<em>np.array</em>) -- np.array containing the elevation of the coastal profile in meters</p></li>
+<li><p><strong>seaward_x</strong> (<em>float</em><em> or </em><em>int</em>) -- Cross-shore seaward boundary</p></li>
+<li><p><strong>landward_x</strong> (<em>float</em><em> or </em><em>int</em>) -- Cross-shore landward boundary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>gradient: slope of the best fit line</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="JAT.Geometric_functions.get_volume">
+<code class="sig-prename descclassname">JAT.Geometric_functions.</code><code class="sig-name descname">get_volume</code><span class="sig-paren">(</span><em class="sig-param">elevation</em>, <em class="sig-param">seaward_x</em>, <em class="sig-param">landward_x</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Geometric_functions.get_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine volume under coastal profile between two two points</p>
+<p>The volume of the coastal profile between a landward and seaward boundary
+is determined by integrating over the surface beneath the coastal profile
+between those two points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elevation</strong> (<em>np.array</em>) -- np.array containing the elevation of the coastal profile in meters</p></li>
+<li><p><strong>seaward_x</strong> (<em>float</em><em> or </em><em>int</em>) -- Cross-shore seaward boundary</p></li>
+<li><p><strong>landward_x</strong> (<em>float</em><em> or </em><em>int</em>) -- Cross-shore landward boundary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>volume: surface under the graph in m^2. Can be interpreted as m^3 by
+assuming the profile is 1 m wide.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JAT.Jarkus_Analysis_Toolbox">
+<span id="jarkus-analysis-toolbox"></span><h2>Jarkus Analysis Toolbox<a class="headerlink" href="#module-JAT.Jarkus_Analysis_Toolbox" title="Permalink to this headline">¶</a></h2>
+<p>Includes the most important functionalities of the JAT including
+retrieving data and extracting profile dimensions</p>
+<dl class="class">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction">
+<em class="property">class </em><code class="sig-prename descclassname">JAT.Jarkus_Analysis_Toolbox.</code><code class="sig-name descname">Extraction</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracting characteristic parameters from coastal profiles.</p>
+<p>This class provides the functionalities to extract the characteristic
+parameters requested by the user from transects of the jarkus dataset.
+Additionally, it provides functions to post-process the outcome of the
+extraction.</p>
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_active_profile_gradient">
+<code class="sig-name descname">get_active_profile_gradient</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_active_profile_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the active profile
+(Active_profile_gradient).</p>
+<p>The gradient of the active profile is determined by finding the slope
+of the line of best fit along the coastal profile between the seaward
+active profile boundary and the landward boundary between the marine
+and aeolian zone (BMA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_active_profile_volume">
+<code class="sig-name descname">get_active_profile_volume</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_active_profile_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the volume of the active profile (Active_profile_volume).</p>
+<p>The volume of the active profile is determined by finding the surface
+under the coastal profile between the seaward active profile boundary
+and the landward boundary between the marine and aeolian zone (BMA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_volume" title="JAT.Geometric_functions.get_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_volume()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_all_dimensions">
+<code class="sig-name descname">get_all_dimensions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_all_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts all requested characteristic parameters for all requested
+years and transects.</p>
+<p>Checks whether the saving directory is in place and proceeds to go
+through all requested transects. Per characteristic parameter it is
+checked whether it was requested, and, if so, the values for all
+requested years are extracted. Ultimately, per transect a dataframe
+is saved that includes the values of all requested characteristic
+parameters for all years at that location.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_gradient_der">
+<code class="sig-name descname">get_beach_gradient_der</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_gradient_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the beach (Beach_gradient_der).</p>
+<p>The gradient of the beach is determined by finding the slope of
+the line of best fit along the coastal profile between the fixed
+mean sea level and the second derivative dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_gradient_fix">
+<code class="sig-name descname">get_beach_gradient_fix</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_gradient_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the beach (Beach_gradient_fix).</p>
+<p>The gradient of the beach is determined by finding the slope of
+the line of best fit along the coastal profile between the fixed
+mean sea level and the fixed dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_gradient_var">
+<code class="sig-name descname">get_beach_gradient_var</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_gradient_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the beach (Beach_gradient_var).</p>
+<p>The gradient of the beach is determined by finding the slope of
+the line of best fit along the coastal profile between the variable
+mean sea level and the fixed dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_der">
+<code class="sig-name descname">get_beach_width_der</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the beach (Beach_width_der).</p>
+<p>The width of the beach is determined by calculating
+the cross-shore distance between the fixed mean sea level and the
+dune toe location based on the second derivative method.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_der_var">
+<code class="sig-name descname">get_beach_width_der_var</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_der_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the beach (Beach_width_der_var).</p>
+<p>The width of the beach is determined by calculating
+the cross-shore distance between the variable mean sea level and the
+dune toe location based on the second derivative method.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_fix">
+<code class="sig-name descname">get_beach_width_fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the beach (Beach_width_fix).</p>
+<p>The width of the beach is determined by calculating
+the cross-shore distance between the fixed mean sea level and the
+fixed dune toe location.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_var">
+<code class="sig-name descname">get_beach_width_var</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_beach_width_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the beach (Beach_width_var).</p>
+<p>The width of the beach is determined by calculating
+the cross-shore distance between the variable mean sea level and the
+fixed dune toe location.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dataframe_per_dimension">
+<code class="sig-name descname">get_dataframe_per_dimension</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dataframe_per_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and saves a dataframe per characteristic parameter from the
+dataframes with all requested characteristic parameters per transect.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_prim_der">
+<code class="sig-name descname">get_dune_front_gradient_prim_der</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_prim_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the primary dune front
+(Dunefront_gradient_prim_der).</p>
+<p>The gradient of the dune front is determined by finding the slope of
+the line of best fit along the coastal profile between the primary
+dune top  and the derivative dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_prim_fix">
+<code class="sig-name descname">get_dune_front_gradient_prim_fix</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_prim_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the primary dune front
+(Dunefront_gradient_prim_fix).</p>
+<p>The gradient of the dune front is determined by finding the slope of
+the line of best fit along the coastal profile between the primary
+dune top  and the fixed dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_sec_der">
+<code class="sig-name descname">get_dune_front_gradient_sec_der</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_sec_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the secondary dune front
+(Dunefront_gradient_sec_der).</p>
+<p>The gradient of the dune front is determined by finding the slope of
+the line of best fit along the coastal profile between the secondary
+dune top and the derivative dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_sec_fix">
+<code class="sig-name descname">get_dune_front_gradient_sec_fix</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_gradient_sec_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the secondary dune front
+(Dunefront_gradient_sec_fix).</p>
+<p>The gradient of the dune front is determined by finding the slope of
+the line of best fit along the coastal profile between the secondary
+dune top and the fixed dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_prim_der">
+<code class="sig-name descname">get_dune_front_width_prim_der</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_prim_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the primary dune front
+(Dunefront_width_prim_der).</p>
+<p>The width of the primary dune front is determined by calculating
+the cross-shore distance between the cross-shore location of the
+primary dune top and the derivative dune toe location.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_prim_fix">
+<code class="sig-name descname">get_dune_front_width_prim_fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_prim_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the primary dune front
+(Dunefront_width_prim_fix).</p>
+<p>The width of the primary dune front is determined by calculating
+the cross-shore distance between the cross-shore location of the
+primary dune top and the fixed dune toe location.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_sec_der">
+<code class="sig-name descname">get_dune_front_width_sec_der</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_sec_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the secondary dune front
+(Dunefront_width_sec_der).</p>
+<p>The width of the secondary dune front is determined by calculating
+the cross-shore distance between the cross-shore location of the
+secondary dune top and the derivative dune toe location.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_sec_fix">
+<code class="sig-name descname">get_dune_front_width_sec_fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_front_width_sec_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the secondary dune front
+(Dunefront_width_sec_fix).</p>
+<p>The width of the secondary dune front is determined by calculating
+the cross-shore distance between the cross-shore location of the
+secondary dune top and the fixed dune toe location.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative">
+<code class="sig-name descname">get_dune_toe_derivative</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the elevation (Dunetoe_y_der) and cross-shore location
+(Dunetoe_x_der) of the dune toe based on the second derivative
+method [3].</p>
+<p>The dune toe elevation is extracted from the repository where the work
+of Diamantidou et al. [3] is saved. First, the method selects part of
+the coastal profile. This selection is between the landward boundary
+(get_landward_point_derivative) and the variable MHW. Then, the first
+and second derivative of this part of the coastal profile is
+calculated. The most seaward location where the first derivative is
+lower than 0.001 and the second derivative is lower than 0.01 is
+selected as the dune toe [3].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>index of the transect necessary to extract the elevation of the profiles.</em>) -- </p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative()</span></code></a></p>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets">3</span></dt>
+<dd><p>Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., &amp; de Vries, S.   &quot;An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast.&quot;     Journal of Coastal Research, 36(3)(2020): 668-675. <a class="reference external" href="https://doi.org/10.2112/JCOASTRES-D-19-00056.1">https://doi.org/10.2112/JCOASTRES-D-19-00056.1</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed">
+<code class="sig-name descname">get_dune_toe_fixed</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of the dune toe (Dunetoe_x_fix).</p>
+<p>The dune toe is defined as a fixed, user-defined elevation
+(default = +3 m). The intersections between this elevation and the
+coastal profile are determined. Then, the cross-shore location of the
+most seaward intersection is selected as the dune toe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_pybeach">
+<code class="sig-name descname">get_dune_toe_pybeach</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_pybeach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the elevation (Dunetoe_y_pybeach) and cross-shore location
+(Dunetoe_x_pybeach) of the dune toe based on pybeach machine learning
+method <a class="footnote-reference brackets" href="#id5" id="id3">7</a>.</p>
+<p>Pybeach provides three different pre-trained machine learning models
+(barrier-island, wave-embayed and mixed) that can extract the dune toe
+location. Here, the user can define which model to use (default =
+'mixed') These models were based on the identification of the dune
+toe by experts. To make the applicaiton of the pybeach machine
+learning method comparable to the second derivative method a similar
+reduction of the coastal profile (with a landward and seaward
+boundary) is executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a></p>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id3">7</a></span></dt>
+<dd><p>Beuzen, Tomas. &quot;pybeach: A Python package for extracting the location of dune toes on beach profile transects.&quot; Journal of Open Source Software 4(44) (2019): 1890. <a class="reference external" href="https://doi.org/10.21105/joss.01890">https://doi.org/10.21105/joss.01890</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_volume_der">
+<code class="sig-name descname">get_dune_volume_der</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_volume_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the dune volume (DuneVol_der).</p>
+<p>The dune volume is determined by finding the surface under the coastal
+profile between the primary dune top  and the derivative dune toe
+location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_volume" title="JAT.Geometric_functions.get_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_volume()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_volume_fix">
+<code class="sig-name descname">get_dune_volume_fix</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_volume_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the dune volume (DuneVol_fix).</p>
+<p>The dune volume is determined by finding the surface under the coastal
+profile between the primary dune top  and the fixed dune toe location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_volume" title="JAT.Geometric_functions.get_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_volume()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_foreshore_gradient">
+<code class="sig-name descname">get_foreshore_gradient</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_foreshore_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the foreshore (Foreshore_gradient).</p>
+<p>The gradient of the foreshore is determined by finding the slope
+of the line of best fit along the coastal profile between the seaward
+foreshore boundary and the landward boundary between the marine and
+aeolian zone (BMA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_foreshore_volume">
+<code class="sig-name descname">get_foreshore_volume</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_foreshore_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the volume of the foreshore (Foreshore_volume).</p>
+<p>The foreshore volume is determined by finding the surface under
+the coastal profile between the seaward foreshore boundary and the
+landward boundary between the marine and aeolian zone (BMA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_volume" title="JAT.Geometric_functions.get_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_volume()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_gradient_fix">
+<code class="sig-name descname">get_intertidal_gradient_fix</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_gradient_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the gradient of the intertidal area
+(Intertidal_gradient_fix).</p>
+<p>The gradient of the intertidal area is determined by finding the slope
+of the line of best fit along the coastal profile between the fixed
+mean low water and the fixed mean high water.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_gradient" title="JAT.Geometric_functions.get_gradient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_gradient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_volume_fix">
+<code class="sig-name descname">get_intertidal_volume_fix</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_volume_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the volume of the intertidal area (Intertidal_volume_fix).</p>
+<p>The intertidal area volume is determined by finding the surface under
+the coastal profile between the fixed mean low water and the fixed
+mean high water.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_volume" title="JAT.Geometric_functions.get_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_volume()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_volume_var">
+<code class="sig-name descname">get_intertidal_volume_var</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_volume_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the volume of the intertidal area (Intertidal_volume_var).</p>
+<p>The intertidal area volume is determined by finding the surface under
+the coastal profile between the variable mean low water and the
+variable mean high water.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable()</span></code></a>, <a class="reference internal" href="#JAT.Geometric_functions.get_volume" title="JAT.Geometric_functions.get_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Geometric_functions.get_volume()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_width_fixed">
+<code class="sig-name descname">get_intertidal_width_fixed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_width_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the intertidal area (Intertidal_width_fix).</p>
+<p>The width of the intertidal area is determined by calculating
+the cross-shore distance between the fixed mean low water and the
+fixed mean high water.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_width_variable">
+<code class="sig-name descname">get_intertidal_width_variable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_intertidal_width_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the width of the intertidal area (Intertidal_width_var).</p>
+<p>The width of the intertidal area is determined by calculating
+the cross-shore distance between the variable mean low water and the
+variable mean high water.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma">
+<code class="sig-name descname">get_landward_point_bma</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of the landward boundary based on
+the boundary between the marine and aeolian zone (Landward_x_bma) [4].</p>
+<p>The landward boundary is defined as a fixed, user-defined elevation
+(default = +2 m). The intersections between this elevation and the
+coastal profile are determined. Then, the cross-shore location of the
+most seaward intersection is selected as the landward boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">4</span></dt>
+<dd><p>De Vries, S., de Schipper, M., Stive, M., &amp; Ranasinghe, R. &quot;Sediment exchange between the sub-aqeous and sub-aerial coastal zones.&quot; Coastal Engineering. 2 (2010).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative">
+<code class="sig-name descname">get_landward_point_derivative</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of the landward boundary based on
+steps in the second derivative method (Landward_x_der) [3].</p>
+<p>The landward boundary is determined by finding the peaks with a
+prominence larger than a fixed threshold (default = +2.4 m). If peaks
+are found and those peaks are larger than a user-defined elevation
+(default = 6.0), the cross-shore location of the intersection of this
+elevation with the coastal profile is the landward boundary.
+Otherwise, the peaks above the peaks threshold (variable MHW +
+prominence threshold) are selected and the most seaward selected peak
+is the landward boundary. If none of these selection cannot be applied
+a NaN value is inserted. This function uses scipy.signal.find_peaks
+[1]. The prominence of a peak measures how much a peak stands out from
+the surrounding baseline of the signal and is defined as the vertical
+distance between the peak and its lowest contour line [2].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>index of the transect necessary to extract the elevation of the profiles.</em>) -- </p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id8"><span class="brackets">3</span></dt>
+<dd><p>Diamantidou, E., Santinelli, G., Giardino, A., Stronkhorst, J., &amp; de Vries, S.   &quot;An Automatic Procedure for Dune toe Position Detection: Application to the Dutch Coast.&quot;     Journal of Coastal Research, 36(3)(2020): 668-675. <a class="reference external" href="https://doi.org/10.2112/JCOASTRES-D-19-00056.1">https://doi.org/10.2112/JCOASTRES-D-19-00056.1</a></p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks</a></p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_variance">
+<code class="sig-name descname">get_landward_point_variance</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_variance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of the landward boundary based on
+variance (Landward_x_variance).</p>
+<p>The landward boundary is determined by calculating the variance of the
+elevation of a transect location throughout all available years.
+Stable points are located based on where the variance of the elevation
+through time is below a user-defined threshold (default = 0.1). The
+stable points landward of the primary dune top are filtered out and
+the cross-shore location and elevation of the most seaward stable
+point is are selected as the landward boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed">
+<code class="sig-name descname">get_mean_high_water_fixed</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of mean high water (MHW_x_fix).</p>
+<p>The mean high water is defined as a fixed, user-defined
+elevation (default = + 1 m). The intersections between this elevation
+and the coastal profile are determined. Then, intersections that are
+further than 250 m landward of the location of the mean sea level
+(MSL_x) are excluded. This filtering is necessary to make sure
+landward intersections behind the dunes are not selected as the MHW
+location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable">
+<code class="sig-name descname">get_mean_high_water_variable</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the elevation (MHW_y_var) and cross-shore location
+(MHW_x_var) of mean low water.</p>
+<p>The mean high water is defined as a spatially variable elevation.
+This elevation is provided per transect location in the jarkus
+database (determined with tidal modeling). The intersections between
+this elevation and the coastal profile are determined. Then,
+intersections that are further than 250 m landward of the location of
+the mean sea level (MSL_x) are excluded. This filtering is necessary
+to make sure landward intersections behind the dunes are not selected
+as the MHW location. Both the cross-shore location and variable
+elevation are saved. Note, that the spatially variable elevation is
+not variable in time, so each transect has a constant MHW elevation
+assigned that is constant throughout the years.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed">
+<code class="sig-name descname">get_mean_low_water_fixed</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of mean low water (MLW_x_fix).</p>
+<p>The mean low water is defined as a fixed, user-defined elevation
+(default = -1 m). The intersections between this elevation and the
+coastal profile are determined. Then, intersections that are further
+than 250 m seaward of the location of the mean sea level (MSL_x) are
+excluded. This filtering is necessary to make sure seaward
+intersections caused by for instance the presence of shoals are not
+selected as the MLW location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable">
+<code class="sig-name descname">get_mean_low_water_variable</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the elevation (MLW_y_var) and cross-shore location
+(MLW_x_var) of mean low water.</p>
+<p>The mean low water is defined as a spatially variable elevation.
+This elevation is provided per transect location in the jarkus
+database (determined with tidal modeling). The intersections between
+this elevation and the coastal profile are determined. Then,
+intersections that are further than 250 m seaward of the location of
+the mean sea level (MSL_x) are excluded. This filtering is necessary
+to make sure seaward intersections caused by for instance the presence
+of shoals are not selected as the MLW location. Both the cross-shore
+location and variable elevation are saved. Note, that the spatially
+variable elevation is not variable in time, so each transect has a
+constant MLW elevation assigned that is constant throughout the years.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level">
+<code class="sig-name descname">get_mean_sea_level</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of mean sea level (MSL_x).</p>
+<p>The mean sea level is defined as a fixed, user-defined elevation
+(default = 0 m). The intersections between this elevation and the
+coastal profile are determined. The most seaward intersection is
+selected as the cross-shore location if no primary dune top is
+available. Otherwise, all intersections landward of the primary dune
+top are filtered out. Then, if the distance between the most seaward
+and landward intersection is equal or smaller than 100 m the most
+seaward intersection is selected as the cross-shore MSL location.
+Otherwise, if the distance is larger than 100 m, only the
+intersections 100 m landward of the most seaward intersection are
+selected. Of this selection, the most seaward intersection is
+selected as the cross-shore MSL location. This filtering is necessary
+to make sure landward intersections behind the dunes and seaward
+intersections due to the presence of shoals are not selected as the
+MSL location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable">
+<code class="sig-name descname">get_mean_sea_level_variable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore mean sea level location (MSL_x_var) based
+on the variable mean high and low water.</p>
+<p>The mean sea level location is determined by calculating the
+middle point between the cross-shore location of the variable mean
+high water and the variable mean low water.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_variable()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_variable()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top">
+<code class="sig-name descname">get_primary_dune_top</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the primary dune top height (DuneTop_prim_y) and
+cross-shore location (DuneTop_prim_x).</p>
+<p>The primary dune top is defined as the most seaward dune top that
+has a height that is larger than a user-defined threshold (default =
+5 m) and a prominence that is larger than a user-defined value
+(default = 2.0). This function uses scipy.signal.find_peaks [1]. The
+prominence of a peak measures how much a peak stands out from the
+surrounding baseline of the signal and is defined as the vertical
+distance between the peak and its lowest contour line [2].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id16"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks</a></p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_requested_variables">
+<code class="sig-name descname">get_requested_variables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_requested_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all variables that are related to the requested
+characteristic parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>variables_req: List of all variable that are related to the
+requested characteristic parameters as included in the
+configuration file</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile">
+<code class="sig-name descname">get_seaward_point_activeprofile</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of the seaward active profile
+boundary (Seaward_x_AP).</p>
+<p>The seaward boundary is defined as a fixed, user-defined elevation
+(default = -8 m). The intersections between this elevation and the
+coastal profile are determined. Then, the cross-shore location of the
+most seaward intersection is selected as the seaward boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_doc">
+<code class="sig-name descname">get_seaward_point_doc</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location (Seaward_x_DoC) of the depth of
+closure based on the method of Hinton [5].</p>
+<p>Approximation of the depth of closure below a user-defined minimum
+(default = -5.0 m) (Seaward_x_mindepth) where the standard deviation
+of the elevation through time is below a user-defined value (default
+= 0.25) for at least a user-defined length (default = 200m), based on
+the method by Hinton [5].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id19"><span class="brackets">5</span></dt>
+<dd><p>Hinton, Claire L. Decadal morphodynamic behaviour of the Holland shoreface. Diss. Middlesex University, 2000. <a class="reference external" href="https://eprints.mdx.ac.uk/id/eprint/6601">https://eprints.mdx.ac.uk/id/eprint/6601</a></p>
+</dd>
+<dt class="label" id="id20"><span class="brackets">6</span></dt>
+<dd><p>Zwarenstein Tutunji, Nicha. &quot;Classification of coastal profile development in the Hoogheemraadschap Hollands Noorderkwartier area: Using advanced data analysis techniques.&quot; (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore">
+<code class="sig-name descname">get_seaward_point_foreshore</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the cross-shore location of the seaward foreshore boundary
+(Seaward_x_FS).</p>
+<p>The seaward boundary is defined as a fixed, user-defined elevation
+(default = -4 m). The intersections between this elevation and the
+coastal profile are determined. Then, the cross-shore location of the
+most seaward intersection is selected as the seaward boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top">
+<code class="sig-name descname">get_secondary_dune_top</code><span class="sig-paren">(</span><em class="sig-param">trsct_idx</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the secondary dune top height (DuneTop_sec_y) and
+cross-shore location (DuneTop_sec_x).</p>
+<p>The secondary dune top is defined as the most seaward dune top that
+has a height that is larger than a user-defined threshold (default =
+3 m) and a prominence that is larger than a user-defined value
+(default = 0.5) and is located seaward of the primary dune top.
+This function uses scipy.signal.find_peaks [1]. The prominence of a
+peak measures how much a peak stands out from the surrounding baseline
+of the signal and is defined as the vertical distance between the peak
+and its lowest contour line [2]. The goal of this function is to be
+able to identify embryo dune formation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trsct_idx</strong> (<em>int</em>) -- index of the transect necessary to extract the elevation of the profiles.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top" title="JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top()</span></code></a></p>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="id21"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html#scipy.signal.find_peaks</a></p>
+</dd>
+<dt class="label" id="id22"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_prominences.html#scipy.signal.peak_prominences</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Extraction.normalize_dimensions">
+<code class="sig-name descname">normalize_dimensions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Extraction.normalize_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the cross-shore location values of all requested
+characteristic parameters</p>
+<p>Normalization of the cross-shore locations is done to make cross-shore
+values between transects comparable. The normalization is executed by
+subtracting a normalization value from the value of each year of a
+characteristic parameter. This function provides the option to apply
+a normalization based on the mean of all the years available for a
+transect. Additionally, a normalization based on the value of a fixed
+user-defined year is available. The normalized cross-shore locations
+are saved as a dataframe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects">
+<em class="property">class </em><code class="sig-prename descclassname">JAT.Jarkus_Analysis_Toolbox.</code><code class="sig-name descname">Transects</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loading and plotting transects.</p>
+<p>This class provides the functionalities to retrieve the jarkus dataset
+and filter out the years and locations requested by the user. This
+includes determining whether the user defined request is available.
+Additionally, the elevation of each requested transect can be saved and
+plotted to provide easy access for analysis, and the conversion of the
+transect number to the alongshore kilometer is provided.</p>
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_availability">
+<code class="sig-name descname">get_availability</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_availability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getting available years and transects</p>
+<p>This function executes the get_years_filtered and
+get_transects_filtered functions based on a configuration file
+containing the requested years and transects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and
+transects</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered" title="JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Transects.get_years_filtered()</span></code></a>, <a class="reference internal" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered" title="JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Transects.get_transects_filtered()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_conversion_dicts">
+<code class="sig-name descname">get_conversion_dicts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_conversion_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create conversion from transect number to alongshore meter and
+vice versa</p>
+<p>For each transect number in the jarkus dataset the alongshore
+kilometer is calculated. A dictionary is created that relates each
+transect number to its alongshore kilometer. Additionally, a
+dictionary is created that does the reverse.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>conversion_ids2alongshore: does the conversion from transect
+number to alongshore meter</p>
+<p>conversion_alongshore2ids: does the conversion from alongshore
+meter to transect number</p>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_transect_plot">
+<code class="sig-name descname">get_transect_plot</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transect_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save plot with all coastal profiles for each requested transect</p>
+<p>For each requested transect a quickplot is created and saved (as png
+and picle file) that shows all the requested years. The colors in the
+plot go from the start year in red to the end year in blue. Currently
+the axes are set automatically but this can be changed to user-defined
+limits in the future, which is mostly relevant for single transect
+plotting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and
+transects, reference to the jarkus dataset and the save locations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered">
+<code class="sig-name descname">get_transects_filtered</code><span class="sig-paren">(</span><em class="sig-param">transects</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_transects_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filtering requested transects</p>
+<p>It is determined what type of request is made and which transects are
+associated with this request. Then all transects in the jarkus dataset
+are extracted and compared to the user-requested years. Only the
+available (requested) years and their indices are retained.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>transects</strong> (<em>dict</em>) -- Part of the configuration file that includes which type of
+transects are requested (single, multiple, range or all) and (if
+applicable) which transects are associated with this request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered">
+<code class="sig-name descname">get_years_filtered</code><span class="sig-paren">(</span><em class="sig-param">start_yr</em>, <em class="sig-param">end_yr</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.get_years_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filtering requested years</p>
+<p>All years in the jarkus dataset are extracted and compared to the
+user-requested years. Only the available (requested) years and their
+indices are retained.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_yr</strong> (<em>int</em>) -- Starting year of the user-requested period</p></li>
+<li><p><strong>end_yr</strong> (<em>int</em>) -- Ending year of the user-requested period</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JAT.Jarkus_Analysis_Toolbox.Transects.save_elevation_dataframes">
+<code class="sig-name descname">save_elevation_dataframes</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Jarkus_Analysis_Toolbox.Transects.save_elevation_dataframes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save elevation of all years for each transect as a dataframe</p>
+<p>The elevation and corresponding cross-shore location of each requested
+year and requested transect location are saved as a dataframe. Note
+that each resulting file contains the profiles for all requested years
+of one requested transect. The function provides the option to use a
+filter that leaves out profiles when there is no elevation data
+present between a certain minimum and maximum elevation. This can,
+for instance, be useful when only the foreshore is studied and all
+transects that do not have elevation data in this region are
+redundant. The user-defined values for filter1 are included in the
+configuration file. Currently this filter does not have an effect on
+the extraction of the characteristic parameters because these are
+determined based on the elevation that is directly extracted from the
+jarkus dataset. Therefore, the default setting for filter1 is that is
+it not applied (config['user defined']['filter1']['apply']=False),
+but this could be changed in the future.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) -- The configuration file that contains the user-requested years and
+transects, reference to the jarkus dataset, the filter1 settings
+and the save locations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JAT.Filtering_functions">
+<span id="filtering-functions"></span><h2>Filtering functions<a class="headerlink" href="#module-JAT.Filtering_functions" title="Permalink to this headline">¶</a></h2>
+<p>Provides functions that allow filtering of the extracted characteristic
+parameters.</p>
+<dl class="function">
+<dt id="JAT.Filtering_functions.availability_locations_filter">
+<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">availability_locations_filter</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">dimension</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.availability_locations_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out transects based on data availability.</p>
+<p>Filter out transects that have a data availability that is lower than the
+user-defined threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) -- configuration file that includes the user defined availability
+threshold in percentage (filter2, locations)</p></li>
+<li><p><strong>dimension</strong> (<em>pd.dataframe</em>) -- dataframe containing the values of a characteristic parameter through
+time and more multiple transect locations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dimension_filt: dataframe containing the values of a
+characteristic parameter where filtered transects have been removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="JAT.Filtering_functions.availability_years_filter">
+<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">availability_years_filter</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">dimension</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.availability_years_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out years based on data availability.</p>
+<p>Filter out years that have a data availability that is lower than the
+user-defined threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) -- configuration file that includes the user defined availability
+threshold in percentage (filter2, years)</p></li>
+<li><p><strong>dimension</strong> (<em>pd.dataframe</em>) -- dataframe containing the values of a characteristic parameter through
+time and for multiple transect locations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dimension_filt: dataframe containing the values of a
+characteristic parameter where filtered years have been removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="JAT.Filtering_functions.locations_filter">
+<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">locations_filter</code><span class="sig-paren">(</span><em class="sig-param">dimension</em>, <em class="sig-param">filter_file</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.locations_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out user-defined transects.</p>
+<p>Filter out locations that are specified by the user from a dataframe of a
+characteristic parameter. Default settings filter out locations like the
+Hondsbossche Dunes and Maasvlakte, redundant transects at the outer edges
+of the Wadden Islands, and dams in Zeeland.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>pd.dataframe</em>) -- dataframe containing the values of a characteristic parameter through
+time and more multiple transect locations.</p></li>
+<li><p><strong>filter_file</strong> (<em>dict</em>) -- Includes a numbered list of sections that should be excluded. The
+first transect number represents the start of the section, the second
+transect number the end.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dimension_filt: dataframe containing the values of a
+characteristic parameter where filtered transects have been removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="JAT.Filtering_functions.nourishment_filter">
+<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">nourishment_filter</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">dimension</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.nourishment_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split characteristic parameter values into nourished and not nourished
+transects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) -- configuration file that includes the directory where the nourishment
+database is stored.</p></li>
+<li><p><strong>dimension</strong> (<em>pd.dataframe</em>) -- dataframe containing the values of a characteristic parameter through
+time and more multiple transect locations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.dataframe</em> -- nourished_dataframe: dataframe containing the values of a
+characteristic parameter of only transect that have been nourished.</p></li>
+<li><p><em>pd.dataframe</em> -- not_nourished_dataframe: dataframe containing the values of a
+characteristic parameter of only transect that have not been nourished.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="JAT.Filtering_functions.yrs_filter">
+<code class="sig-prename descclassname">JAT.Filtering_functions.</code><code class="sig-name descname">yrs_filter</code><span class="sig-paren">(</span><em class="sig-param">dimension</em>, <em class="sig-param">begin_year</em>, <em class="sig-param">end_year</em><span class="sig-paren">)</span><a class="headerlink" href="#JAT.Filtering_functions.yrs_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out user-defined years.</p>
+<p>Filter values of a characteristic parameter that are associated with a
+range of years that is specified by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>pd.dataframe</em>) -- dataframe containing the values of a characteristic parameter through
+time and more multiple transect locations.</p></li>
+<li><p><strong>begin_yr</strong> (<em>int</em>) -- Start year of the range that should be filtered</p></li>
+<li><p><strong>end_yr</strong> (<em>int</em>) -- End year of the range that should be filtered</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dimension_filt: dataframe containing the values of a
+characteristic parameter where filtered years have been removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Help.html" class="btn btn-neutral float-right" title="Help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CharacteristicParameters.html" class="btn btn-neutral float-left" title="Characteristic parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Christa van IJzendoorn.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
