@@ -105,8 +105,24 @@ User-defined settings
 ----------------------
 Below you can find a list of all user-defined settings that are included in the `jarkus.yml` file. For each setting a link to the documentation of the corresponding function is provided which explains how the setting is used.
 
-Upcoming!
-
+	* filter1: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Transects.save_elevation_dataframes`
+	* filter2: :py:mod:`JAT.Filtering_functions.availability_locations_filter`
+	* primary dune: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top`
+	* secondary dune: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_secondary_dune_top`
+	* mean sea level: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_sea_level`
+	* mean high water: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_high_water_fixed`
+	* mean low water: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_mean_low_water_fixed`
+	* landward variance threshold: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_variance`
+	* landward derivative: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_derivative`
+	* landward bma: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_bma`
+	* seaward foreshore: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_foreshore`
+	* seaward active profile: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_activeprofile`
+	* seaward DoC: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_seaward_point_doc`
+	* dune toe fixed: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed`
+	* dune toe classifier: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative`
+	* normalization: :py:mod:`JAT.Jarkus_Analysis_Toolbox.Extraction.normalize_dimensions(`
+   
+   
 Dependencies
 ---------------
 The JAT has specific dependencies that are managed through the `setup.py` file, the packages needed are as follows::

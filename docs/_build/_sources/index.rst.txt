@@ -6,7 +6,8 @@ The Jarkus Analysis Toolbox (JAT) is a Python-based open-source software, that c
 The software that is described in this documentation can be found in this `Github repository`_. Additionally, the extracted parameters for the entire Jarkus dataset are made available through the `4TU repository`_. Please use the `issues`_ page to raise questions and suggest improvements.
 
 .. _Github repository: https://github.com/christavanijzendoorn/JAT
-.. _4TU repository: https://github.com/christavanijzendoorn/JAT
+.. _4TU repository: https://doi.org/10.4121/14514213
+
 .. _issues: https://github.com/christavanijzendoorn/JAT/issues
 
 
