@@ -140,7 +140,7 @@ for variable in variables:
     value.units = metadata[variable][1]
     value.long_name = metadata[variable][0]
     
-    value[:,:] = dimension
+    value[:,:] = np.array(dimension.values)
 
 ds.close()
 
