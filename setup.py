@@ -16,7 +16,7 @@ setuptools.setup(
 	install_requires=[
 		'numpy==1.17.2',
 		'pandas==0.25.1',
-		'netCDF4',
+		'netCDF4==1.4.1',
 		'scipy==1.3.1',
 		'matplotlib',
 		'cftime==1.0.3.4',
