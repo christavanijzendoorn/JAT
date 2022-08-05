@@ -608,7 +608,7 @@ class Extraction:
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
             # Find all peaks that meet the user-defined height and prominence
-            dune_top_prim = find_peaks(elevation, height = self.config['user defined']['primary dune']['height'], prominence = self.config['user defined']['primary dune']['prominence'])
+            dune_top_prim = find_peaks(elevation.filled(np.nan), height = self.config['user defined']['primary dune']['height'], prominence = self.config['user defined']['primary dune']['prominence'])
 
             if len(dune_top_prim[0]) != 0: # If a peak is found in the profile
                 # Select the most seaward peak found of the primarypeaks
@@ -659,7 +659,7 @@ class Extraction:
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             
             # Find all peaks that meet the user-defined height and prominence
-            dune_top_sec = find_peaks(elevation, height = self.config['user defined']['secondary dune']['height'], prominence = self.config['user defined']['secondary dune']['prominence'])
+            dune_top_sec = find_peaks(elevation.filled(np.nan) , height = self.config['user defined']['secondary dune']['height'], prominence = self.config['user defined']['secondary dune']['prominence'])
 
             if len(dune_top_sec[0]) != 0: # If a peak is found in the profile
                 # Select the most seaward peak found of the secondary peaks
@@ -1061,7 +1061,7 @@ class Extraction:
             # Extract elevation
             elevation = self.data.variables['altitude'][yr_idx, trsct_idx, :]
             # Find peaks that have a prominence larger than height_of_peaks
-            peaks = find_peaks(elevation, prominence = height_of_peaks)[0] 
+            peaks = find_peaks(elevation.filled(np.nan) , prominence = height_of_peaks)[0] 
             # Get elevation of peaks
             peaks = elevation[peaks]
             # Select peaks that are larger or equal to the peaks threshold
@@ -1643,9 +1643,9 @@ class Extraction:
              elevation = pd.DataFrame(self.data.variables['altitude'][yr_idx, trsct_idx, :], index = self.crossshore) 
              
              # Get seaward boundary
-             seaward_x = self.dimensions.loc[yr, 'DuneTop_prim_x']
+             seaward_x = self.dimensions.loc[yr, 'Dunetoe_x_fix']
              # Get landward boundary 
-             landward_x = self.dimensions.loc[yr, 'Dunetoe_x_fix'] 
+             landward_x = self.dimensions.loc[yr, 'DuneTop_prim_x'] 
                  
              self.dimensions.loc[yr,'Dunefront_gradient_prim_fix'] = get_gradient(elevation, seaward_x, landward_x)
  
@@ -1752,7 +1752,8 @@ class Extraction:
         """Extract the dune volume (DuneVol_fix).
               
         The dune volume is determined by finding the surface under the coastal 
-        profile between the primary dune top  and the fixed dune toe location.
+        profile between the landward boundary based on the variance and the 
+		fixed dune toe location.
 
         Parameters
         ----------
@@ -1761,7 +1762,7 @@ class Extraction:
         
         See also
         --------
-        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_variance
         JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
         JAT.Geometric_functions.get_volume
 
@@ -1783,8 +1784,8 @@ class Extraction:
         """Extract the dune volume (DuneVol_der).
               
         The dune volume is determined by finding the surface under the coastal 
-        profile between the primary dune top  and the derivative dune toe 
-        location.
+        profile between the landward boundary based on the variance and the 
+		derivative dune toe location.
         
         Parameters
         ----------
@@ -1793,8 +1794,8 @@ class Extraction:
 
         See also
         --------
-        JAT.Jarkus_Analysis_Toolbox.Extraction.get_primary_dune_top
-        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_derivative
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_landward_point_variance
+        JAT.Jarkus_Analysis_Toolbox.Extraction.get_dune_toe_fixed
         JAT.Geometric_functions.get_volume
 
         """        
