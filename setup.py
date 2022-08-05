@@ -22,7 +22,8 @@ setuptools.setup(
 		'cftime==1.0.3.4',
 		'joblib==0.13.2',
 		'pybeach',
-		'pyyaml==5.2'],
+		'pyyaml==5.2',
+		'Pillow'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
