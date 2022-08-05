@@ -684,13 +684,13 @@ class Extraction:
         top are filtered out. Then, if the distance between the most seaward 
         and landward intersection is equal or smaller than 100 m the most 
         seaward intersection is selected as the cross-shore MSL location. 
-        Otherwise, if the distance is larger than 100 m, only the 
-        intersections 100 m landward of the most seaward intersection are 
-        selected. Of this selection, the most seaward intersection is 
-        selected as the cross-shore MSL location. This filtering is necessary 
-        to make sure landward intersections behind the dunes and seaward 
-        intersections due to the presence of shoals are not selected as the 
-        MSL location.
+        Otherwise, if the distance is larger than 100 m, only the intersecions 
+		that are landwards of the location that is 100 m seaward of the most 
+		landward intersection are selected.Of this selection, the most 
+		seaward intersection is selected as the cross-shore MSL location. 
+		This filtering is necessary to make sure landward intersections 
+		behind the dunes and seaward intersections due to the presence of 
+		shoals are not selected as the MSL location.
         
         Parameters
         ----------
