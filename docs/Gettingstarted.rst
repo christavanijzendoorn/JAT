@@ -13,7 +13,7 @@ Open anaconda prompt and activate the environment you created or want to use (ar
 
 Navigate to the directory where the Jarkus Ananlysis Toolbox is located and the `setup.py` file is present. Use the following command to install the JAT::
  
-  $  python setup.py install
+  $  pip install .
 
 Using the JAT
 --------------
