@@ -565,12 +565,12 @@ class Extraction:
             # Retrieve normalization type that should be applied from the configuration file
             norm_type = self.config['user defined']['normalization']['type']
             if norm_type == 'mean':
-                for i, col in dimensions.iteritems():
+                for i, col in dimensions.items():
                     # Get the mean cross-shore location per transect and subtract that from the values of the variable for each transect
                     normalized.loc[:, i] = col - col.mean()
             elif norm_type == 'norm_year':
                 norm_year = self.config['user defined']['normalization'][' year']    
-                for i, col in dimensions.iteritems():
+                for i, col in dimensions.items():
                     # Get norm value for the cross-shore location in the norm year and subtract that from the values of the variable for each transect
                     normalized.loc[:, i] = col - col[norm_year]
             
