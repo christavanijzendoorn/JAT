@@ -76,7 +76,7 @@ Input files
 The Jarkus Analysis Toolbox was developed to make the analysis of the Jarkus dataset more accessible.
 To work with the JAT, the Jarkus data has to be accessed through this `link`_.
 
-.. _link: http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/jarkus/profiles/transect.nc
+.. _link: https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/jarkus/profiles/transect.nc
 
 When you want to access large amounts of data (i.e. many transects and years) or want to be independent of internet access it is advisable to download the dataset (approx. 3 GB). Make sure to include their directory in the settings file (`jarkus.yml`).
 
@@ -84,13 +84,13 @@ When you want to access large amounts of data (i.e. many transects and years) or
 
 When you want to work with the *dune toes* that were extracted using the second derivative method. These can be found `here`_.
 
-.. _here: https://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc
+.. _here: https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/DuneFoot/DF_2nd_deriv.nc
 
 **Nourishment**
 
 `This`_ is where the *nourishment* database can be found.
 
-.. _This: http://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/suppleties/nourishments.nc
+.. _This: https://opendap.deltares.nl/thredds/fileServer/opendap/rijkswaterstaat/suppleties/nourishments.nc
 
 Note: If any of data links don't work, go to https://opendap.deltares.nl/thredds/catalog/opendap/rijkswaterstaat/catalog.html. Under the jarkus, DuneFoot and suppleties folders you'll hopefully be able to find the right files.
 
