@@ -9,7 +9,7 @@ Or use git and navigate to a convenient location and clone the repository::
 
   $ git clone https://github.com/christavanijzendoorn/JAT.git
 
-Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.
+Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment. As of March 2025, a nopybeach branch of the JAT is available that is compatible with python 3.12 (https://github.com/christavanijzendoorn/JAT/tree/nopybeach). Use of this branch is recommended! It does not support the functionalities that depend on pybeach, which is fine for most applications.
 
 Navigate to the directory where the Jarkus Ananlysis Toolbox is located and the `setup.py` file is present. Use the following command to install the JAT::
  
