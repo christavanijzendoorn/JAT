@@ -12,9 +12,7 @@ Geometric functions
 Jarkus Analysis Toolbox
 ------------------------
 
-.. automodule:: JAT.Jarkus_Analysis_Toolbox.Transects
-    :members:	
-.. automodule:: JAT.Jarkus_Analysis_Toolbox.Extraction
+.. automodule:: JAT.Jarkus_Analysis_Toolbox
     :members:	
 
 Filtering functions
