@@ -9,7 +9,7 @@ Or use git and navigate to a convenient location and clone the repository::
 
   $ git clone https://github.com/christavanijzendoorn/JAT.git
 
-Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`). The JAT requires Python 3.7 and is not compatible with Python 3.8, so make sure to use the right version in your environment.
+Open anaconda prompt and activate the environment you created or want to use (are you not able to follow? Go to :doc:`Help`). The JAT has been tested with Python 3.12, so we recommend to use this version in your environment. If you want to use the functionality of pybeach within the JAT, use the withpybeach branch which requires Python 3.7 (https://github.com/christavanijzendoorn/JAT/tree/withpybeach). 
 
 Navigate to the directory where the Jarkus Ananlysis Toolbox is located and the `setup.py` file is present. Use the following command to install the JAT::
  
