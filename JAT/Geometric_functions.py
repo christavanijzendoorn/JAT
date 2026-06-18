@@ -134,7 +134,7 @@ def get_volume(elevation, seaward_x, landward_x):
         if elevation.empty == False:
             volume_y = elevation - elevation.min()
             # volume_trapz = np.trapz(volume_y, x = volume_y.index)
-            volume_simps = integrate.simps(volume_y.values.transpose(), x = volume_y.index)
+            volume_simps = integrate.simpson(volume_y.values.transpose(), x = volume_y.index)
             volume = volume_simps
         else:
             volume = np.nan
