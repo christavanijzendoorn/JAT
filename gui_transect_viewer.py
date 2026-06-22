@@ -40,6 +40,8 @@ class TransectGUI(tk.Tk):
         self.data = None
         self.transect_ids = []
         self.filtered_transect_ids = []
+        # Cache for transect locations (RD coordinates)
+        self.transect_locations = {}  # {transect_id: (x_rd, y_rd)}
         # Kustvak selection ("All" or 1..17)
         self.kustvak_var = tk.StringVar(value="All")
         # Set larger font for GUI elements
@@ -97,60 +99,84 @@ class TransectGUI(tk.Tk):
         ttk.Button(browser, text="Prev", command=self.prev_transect).grid(row=3, column=0, sticky=tk.EW, padx=(0,2))
         ttk.Button(browser, text="Next", command=self.next_transect).grid(row=3, column=1, sticky=tk.EW, padx=(2,0))
 
-        # Plot settings (to the right of browser)
-        online_frame = ttk.Labelframe(ctrl, text="Plot settings", padding=8)
+        # Transect location map (between browser and plot settings)
+        map_frame = ttk.Labelframe(ctrl, text="Transect Locations", padding=8)
+        map_frame.configure(style='Large.TLabelframe')
+        map_frame.pack(side=tk.LEFT, fill=tk.BOTH, padx=(0,8))
+
+        # Create a matplotlib figure for the map (1.5x wider)
+        self.map_fig, self.map_ax = plt.subplots(figsize=(4.5, 4), dpi=80)
+        self.map_ax.set_aspect('equal')
+        self.map_ax.set_xlabel('RD X (km)', fontsize=8)
+        self.map_ax.set_ylabel('RD Y (km)', fontsize=8)
+        self.map_ax.tick_params(labelsize=7)
+        self.map_ax.set_title('Dutch Coast', fontsize=9)
+        
+        # Initialize map plot references
+        self.map_transects_scatter = None
+        self.map_active_scatter = None
+        
+        # Embed map in tkinter
+        self.map_canvas = FigureCanvasTkAgg(self.map_fig, master=map_frame)
+        self.map_canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+        # Plot settings (to the right of browser) - compact layout
+        online_frame = ttk.Labelframe(ctrl, text="Plot settings", padding=6)
         online_frame.configure(style='Large.TLabelframe')
-        online_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        online_frame.pack(side=tk.LEFT, fill=tk.Y, padx=(0,8))
 
         # Generate year list from 1965 to 2025
         year_list = [str(y) for y in range(1965, 2026)]
         
         # Row 0: Years
-        ttk.Label(online_frame, text="Start year:").grid(row=0, column=0, sticky=tk.E, padx=4)
+        ttk.Label(online_frame, text="Years:").grid(row=0, column=0, sticky=tk.E, padx=2)
         self.start_year_var = tk.StringVar(value="1965")
-        start_year_combo = ttk.Combobox(online_frame, width=8, state="readonly", 
+        start_year_combo = ttk.Combobox(online_frame, width=6, state="readonly", 
                                         values=year_list, textvariable=self.start_year_var)
-        start_year_combo.grid(row=0, column=1, sticky=tk.W)
+        start_year_combo.grid(row=0, column=1, sticky=tk.W, padx=2)
 
-        ttk.Label(online_frame, text="End year (incl.):").grid(row=0, column=2, sticky=tk.E, padx=8)
+        ttk.Label(online_frame, text="to").grid(row=0, column=2, sticky=tk.EW, padx=2)
         self.end_year_var = tk.StringVar(value="2025")
-        end_year_combo = ttk.Combobox(online_frame, width=8, state="readonly", 
+        end_year_combo = ttk.Combobox(online_frame, width=6, state="readonly", 
                                       values=year_list, textvariable=self.end_year_var)
-        end_year_combo.grid(row=0, column=3, sticky=tk.W)
+        end_year_combo.grid(row=0, column=3, sticky=tk.W, padx=2)
 
-        self.load_online_btn = ttk.Button(online_frame, text="Plot (online)", command=self.plot_online)
-        self.load_online_btn.grid(row=0, column=4, padx=8, rowspan=2)
-
-        # Row 1: X-axis limits (cross-shore distance)
-        ttk.Label(online_frame, text="X min:").grid(row=1, column=0, sticky=tk.E, padx=4)
+        # Row 1: X-axis limits
+        ttk.Label(online_frame, text="X-axis:").grid(row=1, column=0, sticky=tk.E, padx=2)
         self.x_min_var = tk.StringVar(value="-500")
-        ttk.Entry(online_frame, width=10, textvariable=self.x_min_var).grid(row=1, column=1, sticky=tk.W)
+        ttk.Entry(online_frame, width=7, textvariable=self.x_min_var).grid(row=1, column=1, sticky=tk.W, padx=2)
 
-        ttk.Label(online_frame, text="X max:").grid(row=1, column=2, sticky=tk.E, padx=8)
+        ttk.Label(online_frame, text="to").grid(row=1, column=2, sticky=tk.EW, padx=2)
         self.x_max_var = tk.StringVar(value="100")
-        ttk.Entry(online_frame, width=10, textvariable=self.x_max_var).grid(row=1, column=3, sticky=tk.W)
+        ttk.Entry(online_frame, width=7, textvariable=self.x_max_var).grid(row=1, column=3, sticky=tk.W, padx=2)
 
-        # Row 2: Y-axis limits (elevation)
-        ttk.Label(online_frame, text="Y min:").grid(row=2, column=0, sticky=tk.E, padx=4)
+        # Row 2: Y-axis limits
+        ttk.Label(online_frame, text="Y-axis:").grid(row=2, column=0, sticky=tk.E, padx=2)
         self.y_min_var = tk.StringVar(value="-2")
-        ttk.Entry(online_frame, width=10, textvariable=self.y_min_var).grid(row=2, column=1, sticky=tk.W)
+        ttk.Entry(online_frame, width=7, textvariable=self.y_min_var).grid(row=2, column=1, sticky=tk.W, padx=2)
 
-        ttk.Label(online_frame, text="Y max:").grid(row=2, column=2, sticky=tk.E, padx=8)
+        ttk.Label(online_frame, text="to").grid(row=2, column=2, sticky=tk.EW, padx=2)
         self.y_max_var = tk.StringVar(value="35")
-        ttk.Entry(online_frame, width=10, textvariable=self.y_max_var).grid(row=2, column=3, sticky=tk.W)
+        ttk.Entry(online_frame, width=7, textvariable=self.y_max_var).grid(row=2, column=3, sticky=tk.W, padx=2)
 
-        ttk.Label(online_frame, text="(leave empty for auto)", font=('TkDefaultFont', 8), 
-                  foreground='gray').grid(row=2, column=4, sticky=tk.W, padx=4)
+        # Row 3: Auto scale hint
+        ttk.Label(online_frame, text="(leave empty for auto scale)", font=('TkDefaultFont', 7), 
+                  foreground='gray').grid(row=3, column=0, columnspan=4, sticky=tk.W, padx=2, pady=(0,2))
 
-        # Right-side utility buttons (Save, Exit)
+        # Row 4: Plot button
+        self.load_online_btn = ttk.Button(online_frame, text="Plot", command=self.plot_online)
+        self.load_online_btn.grid(row=4, column=0, columnspan=4, sticky=tk.EW, padx=2, pady=(2,0))
+
+        # Right-side utility buttons (Save, Exit) - stacked vertically
         right_btns = ttk.Frame(ctrl)
-        right_btns.pack(side=tk.RIGHT, anchor='e')
-        ttk.Button(right_btns, text="Save Plot", command=self._save_plot).pack(side=tk.LEFT, padx=4)
-        ttk.Button(right_btns, text="Exit", command=self._on_exit).pack(side=tk.LEFT, padx=4)
+        right_btns.pack(side=tk.RIGHT, anchor='ne', padx=(8,0))
+        ttk.Button(right_btns, text="Save Plot", command=self._save_plot).pack(side=tk.TOP, pady=(0,4))
+        ttk.Button(right_btns, text="Exit", command=self._on_exit).pack(side=tk.TOP)
 
         if not HAS_JAT:
             self.load_online_btn.state(["disabled"])  # JAT not available
-            ttk.Label(online_frame, foreground="red", text="JAT not installed or import failed — online plotting disabled.").grid(row=1, column=0, columnspan=5, sticky=tk.W)
+            ttk.Label(online_frame, foreground="red", font=('TkDefaultFont', 7),
+                     text="JAT not installed — plotting disabled.").grid(row=5, column=0, columnspan=4, sticky=tk.W)
 
         # Plot area - use constrained layout to prevent shrinking
         self.fig, self.ax = plt.subplots(figsize=(10,5), dpi=100, constrained_layout=True)
@@ -174,6 +200,133 @@ class TransectGUI(tk.Tk):
         # Load default transect and plot after GUI is built
         self.after(100, self._load_and_plot_default)
 
+    def _draw_dutch_coast_outline(self):
+        """Draw a simplified outline of the Dutch coast in RD coordinates."""
+        # Try to load from shapefile if available, otherwise use simplified coordinates
+        try:
+            import geopandas as gpd
+            import os
+            # Look for common shapefile locations
+            shapefile_paths = [
+                'data/netherlands_coast.shp',
+                'shapefiles/netherlands_coast.shp',
+                'data/nl_coast.shp',
+            ]
+            shapefile_found = False
+            for shp_path in shapefile_paths:
+                if os.path.exists(shp_path):
+                    gdf = gpd.read_file(shp_path)
+                    # Convert to RD if needed and plot
+                    if gdf.crs and gdf.crs.to_epsg() != 28992:
+                        gdf = gdf.to_crs(epsg=28992)
+                    for geom in gdf.geometry:
+                        x, y = geom.exterior.xy
+                        x_km = [xi/1000 for xi in x]
+                        y_km = [yi/1000 for yi in y]
+                        self.map_ax.plot(x_km, y_km, 'k-', linewidth=1.5, alpha=0.6)
+                        self.map_ax.fill(x_km, y_km, color='tan', alpha=0.2)
+                    shapefile_found = True
+                    break
+            if shapefile_found:
+                return
+        except (ImportError, Exception):
+            pass  # Fall back to simplified coordinates
+        
+        # Improved simplified RD coordinates for Dutch coast (in km)
+        # Based on actual Dutch coastline from Zeeland to Wadden Islands
+        coast_x = [16, 28, 42, 56, 68, 78, 88, 98, 106, 112, 118, 126, 138, 152, 168, 186, 206, 228, 248, 254,
+                   254, 248, 236, 218, 202, 188, 176, 164, 152, 140, 128, 114, 100, 86, 72, 58, 44, 30, 16, 16]
+        coast_y = [358, 368, 378, 386, 392, 398, 408, 420, 434, 448, 464, 482, 504, 528, 548, 564, 578, 588, 596, 602,
+                   610, 608, 602, 594, 584, 572, 558, 542, 524, 506, 488, 470, 452, 434, 416, 398, 382, 368, 358, 358]
+        
+        self.map_ax.plot(coast_x, coast_y, 'k-', linewidth=1.5, alpha=0.6)
+        self.map_ax.fill(coast_x, coast_y, color='wheat', alpha=0.3, edgecolor='none')
+
+    def _load_transect_locations(self):
+        """Load RD coordinates (x, y) for all transects from the dataset."""
+        if self.data is None:
+            return
+        
+        try:
+            ids = self.data.variables['id'][:]
+            x_coords = self.data.variables['x'][:]
+            y_coords = self.data.variables['y'][:]
+            
+            self.transect_locations = {}
+            for i in range(len(ids)):
+                # Convert NumPy types to Python scalars properly
+                tid_val = ids[i]
+                x_val = x_coords[i]
+                y_val = y_coords[i]
+                
+                # Handle multi-dimensional arrays by taking the first valid value
+                if hasattr(x_val, 'shape') and len(x_val.shape) > 0:
+                    # If it's an array, find first non-NaN value
+                    x_arr = np.array(x_val).flatten()
+                    x_arr = x_arr[~np.isnan(x_arr)]
+                    if len(x_arr) > 0:
+                        x_val = x_arr[0]
+                
+                if hasattr(y_val, 'shape') and len(y_val.shape) > 0:
+                    # If it's an array, find first non-NaN value
+                    y_arr = np.array(y_val).flatten()
+                    y_arr = y_arr[~np.isnan(y_arr)]
+                    if len(y_arr) > 0:
+                        y_val = y_arr[0]
+                
+                # Convert to Python scalars and convert to km for better display
+                tid = int(tid_val)
+                x_km = float(x_val) / 1000.0  # Convert meters to km
+                y_km = float(y_val) / 1000.0  # Convert meters to km
+                
+                self.transect_locations[tid] = (x_km, y_km)
+            
+        except Exception as e:
+            print(f"Error loading transect locations: {e}")
+            import traceback
+            traceback.print_exc()
+
+    def _update_map(self, active_transect_id=None):
+        """Update the map to show all transects and highlight the active one."""
+        self.map_ax.clear()
+        
+        # Draw coast outline
+        self._draw_dutch_coast_outline()
+        
+        if not self.transect_locations:
+            self.map_canvas.draw()
+            return
+        
+        # Get filtered transects and their locations
+        filtered_x = []
+        filtered_y = []
+        for tid in self.filtered_transect_ids:
+            if tid in self.transect_locations:
+                x_km, y_km = self.transect_locations[tid]
+                filtered_x.append(x_km)
+                filtered_y.append(y_km)
+        
+        # Plot all transects in blue
+        if filtered_x:
+            self.map_ax.scatter(filtered_x, filtered_y, c='blue', s=3, alpha=0.6, 
+                               label='Transects', zorder=2)
+        
+        # Highlight active transect in red
+        if active_transect_id is not None and active_transect_id in self.transect_locations:
+            x_km, y_km = self.transect_locations[active_transect_id]
+            self.map_ax.scatter([x_km], [y_km], c='red', s=50, marker='o', 
+                               edgecolors='darkred', linewidths=1.5, 
+                               label='Active', zorder=3)
+        
+        self.map_ax.set_xlabel('RD X (km)', fontsize=8)
+        self.map_ax.set_ylabel('RD Y (km)', fontsize=8)
+        self.map_ax.tick_params(labelsize=7)
+        self.map_ax.set_title('Dutch Coast', fontsize=9)
+        self.map_ax.set_aspect('equal')
+        self.map_ax.legend(fontsize=7, loc='upper left')
+        
+        self.map_canvas.draw()
+
 
     def _on_exit(self):
         """Close the GUI and terminate the Python process cleanly."""
@@ -191,6 +344,8 @@ class TransectGUI(tk.Tk):
             # Close any matplotlib figures
             try:
                 import matplotlib.pyplot as plt
+                plt.close(self.fig)
+                plt.close(self.map_fig)
                 plt.close('all')
             except Exception:
                 pass
@@ -223,8 +378,14 @@ class TransectGUI(tk.Tk):
             ids = list(self.data.variables['id'][:])
             self.transect_ids = sorted([int(i) for i in ids])
             
+            # Load transect locations
+            self._load_transect_locations()
+            
             # Apply filter and populate listbox
             self.apply_kustvak_filter()
+            
+            # Update map
+            self._update_map()
             
             # Find and select transect 7002800
             target_id = "7002800"
@@ -233,6 +394,8 @@ class TransectGUI(tk.Tk):
                     self.tr_listbox.selection_clear(0, tk.END)
                     self.tr_listbox.selection_set(i)
                     self.tr_listbox.see(i)
+                    # Update map with active transect
+                    self._update_map(active_transect_id=int(target_id))
                     # Trigger the plot
                     self.plot_online()
                     break
@@ -319,6 +482,8 @@ class TransectGUI(tk.Tk):
             ids = list(self.data.variables['id'][:])
             # convert numpy types to int and sort
             self.transect_ids = sorted([int(i) for i in ids])
+            # Load transect locations (lat/lon)
+            self._load_transect_locations()
             # apply current kustvak filter and populate listbox
             self.apply_kustvak_filter()
             total = len(self.transect_ids)
@@ -326,6 +491,8 @@ class TransectGUI(tk.Tk):
             if shown:
                 self.tr_listbox.selection_set(0)
                 self.tr_listbox.see(0)
+            # Update the map
+            self._update_map()
             self.status.set(f"Loaded {total} transects. Showing {shown} based on Kustvak filter.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load transect IDs.\n{e}")
@@ -336,6 +503,9 @@ class TransectGUI(tk.Tk):
             sel = self.tr_listbox.curselection()
             if not sel:
                 return
+            # Get selected transect ID and update map
+            transect_id = int(self.tr_listbox.get(sel[0]))
+            self._update_map(active_transect_id=transect_id)
             # Auto-plot using current year range
             self.plot_online()
         except Exception:
@@ -344,6 +514,8 @@ class TransectGUI(tk.Tk):
     def on_kustvak_change(self, event=None):
         """Re-filter the transect list when Kustvak selection changes."""
         self.apply_kustvak_filter()
+        # Update map with filtered transects
+        self._update_map()
         # Auto-select first item for convenience
         if self.tr_listbox.size() > 0:
             self.tr_listbox.selection_clear(0, tk.END)
